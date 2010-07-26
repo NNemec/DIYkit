@@ -1,0 +1,25 @@
+Index: pysizer/setup.py
+===================================================================
+--- pysizer.orig/setup.py	2005-11-18 19:51:34.000000000 +0100
++++ pysizer/setup.py	2006-02-28 12:13:20.000000000 +0100
+@@ -17,13 +17,14 @@
+     try:
+         from Pyrex.Distutils import build_ext
+         
+-        # Hack for Pyrex versions which define swig_sources
+-        # to only take two parameters.
+-        class my_build_ext(build_ext):
+-            def swig_sources(self, sources, ext = None):
+-                return build_ext.swig_sources(self, sources)
++#        # Hack for Pyrex versions which define swig_sources
++#        # to only take two parameters.
++#        class my_build_ext(build_ext):
++#            def swig_sources(self, sources, ext = None):
++#                return build_ext.swig_sources(self, sources)
+                 
+-        kwargs["cmdclass"] = {"build_ext": my_build_ext}
++        kwargs["cmdclass"] = {"build_ext": build_ext}
++#        kwargs["cmdclass"] = {"build_ext": my_build_ext}
+         ext.append(
+             Extension("sizer.cpython.crules", 
+                       ["src/cpython/crules.pyx"]))

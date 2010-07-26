@@ -1,0 +1,69 @@
+:include {once} NNlab.aap
+
+NAME = all
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+CORE_FILES = 
+    NNlab.aap
+    aap.aap
+    all.aap
+
+AAP_FILES = 
+    ase.aap
+    autoconf.aap
+    automake.aap
+    boost.aap
+    darcs.aap
+    dft++.aap
+    eric.aap
+    f2py.aap
+    fltk.aap
+    hdf5.aap
+    ipython.aap
+    libtool.aap
+    matplotlib.aap
+    matplotlib_htdocs.aap
+    netcdf4.aap
+    netcdf.aap
+    numarray.aap
+    Numeric.aap
+    pkgconfig.aap
+    pyFltk.aap
+    pygtk.aap
+    pymol.aap
+    PyQt.aap
+    pyrex.aap
+    pytables.aap
+    python.aap
+    pyvtk.aap
+    quilt.aap
+    ScientificPython.aap
+    scipy.aap
+    siesta.aap
+    sip.aap
+    tbook.aap
+    vitables.aap
+
+fetch: $(CORE_FILES) $(AAP_FILES)
+
+install: fetch
+    :execute aap.aap install
+    :execute quilt.aap install
+    :execute python.aap install
+    :execute f2py.aap install
+#    :execute Numeric.aap install
+#    :execute numarray.aap install
+    :execute numpy.aap install
+    :execute scipy.aap install
+    :execute tbook.aap install
+    :execute pyrex.aap install
+    :execute hdf5.aap install
+    :execute pytables.aap install
+    :execute fltk install
+    :execute pyFltk install
+    :execute matplotlib.aap install
+    :execute netcdf install
+    :execute ScientificPython install
+
+#    :execute pyvtk install

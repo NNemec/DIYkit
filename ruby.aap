@@ -1,0 +1,35 @@
+:include {once} NNlab.aap
+
+NAME = ruby
+VERSION = 1.8.6
+
+DISTFILE = $(NAME)-$(VERSION).tar.gz
+MASTER_SITES = ftp://ftp.ruby-lang.org/pub/$(NAME)
+
+SRCDIR = $WRKDIR/$NAME
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+#    :do patch $NAME
+
+getsrc: $SRCDIR
+
+build: $SRCDIR
+    :cd $SRCDIR
+    :sys ./configure --prefix $PREFIX
+    :sys make
+
+install: build
+    :cd $SRCDIR
+    :sys make install
+
+
+$DOCDIR/$NAME: $SRCDIR
+    :cd $DOCDIR
+    :symlink {q} $SRCDIR/doc ./$NAME

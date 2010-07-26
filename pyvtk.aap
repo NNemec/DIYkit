@@ -1,0 +1,25 @@
+:include {once} NNlab.aap
+
+NAME = pyvtk
+VERSION = 0.4.70
+
+DISTFILE = PyVTK-$(VERSION).tar.gz
+MASTER_SITES = http://cens.ioc.ee/projects/pyvtk/rel-0.x
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+    :do patch $NAME
+
+getsrc: $SRCDIR
+
+install: $SRCDIR
+    :cd $source
+    :sys python setup.py install --prefix $PREFIX

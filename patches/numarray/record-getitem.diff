@@ -1,0 +1,24 @@
+Wed Jan 26 15:56:29 CET 2005  Norbert@Nemec-online.de
+  * Record.__get/setitem__
+Index: numarray/Lib/records.py
+===================================================================
+--- numarray.orig/Lib/records.py	2005-09-21 20:28:21.000000000 +0200
++++ numarray/Lib/records.py	2005-11-02 11:28:26.000000000 +0100
+@@ -793,11 +793,17 @@
+ 
+         return self.array.field(fieldName)[self.row]
+ 
++    def __getitem__(self, fieldName):
++        return self.field(fieldName)
++
+     def setfield(self, fieldName, value):
+         """Set the field data of the record."""
+ 
+         self.array.field(fieldName)[self.row] = value
+ 
++    def __setitem__(self, fieldName, value):
++        self.setfield(fieldName,value)
++
+     def __str__(self):
+         """Print one row."""
+ 

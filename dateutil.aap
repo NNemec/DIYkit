@@ -1,0 +1,34 @@
+:include {once} NNlab.aap
+
+NAME = dateutil
+VERSION = 1.2
+
+DISTFILE = python-$(NAME)-$(VERSION).tar.bz2
+MASTER_SITES = http://labix.org/download/python-$NAME
+# MASTER_SITES = ftp://ftp.somewhere.com
+
+SRCDIR = $WRKDIR/$NAME
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+#    :do patch $NAME
+
+getsrc: $SRCDIR
+
+build: $SRCDIR
+    :cd $SRCDIR
+    :sys python setup.py build
+
+install: build
+    :cd $SRCDIR
+    :sys python setup.py install --prefix $PREFIX
+
+$DOCDIR/$NAME: $SRCDIR
+    :cd $DOCDIR
+    :symlink {q} $SRCDIR/doc ./$NAME

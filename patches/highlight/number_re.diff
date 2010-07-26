@@ -1,0 +1,30 @@
+Index: highlight/highlight/languagedefinition.cpp
+===================================================================
+--- highlight.orig/highlight/languagedefinition.cpp	2006-03-20 19:32:01.000000000 +0100
++++ highlight/highlight/languagedefinition.cpp	2007-03-14 17:01:34.000000000 +0100
+@@ -19,7 +19,7 @@
+ 
+ #define IDENTIFIER_RE "[a-zA-Z_]\\w*"
+ 
+-#define NUMBER_RE     "(?:0x|0X)[0-9a-fA-F]+|\\d*[\\.]?\\d+(?:[eE][\\-\\+]\\d+)?[lLuU]?"
++#define NUMBER_RE     "(?:0x|0X)[0-9a-fA-F]+|\\d*[\\.]?\\d+(?:[eE][\\-\\+]?\\d+)?[lLuU]?"
+ 
+ 
+ using namespace std;
+Index: highlight/langDefs/py.lang
+===================================================================
+--- highlight.orig/langDefs/py.lang	2006-08-22 21:14:19.000000000 +0200
++++ highlight/langDefs/py.lang	2007-03-14 17:05:25.000000000 +0100
+@@ -45,8 +45,10 @@
+ UnboundLocalError UnicodeError UnicodeEncodeError UnicodeDecodeError
+ UnicodeTranslateError UserWarning ValueError Warning WindowsError
+ ZeroDivisionError
+-
+-$KW_RE(kwd)=regex((\w+?)\s*\()
++
++$DIGIT=regex((?:0x|0X)[0-9a-fA-F]+|\d*[\.]?\d+(?:[eE][\-\+]?\d+)?[lLuUjJ]?)
++
++$KW_RE(kwd)=regex((\w+?)\s*\()
+ 
+ $STRINGDELIMITERS=""" ''' " ' 
+ 

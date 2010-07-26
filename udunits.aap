@@ -1,0 +1,37 @@
+:include {once} NNlab.aap
+
+NAME = udunits
+VERSION = 1.12.4
+
+DISTFILE = $(NAME)-$(VERSION).tar.Z
+MASTER_SITES = ftp://ftp.unidata.ucar.edu/pub/$(NAME)
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+#    :do patch $NAME
+
+getsrc: $SRCDIR
+
+install: $SRCDIR
+# make
+    :cd $source
+    :sys ./configure --prefix $PREFIX
+    :sys make
+    :sys make install
+# python
+    :cd $source
+    :sys python setup.py install --prefix $PREFIX
+
+$DOCDIR/$NAME: $SRCDIR
+    :cd $DOCDIR
+    :symlink {q} $SRCDIR/doc ./$NAME

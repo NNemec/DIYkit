@@ -1,0 +1,27 @@
+:include {once} NNlab.aap
+
+NAME = pyrex
+VERSION = 0.9.4.1
+
+DISTFILE = Pyrex-$(VERSION).tar.gz
+MASTER_SITES = http://www.cosc.canterbury.ac.nz/~greg/python/Pyrex
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+#    :do patch $NAME
+
+getsrc: $SRCDIR
+
+install: $SRCDIR
+    :cd $source
+    :sys python setup.py install --prefix $PREFIX

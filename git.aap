@@ -1,0 +1,36 @@
+:include {once} NNlab.aap
+
+NAME = git
+VERSION = 1.5.3.8
+
+DISTFILE = $(NAME)-$(VERSION).tar.bz2
+MASTER_SITES = http://www.kernel.org/pub/software/scm/$(NAME)
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+#    :do patch $NAME
+
+getsrc: $SRCDIR
+
+build: $SRCDIR
+    :cd $SRCDIR
+    :sys ./configure --without-openssl --prefix=$PREFIX --with-curl=$PREFIX  
+    :sys make
+
+install: build
+    :cd $SRCDIR
+    :sys make install
+
+#$DOCDIR/$NAME: $SRCDIR
+#    :cd $DOCDIR
+#    :symlink {q} $SRCDIR/doc ./$NAME

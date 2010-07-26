@@ -1,0 +1,43 @@
+:python
+    NNlab_home = os.getenv("NNlab_home",None)
+    if NNlab_home is None:
+	NNlab_home = "." # "http://homepages.uni-regensburg.de/~nen10015/NNlab"
+
+    NNlab_path = os.getenv("NNlab_path",None)
+    if NNlab_path is None:
+	NNlab_path = os.environ.get("HOME") + "/NNlab"
+
+:include NNlab-include.aap { fetch=$NNlab_home/%basename% }
+
+:mkdir {f} $BINDIR
+
+:mkdir {f} $WRKDIR
+
+:mkdir {f} $DOCDIR
+
+:mkdir {f} $TMPDIR
+:del {r}{f} $TMPDIR/*
+
+:mkdir {f} $DOWNLOADDIR
+
+NNlab:
+    :fetch $target { fetch=$NNlab_home/%basename% }
+    :chmod 755 $target
+
+NNlab.csh:
+    :fetch $target { fetch=$NNlab_home/%basename% }
+    :chmod 755 $target
+
+NNlab.sh:
+    :fetch $target { fetch=$NNlab_home/%basename% }
+    :chmod 755 $target
+
+:rule %.aap:
+    :fetch $target { fetch=$NNlab_home/%basename% }
+
+bin/NNlab: NNlab
+    :mkdir {r}{f} bin
+    :symlink {f} ../NNlab bin/NNlab
+
+all: NNlab bin/NNlab NNlab.sh NNlab.csh
+    :pass

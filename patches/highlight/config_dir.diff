@@ -1,0 +1,49 @@
+Index: highlight/highlight/datadir.cpp
+===================================================================
+--- highlight.orig/highlight/datadir.cpp	2006-03-20 19:32:01.000000000 +0100
++++ highlight/highlight/datadir.cpp	2007-03-01 16:33:49.000000000 +0100
+@@ -101,7 +101,11 @@
+ 
+ const string DataDir::getConfDir() {
+   #ifndef _WIN32
+-     return "/etc/highlight/";
++     #ifdef HL_CONF_DIR
++	return HL_CONF_DIR;
++     #else
++        return "/etc/highlight/";
++     #endif
+   #else
+      return getDir();
+   #endif
+Index: highlight/highlight/makefile
+===================================================================
+--- highlight.orig/highlight/makefile	2006-10-13 20:29:49.000000000 +0200
++++ highlight/highlight/makefile	2007-03-01 16:34:56.000000000 +0100
+@@ -15,8 +15,8 @@
+ 
+ CXX=c++
+ 
+-CFLAGS := -O2 -DHL_DATA_DIR=\"${HL_DATA_DIR}\" 
+-#CFLAGS := -Wall -DHL_DATA_DIR=\"${HL_DATA_DIR}\" -ggdb
++CFLAGS := -O2 -DHL_DATA_DIR=\"${HL_DATA_DIR}\" -DHL_CONF_DIR=\"${HL_CONF_DIR}\"
++#CFLAGS := -Wall -DHL_DATA_DIR=\"${HL_DATA_DIR}\" -DHL_CONF_DIR=\"${HL_CONF_DIR}\" -ggdb
+ 
+ LDFLAGS = -s
+ 
+Index: highlight/makefile
+===================================================================
+--- highlight.orig/makefile	2005-10-30 14:01:02.000000000 +0100
++++ highlight/makefile	2007-03-01 16:31:12.000000000 +0100
+@@ -31,10 +31,10 @@
+ RMDIR=rm -r -f
+ 
+ all:
+-	${MAKE} -C ./highlight -f ./makefile HL_DATA_DIR=${data_dir}
++	${MAKE} -C ./highlight -f ./makefile HL_DATA_DIR=${data_dir} HL_CONF_DIR=${conf_dir}
+ 
+ all-localgetopt:
+-	${MAKE} -C ./highlight -f ./makefile HL_DATA_DIR=${data_dir} USE_LOCAL_GETOPT='true'
++	${MAKE} -C ./highlight -f ./makefile HL_DATA_DIR=${data_dir} HL_CONF_DIR=${conf_dir} USE_LOCAL_GETOPT='true'
+ 
+ install:
+ 	@echo "This script will install highlight in the following directories:"

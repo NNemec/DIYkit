@@ -1,0 +1,32 @@
+:include {once} NNlab.aap
+
+NAME = ietl
+VERSION = 2.2
+
+DISTFILE = $(NAME)-$(VERSION).tar.gz
+MASTER_SITES = http://www.comp-phys.org/software/$(NAME)
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+    :do patch $NAME
+
+getsrc: $SRCDIR
+
+build: $SRCDIR
+    :cd $SRCDIR
+    :sys ./configure --prefix $PREFIX --with-blitz=$PREFIX --with-boost=$PREFIX/include/boost-1_32 --with-atlas-dir=`os.environ['HOME']`/lib/atlas
+    :sys make
+
+install: build
+    :cd $SRCDIR
+    :sys make install

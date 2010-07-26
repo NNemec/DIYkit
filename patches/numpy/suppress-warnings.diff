@@ -1,0 +1,14 @@
+Index: numpy/numpy/random/setup.py
+===================================================================
+--- numpy.orig/numpy/random/setup.py	2007-05-12 00:06:11.000000000 +0200
++++ numpy/numpy/random/setup.py	2007-07-01 17:55:40.000000000 +0200
+@@ -27,7 +27,8 @@
+                          depends = [join('mtrand','*.h'),
+                                     join('mtrand','*.pyx'),
+                                     join('mtrand','*.pxi'),
+-                                    ]
++                                    ],
++			 extra_compile_args = ["-Wno-unused","-Wno-uninitialized","-Wno-parentheses"],
+                         )
+ 
+     config.add_data_files(('.', join('mtrand', 'randomkit.h')))

@@ -1,0 +1,18 @@
+Index: matplotlib_htdocs/hthelpers.py
+===================================================================
+--- matplotlib_htdocs.orig/hthelpers.py	2005-08-10 12:27:23.000000000 +0200
++++ matplotlib_htdocs/hthelpers.py	2005-08-10 12:29:28.000000000 +0200
+@@ -52,10 +52,13 @@
+     return value is a list of (header, commands) where commands is a
+     list of (func, desc)
+     """
++    import matplotlib
++    matplotlib.use('Agg')
+     import matplotlib.pylab
+     plot_commands = []
+     # parse the header for the commands provided commands
+     import inspect
++    these = []
+     for line in inspect.getsourcelines(matplotlib.pylab)[0]:
+         line = line.strip()
+         if not len(line): continue

@@ -1,0 +1,40 @@
+:include {once} NNlab.aap
+
+NAME = petsc
+VERSION = 2.3.1
+
+DISTFILE = $(NAME)-lite-$(VERSION).tar.gz
+MASTER_SITES = ftp://ftp.mcs.anl.gov/pub/$(NAME)
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+#    :do patch $NAME
+
+getsrc: $SRCDIR
+
+# make
+build: $SRCDIR
+    :cd $SRCDIR
+    @os.environ["PETSC_DIR"] = _no.SRCDIR
+    :sys python config/configure.py
+    :sys make all
+
+install: build
+    :cd $SRCDIR
+    @os.environ["PETSC_DIR"] = _no.SRCDIR
+    @os.environ["INSTALL_DIR"] = _no.PREFIX
+    :sys make install
+
+#$DOCDIR/$NAME: $SRCDIR
+#    :cd $DOCDIR
+#    :symlink {q} $SRCDIR/doc ./$NAME

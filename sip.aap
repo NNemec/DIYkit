@@ -1,0 +1,31 @@
+:include {once} NNlab.aap
+
+NAME = sip
+VERSION = 4.4.5
+
+DISTFILE = $(NAME)-$(VERSION).tar.gz
+MASTER_SITES = http://www.riverbankcomputing.com/Downloads/sip4
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+
+getsrc: $SRCDIR
+
+build: $SRCDIR
+    :cd $SRCDIR
+    :sys python configure.py
+    :sys make
+
+install: build
+    :cd $SRCDIR
+    :sys make install

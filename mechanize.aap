@@ -1,0 +1,34 @@
+:include {once} NNlab.aap
+
+NAME = mechanize
+VERSION = 0.1.6b
+
+DISTFILE = $(NAME)-$(VERSION).tar.gz
+MASTER_SITES = http://wwwsearch.sourceforge.net/mechanize/src
+
+SRCDIR = $WRKDIR/$NAME
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+#    :do patch $NAME
+
+getsrc: $SRCDIR
+
+# python
+build: $SRCDIR
+    :cd $SRCDIR
+    :sys python setup.py build
+
+install: build
+    :cd $SRCDIR
+    :sys python setup.py install --prefix $PREFIX
+
+$DOCDIR/$NAME: $SRCDIR
+    :cd $DOCDIR
+    :symlink {q} $SRCDIR/doc ./$NAME

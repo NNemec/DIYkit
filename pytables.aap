@@ -1,0 +1,47 @@
+:include {once} NNlab.aap
+
+NAME = pytables
+VERSION = 2.1.1
+
+DISTFILE = tables-$(VERSION).tar.gz
+MASTER_SITES = http://www.pytables.org/download/stable
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+#     :do patch $NAME
+
+getsrc: $SRCDIR
+
+build: $SRCDIR
+    :cd $SRCDIR
+    @os.environ["CPATH"] += ":"+_no.NNlab_path+"/include/python"
+#    @os.environ["HDF5_DIR"] = _no.NNlab_path
+    @os.environ["CFLAGS"] = "-Wno-unused -Wno-uninitialized -Wno-parentheses"
+    :sys python setup.py build
+
+install: build
+    :cd $SRCDIR
+    :sys python setup.py install --prefix $PREFIX
+
+$DOCDIR/$NAME: $SRCDIR
+    @if os.path.isfile(_no.PREFIX+"/bin/tbtohtml"):
+    	@if not os.path.exists(os.path.expanduser("~/texmf")):
+	    :symlink $PREFIX/share/texmf `os.environ['HOME']`/texmf
+	:sys make -C $SRCDIR/doc/xml clean
+	:sys make -C $SRCDIR/doc/xml usersguide.html
+	@if os.readlink(os.path.expanduser("~/texmf")) == _no.PREFIX+"/share/texmf":
+	    :del `os.environ['HOME']`/texmf
+    :cd $DOCDIR
+    :copy {r} $SRCDIR/doc/xml ./$NAME
+
+doc: $DOCDIR/$NAME

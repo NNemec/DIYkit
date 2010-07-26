@@ -1,0 +1,30 @@
+:include {once} NNlab.aap
+
+NAME = hdf5
+VERSION = 1.6.5
+#VERSION = 1.8.0-alpha1
+
+DISTFILE = $(NAME)-$(VERSION).tar.gz
+MASTER_SITES = ftp://ftp.ncsa.uiuc.edu/HDF/HDF5/current/src
+#MASTER_SITES = ftp://ftp.ncsa.uiuc.edu/HDF/pub/outgoing/hdf5/hdf5-1.8.0-pre
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+
+getsrc: $SRCDIR
+
+install: $SRCDIR
+    :cd $source
+    :sys ./configure --prefix $PREFIX
+    :sys make
+    :sys make install

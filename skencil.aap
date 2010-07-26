@@ -1,0 +1,37 @@
+:include {once} NNlab.aap
+
+NAME = skencil
+VERSION = 0.6.17
+
+DISTFILE = $(NAME)-$(VERSION).tar.gz
+MASTER_SITES = $(SOURCEFORGE)/sketch
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+#    :do patch $NAME
+
+getsrc: $SRCDIR
+
+install: $SRCDIR
+    :cd $source
+    :python
+	if "LDFLAGS" in os.environ:
+	    os.environ["LDFLAGS"]  += " -L/usr/X11R6/lib"
+	    print "LDFLAGS = ",os.environ["LDFLAGS"]
+    :sys python setup.py configure --tk-flags="`os.environ.get("CPPFLAGS")`"
+    :sys python setup.py build
+    :sys python setup.py install --prefix=$PREFIX
+
+$DOCDIR/$NAME: $SRCDIR
+    :cd $DOCDIR
+    :symlink {q} $SRCDIR/doc ./$NAME

@@ -1,0 +1,61 @@
+Index: scipy/scipy/fftpack/setup.py
+===================================================================
+--- scipy.orig/scipy/fftpack/setup.py	2007-09-22 09:56:38.000000000 +0200
++++ scipy/scipy/fftpack/setup.py	2007-10-26 15:28:53.634058000 +0200
+@@ -21,7 +21,9 @@
+     config.add_data_dir('tests')
+ 
+     config.add_library('dfftpack',
+-                       sources=[join('dfftpack','*.f')])
++                       sources=[join('dfftpack','*.f')],
++		       config_fc={"f77flags": (__file__,["-Wno-uninitialized"])},
++		       )
+ 
+     sources = ['fftpack.pyf','src/zfft.c','src/drfft.c','src/zrfft.c',
+                'src/zfftnd.c']
+Index: scipy/scipy/integrate/setup.py
+===================================================================
+--- scipy.orig/scipy/integrate/setup.py	2007-09-22 09:55:00.000000000 +0200
++++ scipy/scipy/integrate/setup.py	2007-10-26 15:28:53.638058250 +0200
+@@ -16,9 +16,13 @@
+                        sources=[join('mach','*.f')],
+                        config_fc={'noopt':(__file__,1)})
+     config.add_library('quadpack',
+-                       sources=[join('quadpack','*.f')])
++                       sources=[join('quadpack','*.f')],
++		       config_fc={"f77flags": (__file__,["-Wno-uninitialized"])},
++		       )
+     config.add_library('odepack',
+-                       sources=[join('odepack','*.f')])
++                       sources=[join('odepack','*.f')],
++		       config_fc={"f77flags": (__file__,["-Wno-uninitialized"])},
++		       )
+     # should we try to weed through files and replace with calls to
+     # LAPACK routines?
+     # Yes, someday...
+Index: scipy/scipy/interpolate/setup.py
+===================================================================
+--- scipy.orig/scipy/interpolate/setup.py	2007-09-22 09:55:08.000000000 +0200
++++ scipy/scipy/interpolate/setup.py	2007-10-26 15:30:47.397167750 +0200
+@@ -9,6 +9,7 @@
+ 
+     config.add_library('fitpack',
+                        sources=[join('fitpack', '*.f')],
++                       config_fc={"f77flags": (__file__,["-Wno-uninitialized","-Wno-unused"])},
+                       )
+ 
+     config.add_extension('_fitpack',
+Index: scipy/scipy/linsolve/setup.py
+===================================================================
+--- scipy.orig/scipy/linsolve/setup.py	2007-09-22 09:55:22.000000000 +0200
++++ scipy/scipy/linsolve/setup.py	2007-10-26 15:28:53.654059250 +0200
+@@ -18,7 +18,8 @@
+ 
+     config.add_library('superlu_src',
+                        sources = [join('SuperLU','SRC','*.c')],
+-                       macros = superlu_defs
++                       macros = superlu_defs,
++		       extra_compiler_args = ["-Wno-uninitialized","-Wno-unused","-Wno-parentheses","-Wno-implicit-function-declaration","-Wno-return-type","-Wno-strict-prototypes"],
+                        )
+ 
+     #SuperLU/SRC/util.h  has been modifed to use these by default

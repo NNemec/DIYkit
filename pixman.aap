@@ -1,0 +1,34 @@
+:include {once} NNlab.aap
+
+NAME = pixman
+# VERSION = 1.4.10
+
+# DISTFILE = $(NAME)-$(VERSION).tar.gz
+# MASTER_SITES = http://cairographics.org/releases
+# MASTER_SITES = ftp://ftp.somewhere.com
+
+SRCDIR = $WRKDIR/$NAME
+
+# depends on:
+
+# :attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: # $NNlab_path/download/$DISTFILE
+#    :do unpack $NNlab_path/download/$DISTFILE
+#    :do patch $NAME
+
+getsrc: $SRCDIR
+
+# make
+build: $SRCDIR
+    :cd $SRCDIR
+    :sys ./autogen.sh
+    :sys ./configure --prefix $PREFIX
+    :sys make
+
+install: build
+    :cd $SRCDIR
+    :sys make install
+

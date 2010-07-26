@@ -1,0 +1,44 @@
+Index: ietl/configure.in
+===================================================================
+--- ietl.orig/configure.in	2004-07-10 13:13:33.000000000 +0200
++++ ietl/configure.in	2006-08-31 15:38:42.000000000 +0200
+@@ -108,7 +108,7 @@
+   else
+     if test "x$withval" != "x"; then
+       ac_cv_blitz_dir=`echo "$withval" | sed 's,//*,/,g' | sed 's,/$,,'`
+-      if test -f "ac_cv_blitz_dir/include/blitz/config.h"; then :; else
++      if test -f "$ac_cv_blitz_dir/include/blitz/bzconfig.h"; then :; else
+         ac_cv_blitz_dir=
+       fi
+     fi
+@@ -121,7 +121,7 @@
+   if test -z "$ac_cv_boost_dir"; then
+     for d in $HOME $HOME/src $prefix $prefix/src /usr/local /usr/local/src
+     do
+-      if test -f "$d/include/blitz/config.h"; then
++      if test -f "$d/include/blitz/bzconfig.h"; then
+         if test -f "$d/lib/libblitz.a"; then
+           ac_cv_blitz_dir="$d"
+           break
+Index: ietl/configure
+===================================================================
+--- ietl.orig/configure	2004-07-10 13:13:33.000000000 +0200
++++ ietl/configure	2006-08-31 15:39:01.000000000 +0200
+@@ -4049,7 +4049,7 @@
+   else
+     if test "x$withval" != "x"; then
+       ac_cv_blitz_dir=`echo "$withval" | sed 's,//*,/,g' | sed 's,/$,,'`
+-      if test -f "ac_cv_blitz_dir/include/blitz/config.h"; then :; else
++      if test -f "$ac_cv_blitz_dir/include/blitz/bzconfig.h"; then :; else
+         ac_cv_blitz_dir=
+       fi
+     fi
+@@ -4064,7 +4064,7 @@
+   if test -z "$ac_cv_boost_dir"; then
+     for d in $HOME $HOME/src $prefix $prefix/src /usr/local /usr/local/src
+     do
+-      if test -f "$d/include/blitz/config.h"; then
++      if test -f "$d/include/blitz/bzconfig.h"; then
+         if test -f "$d/lib/libblitz.a"; then
+           ac_cv_blitz_dir="$d"
+           break

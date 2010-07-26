@@ -1,0 +1,5 @@
+:include {once} NNlab.aap
+
+NNdarcs_repo = nen10015@pc53687.physik.uni-regensburg.de:.NNdarcs/repo
+
+:recipe {fetch = $NNlab_home/NNdarcs.aap}

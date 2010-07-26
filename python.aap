@@ -1,0 +1,35 @@
+:include {once} NNlab.aap
+
+NAME = python
+VERSION = 2.4.4
+
+DISTFILE = Python-$(VERSION).tar.bz2
+MASTER_SITES = http://www.python.org/ftp/$NAME/$VERSION
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+    :do patch $NAME
+
+getsrc: $SRCDIR
+
+install: $SRCDIR
+    :cd $source
+    :sys ./configure --prefix $PREFIX --enable-shared --enable-unicode=ucs4
+    :sys make
+    :sys make install
+
+$DOCDIR/$NAME: $SRCDIR
+    :cd $source
+    :sys make -C Doc
+    :cd $DOCDIR
+    :copy {r} $SRCDIR/Doc/html ./$NAME

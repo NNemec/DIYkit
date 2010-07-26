@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+  <!-- Created with AOLpress/2.0 -->
+  <TITLE>404 - Seite nicht gefunden</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffcc">
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
+  <TR BGCOLOR="#3333cc">
+    <TD><IMG WIDTH="90" HEIGHT="120" ALT="Uni Regensburg"
+      SRC="http://www-cgi.uni-regensburg.de/images/logos/Siegel_blauweiss-s.gif"></TD>
+    <TD WIDTH="95%"><H2 ALIGN=Center>
+        Homepage-Server der Universität Regensburg
+      </H2>
+      <H1 ALIGN=Center>
+        Seite nicht gefunden<BR>
+        (Fehler 404)
+      </H1>
+    </TD>
+  </TR>
+  <TR>
+    <TD></TD>
+    <TD><IMG SRC="http://www-cgi.uni-regensburg.de/images/allgemein/dummy_v30.gif" WIDTH="1" HEIGHT="15" BORDER="0"></TD>
+  </TR>
+  <TR BGCOLOR="#80ff80">
+    <TD COLSPAN=2><H3 ALIGN=Center><IMG SRC="http://www.uni-regensburg.de/images/allgemein/dummy_v30.gif" WIDTH="1" HEIGHT="25"
+          BORDER="0" ALIGN="Bottom">Die
+      Seite
+      <FONT SIZE=+1 COLOR="ff0000">homepages.uni-regensburg.de/~nen10015/NNlab/pets.aap</FONT> existiert
+      auf diesem Server nicht</H3></TD>
+  </TR>
+</TABLE>
+<P>
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN=Top>
+<TD ALIGN=Center>
+Die Seite, die Sie gesucht haben, existiert auf diesem Server nicht.</TD>
+<TD>&nbsp;&nbsp;</TD>
+<TD ALIGN=Center>
+The page you were looking for is not stored on this server.</TD>
+</TR>
+<TR VALIGN=Top>
+<TD><H3 ALIGN=Center>Ändern Sie eventuell Ihre Bookmarks</H3></TD>
+<TD>&nbsp;&nbsp;</TD>
+<TD ALIGN=Center>
+<H3 ALIGN=Center>Please check your Bookmarks for this Address</H3></TD></TR>
+<TR>
+<TD COLSPAN="3">
+<P>
+  <HR>
+<P></TD></TR>
+<TR VALIGN=Top>
+<TD ALIGN=Center>
+Der offizielle Web-Server der Universität Regensburg ist
+<A HREF="http://www.uni-regensburg.de/">http://www.uni-regensburg.de/</A><BR>
+<P ALIGN=Center>
+Viele virtuelle Server befinden sich jetzt auf
+<A HREF="http://www-virtuell.uni-regensburg.de/">http://www-virtuell.uni-regensburg.de/</A>
+<P ALIGN=Center>
+Der CGI-Server der Universit&auml;t Regensburg ist
+<A HREF="http://www-cgi.uni-regensburg.de/">http://www-cgi.uni-regensburg.de/</A>
+</TD>
+<TD>&nbsp;&nbsp;</TD>
+<TD ALIGN=Center>
+The official Web-Server of the University of Regensburg is<BR>
+<A HREF="http://www.uni-regensburg.de/">http://www.uni-regensburg.de/</A><BR>
+<P ALIGN=Center>
+There are lots of virtual Servers on<BR>
+<A HREF="http://www-virtuell.uni-regensburg.de/">
+http://www-virtuell.uni-regensburg.de/</A>
+<P>
+The CGI-Server of the University of Regensburg is<BR>
+<A HREF="http://www-cgi.uni-regensburg.de/">http://www-cgi.uni-regensburg.de/</A><BR>
+</TD></TR>
+</TABLE>
+<P>
+  <HR>
+  <FONT SIZE="-1">Wenn Sie den Webmaster der betroffenen Seite nicht herausfinden
+  k&ouml;nnen, können Sie eine email an den
+  <A HREF="mailto:Webmaster@uni-regensburg.de?subject=Fehler%20404&body=URL = homepages.uni-regensburg.de/~nen10015/NNlab/pets.aap  ">Webmaster der Uni</A>
+     schicken.</FONT>
+<P>
+</BODY></HTML>

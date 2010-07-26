@@ -1,0 +1,39 @@
+:include {once} NNlab.aap
+
+NAME = pysqlite
+VERSION = 2.3.3
+
+DISTFILE = $(NAME)-$(VERSION).tar.gz
+MASTER_SITES = http://initd.org/pub/software/$(NAME)/releases/2.3/$(VERSION)
+
+SRCDIR = $WRKDIR/$NAME
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+#    :do patch $NAME
+
+getsrc: $SRCDIR
+
+# python
+build: $SRCDIR
+    :cd $SRCDIR
+    :python
+	if "LDFLAGS" in os.environ:
+	    os.environ["LDFLAGS"] += " -L" + _no.PREFIX + "/lib"
+	else:
+	    os.environ["LDFLAGS"] = "-L" + _no.PREFIX + "/lib"
+    :sys python setup.py build
+
+install: build
+    :cd $SRCDIR
+    :sys python setup.py install --prefix $PREFIX
+
+$DOCDIR/$NAME: $SRCDIR
+    :cd $DOCDIR
+    :symlink {q} $SRCDIR/doc ./$NAME

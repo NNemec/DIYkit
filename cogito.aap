@@ -1,0 +1,35 @@
+:include {once} NNlab.aap
+
+NAME = cogito
+VERSION = 0.18.2
+
+DISTFILE = $(NAME)-$(VERSION).tar.bz2
+MASTER_SITES = http://www.kernel.org/pub/software/scm/$(NAME)
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+    :do patch $NAME
+
+getsrc: $SRCDIR
+
+install: $SRCDIR
+    :cd $source
+    :sys make prefix=$PREFIX install
+    :move $PREFIX/bin/cg-diff $PREFIX/bin/cg-diff.orig
+    :print > $PREFIX/bin/cg-diff $#!/bin/sh
+    :print >> $PREFIX/bin/cg-diff $$NNlab_path/bin/cg-diff.orig -c "$$@" $(|) cat
+    :chmod 755 $PREFIX/bin/cg-diff
+
+$DOCDIR/$NAME: $SRCDIR
+    :cd $DOCDIR
+    :symlink {q} $SRCDIR/doc ./$NAME

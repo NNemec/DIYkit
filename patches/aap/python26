@@ -1,0 +1,84 @@
+Index: aap/Filetype.py
+===================================================================
+--- aap.orig/Filetype.py	2009-04-30 18:06:36.000000000 +0100
++++ aap/Filetype.py	2009-04-30 17:59:33.000000000 +0100
+@@ -1414,24 +1414,24 @@
+             rline = items[1]
+         rline_len = len(rline)
+         # isolate first argument, which may be in quotes
+-        as = 0
+-        if as < rline_len:
+-            if rline[as] == '"' or rline[as] == "'":
+-                quote = rline[as]
+-                as = as + 1
+-                ae = as
+-                while ae < rline_len and rline[ae] != quote:
+-                    ae = ae + 1
+-                if ae == rline_len:
++        astart = 0
++        if astart < rline_len:
++            if rline[astart] == '"' or rline[astart] == "'":
++                quote = rline[astart]
++                astart = astart + 1
++                aend = astart
++                while aend < rline_len and rline[aend] != quote:
++                    aend = aend + 1
++                if aend == rline_len:
+                     raise DetectError, (_('Missing quote in line %d: "%s"')
+                                            % (line_idx + recipe_line_nr, line))
+-                n = ae + 1
++                n = aend + 1
+             else:
+-                ae = as
+-                while ae < rline_len and rline[ae] != ' ' and rline[ae] != '\t':
+-                    ae = ae + 1
+-                n = ae
+-            arg1 = rline[as:ae]
++                aend = astart
++                while aend < rline_len and rline[aend] != ' ' and rline[aend] != '\t':
++                    aend = aend + 1
++                n = aend
++            arg1 = rline[astart:aend]
+         else:
+             arg1 = ''
+             n = rline_len
+Index: aap/Sign.py
+===================================================================
+--- aap.orig/Sign.py	2009-04-30 18:06:36.000000000 +0100
++++ aap/Sign.py	2009-04-30 17:59:39.000000000 +0100
+@@ -11,7 +11,7 @@
+ import os
+ import os.path
+ import string
+-import md5
++import hashlib
+ import time
+ 
+ from Util import *
+@@ -272,7 +272,7 @@
+ 
+     try:
+         f = open(fname, "rb")
+-        m = md5.new()
++        m = hashlib.md5()
+         while 1:
+             # Read big blocks at a time for speed, but don't read the whole
+             # file at once to reduce memory usage.
+@@ -301,7 +301,7 @@
+                                                              % fname) + str(e))
+         return "unknown"
+ 
+-    m = md5.new()
++    m = hashlib.md5()
+ 
+     inquote = 0
+     incomment = 0
+@@ -404,7 +404,7 @@
+ 
+ def buildcheckstr2sign(str):
+     """Compute a signature from a string for the buildcheck."""
+-    return hexdigest(md5.new(str))
++    return hexdigest(hashlib.md5(str))
+ 
+ 
+ def _sign_lookup(signatures, name, key):

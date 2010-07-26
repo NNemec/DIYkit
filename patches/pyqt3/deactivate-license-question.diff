@@ -1,0 +1,14 @@
+Index: pyqt3/configure.py
+===================================================================
+--- pyqt3.orig/configure.py	2006-03-25 01:09:06.000000000 +0100
++++ pyqt3/configure.py	2006-08-19 18:03:49.000000000 +0200
+@@ -1368,7 +1368,8 @@
+     check_qt_installation(macros)
+ 
+     # Check the licenses are compatible.
+-    check_license()
++    # check_license()
++    # have to deactivate this for automated install
+ 
+     # Check for QScintilla.
+     check_qscintilla()

@@ -1,0 +1,24 @@
+NEED UPDATE!!!!
+
+
+:include {once} NNlab.aap
+
+NAME = matplotlib_htdocs
+
+CVS_SITE = cvs://:pserver:anonymous@cvs.sourceforge.net:/cvsroot/matplotlib
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+all: install
+
+$WRKDIR/$NAME:
+    :cd $TMPDIR
+    :fetch htdocs {fetch = $CVS_SITE}
+    :move htdocs $WRKDIR/$NAME
+    :do patch $NAME
+
+install: $WRKDIR/$NAME
+    :cd $source
+    :sys python make.py
+    :cd $DOCDIR
+    :symlink {q} $WRKDIR/$NAME ./matplotlib

@@ -1,0 +1,36 @@
+:include {once} NNlab.aap
+
+NAME = texmacs
+# VERSION = 1.0
+
+# DISTFILE = $(NAME)-$(VERSION).tar.gz
+# MASTER_SITES = $(SOURCEFORGE)/$(NAME)
+# MASTER_SITES = ftp://ftp.somewhere.com
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+# depends on:
+
+# :attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: # $NNlab_path/download/$DISTFILE
+#    :do unpack $NNlab_path/download/$DISTFILE
+#    :do patch $NAME
+
+getsrc: $SRCDIR
+
+# make
+build: $SRCDIR
+    :cd $SRCDIR
+#    :sys ./configure --prefix $PREFIX
+    :sys ./configure --prefix $PREFIX --enable-debug=yes
+#    :sys ./configure --prefix $PREFIX --enable-debug=yes --enable-optimize=yes
+    :sys make
+
+install: build
+#    :cd $SRCDIR
+#    :sys make install

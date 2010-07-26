@@ -1,0 +1,32 @@
+#!/bin/bash
+
+export NNlab_path=~/NNlab
+
+# export NNlab_home=http://homepages.uni-regensburg.de/~nen10015/NNlab
+export NNlab_home=http://www.tcm.phy.cam.ac.uk/~nn245/NNlab
+
+(
+mkdir -p $NNlab_path
+
+AAP=`which aap`
+if [ ! -x "$AAP" ] ; then
+    AAP=$NNlab_path/bin/aap
+fi
+if [ -z "$AAP" ] ; then
+    mkdir -p $NNlab_path/tmp
+    cd $NNlab_path/tmp
+    cvs -d:pserver:anonymous@a-a-p.cvs.sourceforge.net:/cvsroot/a-a-p checkout Exec
+    mkdir -p $NNlab_path/src
+    mv Exec $NNlab_path/src/aap
+    cd $NNlab_path/src/aap
+    ./aap install PREFIX=$NNlab_path
+    AAP=$NNlab_path/bin/aap
+fi
+
+cd $NNlab_path
+#if [ -e NNlab.aap ] ; then
+#    $AAP -f NNlab.aap
+#else
+$AAP -f $NNlab_home/NNlab.aap
+#fi
+)

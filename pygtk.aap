@@ -1,0 +1,28 @@
+:include {once} NNlab.aap
+
+NAME = pygtk
+VERSION = 2.10.4
+
+DISTFILE = $(NAME)-$(VERSION).tar.bz2
+MASTER_SITES = http://ftp.gnome.org/pub/GNOME/sources/pygtk/2.10/
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+
+getsrc: $SRCDIR
+
+install: $SRCDIR
+    :cd $source
+    :sys CPPFLAGS="-I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include" ./configure --prefix $PREFIX	    
+#    :sys CPPFLAGS="-save-temps -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include" ./configure --prefix $PREFIX	    
+    :sys make install

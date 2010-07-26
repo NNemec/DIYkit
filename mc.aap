@@ -1,0 +1,32 @@
+:include {once} NNlab-include.aap
+
+NAME = mc
+VERSION = 4.7.0.7
+
+DISTFILE = $(NAME)-$(VERSION).tar.bz2
+MASTER_SITES = http://www.midnight-commander.org/downloads
+
+SRCDIR = $WRKDIR/$NAME
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+#    :do patch $NAME
+
+getsrc: # $SRCDIR
+    :pass
+
+# make
+build: $SRCDIR
+    :cd $SRCDIR
+    :sys ./configure --prefix $PREFIX # --with-screen=slang
+    :sys make
+
+install: build
+    :cd $SRCDIR
+    :sys make install

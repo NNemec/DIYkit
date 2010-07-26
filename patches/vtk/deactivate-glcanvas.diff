@@ -1,0 +1,26 @@
+Index: vtk/Wrapping/Python/vtk/wx/wxVTKRenderWindow.py
+===================================================================
+--- vtk.orig/Wrapping/Python/vtk/wx/wxVTKRenderWindow.py	2005-08-08 12:07:50.000000000 +0200
++++ vtk/Wrapping/Python/vtk/wx/wxVTKRenderWindow.py	2006-11-13 14:37:40.000000000 +0100
+@@ -85,7 +85,7 @@
+ # This is sometimes necessary under wxGTK or the image is blank.
+ # (in wxWindows 2.3.1 and earlier, the GLCanvas had scroll bars)
+ try:
+-    WX_USE_GL_CANVAS
++    WX_USE_GLCANVAS = 0
+ except NameError:
+     if wxPlatform == '__WXMSW__':
+         WX_USE_GLCANVAS = 0
+Index: vtk/Wrapping/Python/vtk/wx/wxVTKRenderWindowInteractor.py
+===================================================================
+--- vtk.orig/Wrapping/Python/vtk/wx/wxVTKRenderWindowInteractor.py	2005-06-06 18:51:16.000000000 +0200
++++ vtk/Wrapping/Python/vtk/wx/wxVTKRenderWindowInteractor.py	2006-11-13 14:38:04.000000000 +0100
+@@ -54,7 +54,7 @@
+ # This is sometimes necessary under wxGTK or the image is blank.
+ # (in wxWindows 2.3.1 and earlier, the GLCanvas had scroll bars)
+ try:
+-    WX_USE_GL_CANVAS
++    WX_USE_GLCANVAS = 0
+ except NameError:
+     if wxPlatform == '__WXMSW__':
+         WX_USE_GLCANVAS = 0

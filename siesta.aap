@@ -1,0 +1,70 @@
+:include {once} NNlab.aap
+
+NAME = siesta
+
+VERSION = 2.0
+
+DISTFILE = $NNlab_path/download/$(NAME)-$(VERSION).tgz
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+all: install
+
+$SRCDIR:
+    :cd $TMPDIR
+    :do extract $DISTFILE
+    :del {r}{f} $SRCDIR
+    :move $(NAME)-$(VERSION) $SRCDIR
+    :do patch $NAME
+
+getsrc: $SRCDIR
+
+build: $SRCDIR
+    :sys set
+    
+    :cd $SRCDIR/Src
+#    :sys FC="ifort" ./configure --enable-fast --with-netcdf=$PREFIX/lib/libnetcdf.a --prefix=$PREFIX
+    :sys make
+    :sys make denchar
+#    :sys make -C Src denchar
+
+    :cd $SRCDIR
+    :sys make -C Pseudo/atom
+    :sys ifort Util/gnubands.f -o Util/gnubands
+    :sys ifort Util/eig2dos.f -o Util/eig2dos
+    :sys ifort Util/grid2cube.f -o Util/grid2cube
+    :sys ifort Util/readwf.f -o Util/readwf
+
+install: build
+    :cd $SRCDIR
+    :copy Src/siesta $PREFIX/bin/siesta
+    :copy Pseudo/atom/atm $PREFIX/bin/atm
+#    :copy Src/arch.make Util/Denchar/Src/arch.make
+#    :copy Util/Denchar/Src/denchar $PREFIX/bin/denchar
+    :copy Util/gnubands $PREFIX/bin/gnubands
+    :copy Util/eig2dos $PREFIX/bin/eig2dos
+    :copy Util/grid2cube $PREFIX/bin/grid2cube
+    :copy Util/readwf $PREFIX/bin/readwf
+
+$SRCDIR/Docs/siesta.aux: $SRCDIR
+    :cd $WRKDIR/$NAME/Docs/
+    :sys latex siesta.tex
+    
+$SRCDIR/Docs/siesta: $SRCDIR/Docs/siesta.aux
+    :cd $SRCDIR/Docs/
+    :sys latex2html siesta.tex
+
+$SRCDIR/Pseudo/atom/Docs/atom.aux: $SRCDIR
+    :cd $SRCDIR/Pseudo/atom/Docs/
+    :sys latex atom.tex
+    
+$SRCDIR/Pseudo/atom/Docs/atom: $SRCDIR/Pseudo/atom/Docs/atom.aux
+    :cd $SRCDIR/Pseudo/atom/Docs/
+    :sys latex2html atom.tex
+
+docs: $SRCDIR/Docs/siesta $SRCDIR/Pseudo/atom/Docs/atom
+    :cd $DOCDIR
+    :copy {r} $SRCDIR/Pseudo/atom/Docs/atom ./atom
+    :copy {r} $SRCDIR/Docs/siesta ./siesta

@@ -1,0 +1,35 @@
+:include {once} NNlab.aap
+
+NAME = numarray
+VERSION = 1.5.2
+
+DISTFILE = $(NAME)-$(VERSION).tar.gz
+MASTER_SITES = $(SOURCEFORGE)/numpy
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+    :do patch $NAME
+
+getsrc: $SRCDIR
+
+install: $SRCDIR
+    :cd $source
+    :sys python setup.py config
+    :sys python setup.py install --prefix $PREFIX
+
+#$DOCDIR/$NAME: $SRCDIR
+    :cd Doc/manual
+    :sys ./mklinks ../../../python
+    :sys make numarray
+    :cd $DOCDIR
+    :copy {r} $SRCDIR/Doc/manual/numarray ./$NAME

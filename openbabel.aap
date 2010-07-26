@@ -1,0 +1,31 @@
+:include {once} NNlab.aap
+
+NAME = openbabel
+VERSION = 1.100.2
+
+DISTFILE = $(NAME)-$(VERSION).tar.gz
+MASTER_SITES = $(SOURCEFORGE)/$(NAME)
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+#    :do patch $NAME
+
+getsrc: $SRCDIR
+
+install: $SRCDIR
+    :cd $source
+    :sys ./configure --prefix $PREFIX
+    :sys make
+    :sys make install
+
+$DOCDIR/$NAME: $SRCDIR
+    :cd $DOCDIR
+    :symlink {q} $SRCDIR/doc ./$NAME

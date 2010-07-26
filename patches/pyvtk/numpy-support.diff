@@ -1,0 +1,103 @@
+Index: pyvtk/examples/example1.py
+===================================================================
+--- pyvtk.orig/examples/example1.py	2001-05-29 21:22:01.000000000 +0200
++++ pyvtk/examples/example1.py	2006-05-22 13:17:58.000000000 +0200
+@@ -27,7 +27,7 @@
+     Normals([[0,0,-1],[0,0,1],[0,-1,0],
+              [0,1,0],[-1,0,0],[1,0,0]],
+             name='cell_normals'),
+-    Field('FieldData',
++    Field('myfield',
+           cellIds=[[0],[1],[2],[3],[4],[5]],
+           faceAttributes=[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6]]))
+ 
+Index: pyvtk/lib/common.py
+===================================================================
+--- pyvtk.orig/lib/common.py	2006-05-18 11:55:21.000000000 +0200
++++ pyvtk/lib/common.py	2006-05-22 15:19:42.000000000 +0200
+@@ -20,6 +20,32 @@
+ import sys
+ import struct
+ 
++_numpy_typecodes = {
++    '?': 'bit',
++    'B': 'unsigned_char',
++    'H': 'unsigned_short',
++    'L': 'unsigned_int',
++    'b': 'char',
++    'h': 'short',
++    'i': 'int',
++    'l': 'long',
++    'f': 'float',
++    'd': 'double',
++}
++
++_numeric_typecodes = {
++    'b':'unsigned_char', #'bit'??
++    'f':'float',
++    'd':'double',
++    'i':'int',
++    'l':'long',
++    '1':'char',
++    's':'short',
++    'w':'unsigned_short',
++    'u':'unsigned_int',
++    #'?':'unsigned_long',
++}
++
+ def is_sequence(obj):
+     """Check if obj is sequence."""
+     try:
+@@ -37,11 +63,19 @@
+ 
+ def is_number(obj):
+     """Check if obj is number."""
+-    return type(obj) in [types.IntType,types.FloatType]
++    return (
++	type(obj) in [types.IntType,types.FloatType]
++    ) or (
++	hasattr(obj,'dtype') and obj.dtype.kind in _numpy_typecodes
++    )
+ 
+ def is_int(obj):
+     """Check if obj is integer."""
+-    return type(obj) is types.IntType
++    return (
++	type(obj) is types.IntType
++    ) or (
++	hasattr(obj,'dtype') and obj.dtype.kind in _numpy_typecodes and obj.dtype.kind not in ['f','d']
++    )
+ 
+ def is_string(obj):
+     """Check if obj is string."""
+@@ -113,24 +147,12 @@
+     def __str__(self):
+         return self.to_string()
+     def get_datatype(self,obj):
+-        typecode = None
+-        if hasattr(obj,'dtype'): # obj is numpy array
+-            typecode = obj.dtype.char
+-        elif hasattr(obj,'typecode'): # obj is Numeric array
+-            typecode = obj.typecode()
+-
+-        if typecode is not None:
+-            r =  {'b':'unsigned_char', #'bit'??
+-                  'f':'float', 
+-                  'd':'double',
+-                  'i':'int',
+-                  'l':'long',
+-                  '1':'char',
+-                  's':'short',
+-                  'w':'unsigned_short',
+-                  'u':'unsigned_int'
+-                  #'?':'unsigned_long'
+-                  }.get(typecode)
++        if hasattr(obj,'dtype'):
++	    r = _numpy_typecodes.get(obj.dtype.char)
++            if r is not None:
++                return r
++	elif hasattr(obj,'typecode'):
++            r = _numeric_typecodes.get(obj.typecode())
+             if r is not None:
+                 return r
+         t = type(obj)

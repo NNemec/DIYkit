@@ -1,0 +1,39 @@
+:include {once} NNlab.aap
+
+NAME = arpack++
+
+DISTFILE = $(NAME).tar.gz
+MASTER_SITES = http://www.ime.unicamp.br/~chico/$(NAME)
+# MASTER_SITES = http://www.caam.rice.edu/software/ARPACK/ARPACK++
+
+SRCDIR = $WRKDIR/$NAME
+
+:recipe {fetch = $NNlab_home/$(NAME).aap}
+
+# depends on:
+
+:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+
+all: install
+
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
+#    :do patch $NAME
+
+getsrc: $SRCDIR
+
+install: $SRCDIR
+    :cd $SRCDIR
+    :del {r} {f} $PREFIX/include/arpack++
+    :mkdir {r} {f} $PREFIX/include/arpack++
+    :copy include/*.h $PREFIX/include/arpack++
+
+$SRCDIR/doc/arpackpp.pdf: $SRCDIR/doc/arpackpp.ps.gz
+    :sys zcat $SRCDIR/doc/arpackpp.ps.gz > $SRCDIR/doc/arpackpp.ps
+    :sys ps2pdf $SRCDIR/doc/arpackpp.ps
+    :del {f} $SRCDIR/doc/arpackpp.ps
+
+$DOCDIR/$(NAME).pdf: $SRCDIR/doc/arpackpp.pdf
+    :copy $SRCDIR/doc/arpackpp.pdf $DOCDIR/$(NAME).pdf
+
+doc: $DOCDIR/$(NAME).pdf

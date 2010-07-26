@@ -1,0 +1,985 @@
+Index: gnuplot-4.2.rc1/demo/all.dem
+===================================================================
+--- gnuplot-4.2.rc1.orig/demo/all.dem	2006-11-03 15:15:34.000000000 +0100
++++ gnuplot-4.2.rc1/demo/all.dem	2006-11-03 15:21:56.000000000 +0100
+@@ -211,3 +211,12 @@
+ print "********************** file rectangle.dem *********************"
+ load "rectangle.dem"
+ reset
++
++print "********************** file transparent.dem *********************"
++load "transparent.dem"
++reset
++
++print "********************** file transparent_tori.dem *********************"
++load "transparent_tori.dem"
++pause 5
++reset
+Index: gnuplot-4.2.rc1/demo/html/index.save
+===================================================================
+--- gnuplot-4.2.rc1.orig/demo/html/index.save	2006-11-03 15:15:34.000000000 +0100
++++ gnuplot-4.2.rc1/demo/html/index.save	2006-11-03 15:21:56.000000000 +0100
+@@ -118,6 +118,8 @@
+     <li><a href="dashcolor.html">line styles</a></li>
+     <li><a href="fillstyle.html">fill styles</a></li>
+     <li><a href="arrowstyle.html">arrow styles</a></li>
++    <li><a href="transparent.html">transparency</a></li>
++    <li><a href="transparent_tori.html">transparent solids</a></li>
+     </ul>
+ </td>
+ 
+Index: gnuplot-4.2.rc1/demo/html/Makefile
+===================================================================
+--- gnuplot-4.2.rc1.orig/demo/html/Makefile	2006-11-03 15:15:34.000000000 +0100
++++ gnuplot-4.2.rc1/demo/html/Makefile	2006-11-03 15:23:18.000000000 +0100
+@@ -12,7 +12,7 @@
+ # Several of the demos need manual intervention:
+ #	fontfile vector epslatex
+ #
+-html: airfoil.html arrowstyle.html binary.html bivariat.html candlesticks.html contours.html controls.html datastrings.html discrete.html electron.html enhancedtext.html epslatex.html fillbetween.html fillcrvs.html fillstyle.html finance.html fit.html hidden.html hidden2.html histograms.html histograms2.html image.html index.html key.html layout.html mgr.html multimsh.html multiplt.html param.html pm3dcolors.html pm3d.html pm3dgamma.html pointsize.html polar.html poldat.html prob2.html prob.html rainbow.html random.html rectangle.html rgb_variable.html scatter.html simple.html singulr.html spline.html steps.html stringvar.html surface1.html surface2.html textcolor.html textrotate.html tics.html timedat.html using.html vector.html world.html world2.html dashcolor.html animate2.html
++html: airfoil.html arrowstyle.html binary.html bivariat.html candlesticks.html contours.html controls.html datastrings.html discrete.html electron.html enhancedtext.html epslatex.html fillbetween.html fillcrvs.html fillstyle.html finance.html fit.html hidden.html hidden2.html histograms.html histograms2.html image.html index.html key.html layout.html mgr.html multimsh.html multiplt.html param.html pm3dcolors.html pm3d.html pm3dgamma.html pointsize.html polar.html poldat.html prob2.html prob.html rainbow.html random.html rectangle.html rgb_variable.html scatter.html simple.html singulr.html spline.html steps.html stringvar.html surface1.html surface2.html transparent.html transparent_tori.html textcolor.html textrotate.html tics.html timedat.html using.html vector.html world.html world2.html dashcolor.html animate2.html
+ 
+ index.html: index.save
+ 	cp index.save index.html
+@@ -26,6 +26,15 @@
+ multiplt.html: $(GNUPLOT_LIB)/multiplt.dem ./webify.pl
+ 	export DEMOTERM="png enhanced transparent font arial 8 size 610,480"; ./webify.pl multiplt
+ 
++transparent.html: $(GNUPLOT_LIB)/transparent.dem ./webify.pl
++	export DEMOTERM="png enhanced truecolor font arial 8 size 512,280"; ./webify.pl transparent
++	mv transparent.2.png temp.png
++	export DEMOTERM="png enhanced notruecolor font arial 8 size 512,280"; ./webify.pl transparent
++	mv temp.png transparent.2.png
++
++transparent_tori.html: $(GNUPLOT_LIB)/transparent_tori.dem ./webify.pl
++	export DEMOTERM="png enhanced truecolor font arial 9 size 512,384"; ./webify.pl transparent_tori
++
+ # The png terminal does not support dashed lines, so we create an eps file and convert it.
+ # Do this one last, so that if conversion fails everything else has already been done.
+ dashcolor.html: $(GNUPLOT_LIB)/dashcolor.dem ./webify.pl
+Index: gnuplot-4.2.rc1/demo/transparent.dem
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ gnuplot-4.2.rc1/demo/transparent.dem	2006-11-03 15:21:56.000000000 +0100
+@@ -0,0 +1,50 @@
++#
++# Example of transparent fill areas
++# Ethan A Merritt - Aug 2006
++# NB:
++#    Not all terminal types support transparency
++#    Assumes UTF-8 support for plot titles
++#
++set style fill solid 1.0 noborder
++set style function filledcurves y1=0
++set clip two
++
++Gauss(x,mu,sigma) = 1./(sigma*sqrt(2*pi)) * exp( -(x-mu)**2 / (2*sigma**2) )
++d1(x) = Gauss(x, 0.5, 0.5)
++d2(x) = Gauss(x,  2.,  1.)
++d3(x) = Gauss(x, -1.,  2.)
++
++set xrange [-5:5]
++set yrange [0:1]
++
++unset colorbox
++
++set key title "Gaussian Distribution"
++set key top left Left reverse samplen 1
++
++#set obj 1 rect from graph 0,0 to graph 1,1
++#set obj 1 rect back fs solid 0.25 fc lt 4
++
++set title "Solid filled curves"
++plot d1(x) fs solid 1.0 lc rgb "forest-green" title "μ =  0.5 σ = 0.5", \
++     d2(x) lc rgb "gold" title "μ =  2.0 σ = 0.5", \
++     d3(x) lc rgb "red" title "μ = -1.0 σ = 2.0"
++
++pause -1
++
++set style fill transparent solid 0.5 noborder
++set title "Transparent filled curves"
++replot
++
++pause -1
++
++set style fill pattern 4 bo
++set title "Pattern-filled curves"
++replot
++
++pause -1
++set style fill transparent pattern 4 bo
++set title "Transparent pattern-filled curves"
++replot
++
++pause -1
+Index: gnuplot-4.2.rc1/demo/transparent_tori.dem
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ gnuplot-4.2.rc1/demo/transparent_tori.dem	2006-11-03 15:21:56.000000000 +0100
+@@ -0,0 +1,26 @@
++set title "Interlocking Tori - PM3D surface with depth sorting and transparency"
++
++unset border
++unset key
++set object 1 rect from screen 0, 0, 0 to screen 1, 1, 0 behind 
++set object 1 rect fc  rgb "gray"  fillstyle solid 1.0  border -1
++set view 64, 345, 1.24375, 0.995902
++set isosamples 50, 20
++set noxtics
++set noytics
++set noztics
++set parametric
++set dummy u,v
++set urange [ -pi : pi ]
++set vrange [ -pi : pi ]
++
++set pm3d depthorder
++set pm3d interpolate 1,1 flush begin noftriangles hidden3d 2 corners2color mean
++set palette rgbformulae 8, 9, 7
++set style line 2  linetype 2 linecolor rgb "#a0a0f0"  linewidth 0.5
++set style fill  transparent solid 0.30 border
++
++splot cos(u)+.5*cos(u)*cos(v),sin(u)+.5*sin(u)*cos(v),.5*sin(v) with pm3d, \
++    1+cos(u)+.5*cos(u)*cos(v),.5*sin(v),sin(u)+.5*sin(u)*cos(v) with pm3d
++
++pause -1 "Hit return to continue"
+Index: gnuplot-4.2.rc1/docs/gnuplot.doc
+===================================================================
+--- gnuplot-4.2.rc1.orig/docs/gnuplot.doc	2006-11-03 15:15:35.000000000 +0100
++++ gnuplot-4.2.rc1/docs/gnuplot.doc	2006-11-03 15:21:57.000000000 +0100
+@@ -8274,7 +8274,9 @@
+  histograms, candlesticks and filledcurves.
+ 
+  Syntax:
+-       set style fill {empty | solid {<density>} | pattern {<n>}}
++       set style fill {empty 
++                       | {transparent} solid {<density>} 
++                       | {transparent} pattern {<n>}}
+                       {border {<linetype>} | noborder}
+ 
+  The default fillstyle is `empty`.
+@@ -8299,6 +8301,51 @@
+  By default, `border`, the box is bounded by a solid line of the current
+  linetype. `border <lt>` specifies that a border is to be drawn using
+  linetype <lt>. `noborder` specifies that no bounding lines are drawn.
++5 set style fill transparent
++?commands set style fill transparent
++?set style fill transparent
++?fillstyle transparent
++?transparent
++ Some terminals support the attribute `transparent` for filled areas.
++ In the case of transparent solid fill areas, the `density` parameter is
++ interpreted as an alpha value; that is, density 0 is fully transparent,
++ density 1 is fully opaque.  In the case of transparent pattern fill, the
++ background of the pattern is either fully transparent or fully opaque.
++
++@start table - Driver support for transparency
++       terminal   solid pattern    pm3d
++       --------------------------------
++       gif           no     yes      no
++       jpeg         yes      no     yes
++       pdf          yes     yes     yes
++       png    TrueColor   index     yes
++       post          no     yes      no
++       svg          yes      no     yes
++       wxt          yes     yes     yes
++       x11           no     yes      no
++#\begin{tabular}{|cccl|} \hline
++#Terminal   &   solid & pattern &    pm3d \\ \hline
++#gif        &      no &     yes &      no \\
++#jpeg       &     yes &      no &     yes \\
++#pdf        &     yes &     yes &     yes \\
++#png        &TrueColor&   index &     yes \\
++#post       &      no &     yes &      no \\
++#svg        &     yes &      no &     yes \\
++#wxt        &     yes &     yes &     yes \\
++#x11        &      no &     yes &      no \\
++%c l .
++%Terminal@solid@pattern@pm3d
++%_
++%gif@no@yes@no
++%jpeg@yes@no@yes
++%pdf@yes@yes@yes
++%png@TrueColor@index@yes
++%post@no@yes@no
++%svg@yes@yes@yes
++%wxt@yes@yes@yes
++%x11@no@yes@no
++%_
++@end table
+ 4 set style function
+ ?commands set style function
+ ?commands show style function
+Index: gnuplot-4.2.rc1/src/color.c
+===================================================================
+--- gnuplot-4.2.rc1.orig/src/color.c	2006-11-03 15:15:35.000000000 +0100
++++ gnuplot-4.2.rc1/src/color.c	2006-11-03 15:21:57.000000000 +0100
+@@ -202,7 +202,10 @@
+ 
+ void ifilled_quadrangle(gpiPoint* icorners)
+ {
+-    icorners->style = FS_OPAQUE;
++    if (default_fillstyle.fillstyle == FS_EMPTY)
++	icorners->style = FS_OPAQUE;
++    else
++	icorners->style = style_from_fill(&default_fillstyle);
+     term->filled_polygon(4, icorners);
+ 
+     if (pm3d.hidden3d_tag) {
+@@ -265,7 +268,10 @@
+ 	icorners[0].spec.gray = -1;	/* force solid color */
+     }
+ #endif
+-    icorners->style = FS_OPAQUE;
++    if (default_fillstyle.fillstyle == FS_EMPTY)
++	icorners->style = FS_OPAQUE;
++    else
++	icorners->style = style_from_fill(&default_fillstyle);
+     term->filled_polygon(points, icorners);
+     free(icorners);
+ }
+@@ -288,7 +294,10 @@
+ 	icorners[0].spec.gray = -1;	/* force solid color */
+     }
+ #endif
+-    icorners->style = FS_OPAQUE;
++    if (default_fillstyle.fillstyle == FS_EMPTY)
++	icorners->style = FS_OPAQUE;
++    else
++	icorners->style = style_from_fill(&default_fillstyle);
+     term->filled_polygon(points, icorners);
+     free(icorners);
+ }
+@@ -384,7 +393,10 @@
+ 	}
+ #endif
+ 	/* print the rectangle with the given colour */
+-	corners->style = FS_OPAQUE;
++	if (default_fillstyle.fillstyle == FS_EMPTY)
++	    corners->style = FS_OPAQUE;
++	else
++	    corners->style = style_from_fill(&default_fillstyle);
+ 	term->filled_polygon(4, corners);
+     }
+ }
+Index: gnuplot-4.2.rc1/src/gplt_x11.c
+===================================================================
+--- gnuplot-4.2.rc1.orig/src/gplt_x11.c	2006-11-03 15:15:35.000000000 +0100
++++ gnuplot-4.2.rc1/src/gplt_x11.c	2006-11-03 15:27:42.000000000 +0100
+@@ -2222,6 +2222,7 @@
+ 	    /* lower nibble contains fillstyle */
+ 	    switch (style & 0xf) {
+ 	    case FS_SOLID:
++	    case FS_TRANSPARENT_SOLID:
+ 		/* filldensity is from 0..100 percent */
+ 		if (fillpar >= 100)
+ 		    break;
+@@ -2242,13 +2243,17 @@
+ 		    XSetForeground(dpy, gc, xcolor.pixel);
+ 		break;
+ 	    case FS_PATTERN:
++	    case FS_TRANSPARENT_PATTERN:
+ 		/* use fill pattern according to fillpattern */
+ 		idx = (int) fillpar;	/* fillpattern is enumerated */
+ 		if (idx < 0)
+ 		    idx = 0;
+ 		idx = idx % stipple_pattern_num;
+ 		XSetStipple(dpy, gc, stipple_pattern[idx]);
+-		XSetFillStyle(dpy, gc, FillOpaqueStippled);
++     	        if (style == FS_TRANSPARENT_PATTERN)
++ 		    XSetFillStyle(dpy, gc, FillStippled);
++ 	        else
++ 		    XSetFillStyle(dpy, gc, FillOpaqueStippled);
+ 		XSetForeground(dpy, gc, plot->cmap->colors[plot->lt + 3]);
+ 		break;
+ 	    case FS_EMPTY:
+@@ -2687,6 +2692,7 @@
+ 		fillpar = style >> 4;
+ 		switch (style & 0xf) {
+ 		case FS_SOLID:
++		case FS_TRANSPARENT_SOLID:
+ 		    /* filldensity is from 0..100 percent */
+ 		    if (fillpar >= 100)
+ 			break;
+@@ -2707,13 +2713,17 @@
+ 			XSetForeground(dpy, *current_gc, xcolor.pixel);
+ 		    break;
+ 		case FS_PATTERN:
++		case FS_TRANSPARENT_PATTERN:
+ 		    /* use fill pattern according to fillpattern */
+ 		    idx = (int) fillpar;	/* fillpattern is enumerated */
+ 		    if (idx < 0)
+ 			idx = 0;
+ 		    idx = idx % stipple_pattern_num;
+ 		    XSetStipple(dpy, *current_gc, stipple_pattern[idx]);
+-		    XSetFillStyle(dpy, *current_gc, FillOpaqueStippled);
++ 	            if (style == FS_TRANSPARENT_PATTERN)
++ 		        XSetFillStyle(dpy, *current_gc, FillStippled);
++ 	            else
++ 		        XSetFillStyle(dpy, *current_gc, FillOpaqueStippled);
+ 		    XSetBackground(dpy, *current_gc, plot->cmap->colors[0]);
+ 		    break;
+ 		case FS_EMPTY:
+Index: gnuplot-4.2.rc1/src/graphics.c
+===================================================================
+--- gnuplot-4.2.rc1.orig/src/graphics.c	2006-11-03 15:15:35.000000000 +0100
++++ gnuplot-4.2.rc1/src/graphics.c	2006-11-03 15:21:57.000000000 +0100
+@@ -165,8 +165,6 @@
+ static void do_key_sample __PROTO((struct curve_points *this_plot, legend_key *key,
+ 				   char *title,  struct termentry *t, int xl, int yl));
+ 
+-static int style_from_fill __PROTO((struct fill_style_type *));
+-
+ /* for plotting error bars
+  * half the width of error bar tic mark
+  */
+@@ -5033,36 +5031,6 @@
+     clip_area = clip_save;
+ }
+ 
+-/* Squeeze all fill information into the old style parameter.
+- * The terminal drivers know how to extract the information.
+- * We assume that the style (int) has only 16 bit, therefore we take
+- * 4 bits for the style and allow 12 bits for the corresponding fill parameter.
+- * This limits the number of styles to 16 and the fill parameter's
+- * values to the range 0...4095, which seems acceptable.
+- */
+-static int
+-style_from_fill(struct fill_style_type *fs)
+-{
+-    int fillpar, style;
+-
+-    switch( fs->fillstyle ) {
+-    case FS_SOLID:
+-	fillpar = fs->filldensity;
+-	style = ((fillpar & 0xfff) << 4) + FS_SOLID;
+-	break;
+-    case FS_PATTERN:
+-	fillpar = fs->fillpattern;
+-	style = ((fillpar & 0xfff) << 4) + FS_PATTERN;
+-	break;
+-    default:
+-	/* solid fill with background color */
+-	style = FS_EMPTY;
+-	break;
+-    }
+-
+-    return style;
+-}
+-
+ 
+ /*
+  * The equivalent of t->fillbox() except that it uses PM3D colors instead
+Index: gnuplot-4.2.rc1/src/misc.c
+===================================================================
+--- gnuplot-4.2.rc1.orig/src/misc.c	2006-11-03 15:15:35.000000000 +0100
++++ gnuplot-4.2.rc1/src/misc.c	2006-11-03 15:21:57.000000000 +0100
+@@ -909,6 +909,7 @@
+     struct value a;
+     TBOOLEAN set_fill = FALSE;
+     TBOOLEAN set_param = FALSE;
++    TBOOLEAN transparent = FALSE;
+ 
+     /* Set defaults */
+     fs->fillstyle = def_style;
+@@ -923,15 +924,20 @@
+     c_token++;
+ 
+     while (!END_OF_COMMAND) {
++	if (almost_equals(c_token, "trans$parent")) {
++	    transparent = TRUE;
++	    c_token++;
++	}
++
+ 	if (almost_equals(c_token, "e$mpty")) {
+ 	    fs->fillstyle = FS_EMPTY;
+ 	    c_token++;
+ 	} else if (almost_equals(c_token, "s$olid")) {
+-	    fs->fillstyle = FS_SOLID;
++	    fs->fillstyle = transparent ? FS_TRANSPARENT_SOLID : FS_SOLID;
+ 	    set_fill = TRUE;
+ 	    c_token++;
+ 	} else if (almost_equals(c_token, "p$attern")) {
+-	    fs->fillstyle = FS_PATTERN;
++	    fs->fillstyle = transparent ? FS_TRANSPARENT_PATTERN : FS_PATTERN;
+ 	    set_fill = TRUE;
+ 	    c_token++;
+ 	}
+@@ -956,7 +962,7 @@
+ 	else if (!set_fill || !isanumber(c_token) || set_param)
+ 	    break;
+ 
+-	if (fs->fillstyle == FS_SOLID) {
++	if (fs->fillstyle == FS_SOLID || fs->fillstyle == FS_TRANSPARENT_SOLID) {
+ 	    /* user sets 0...1, but is stored as an integer 0..100 */
+ 	    fs->filldensity = 100.0 * real(const_express(&a)) + 0.5;
+ 	    if (fs->filldensity < 0)
+@@ -964,7 +970,7 @@
+ 	    if (fs->filldensity > 100)
+ 		fs->filldensity = 100;
+ 	    set_param = TRUE;
+-	} else if (fs->fillstyle == FS_PATTERN) {
++	} else if (fs->fillstyle == FS_PATTERN || fs->fillstyle == FS_TRANSPARENT_PATTERN) {
+ 	    fs->fillpattern = real(const_express(&a));
+ 	    if (fs->fillpattern < 0)
+ 		fs->fillpattern = 0;
+Index: gnuplot-4.2.rc1/src/os2/gclient.c
+===================================================================
+--- gnuplot-4.2.rc1.orig/src/os2/gclient.c	2006-11-03 15:15:35.000000000 +0100
++++ gnuplot-4.2.rc1/src/os2/gclient.c	2006-11-03 15:21:57.000000000 +0100
+@@ -2698,6 +2698,7 @@
+ 		switch(style & 0xf) {
+ 
+ 		    case FS_SOLID:
++		    case FS_TRANSPARENT_SOLID:
+ 		    {
+ 			/* style == 1 --> fill with intensity according to filldensity */
+ 			static const ULONG patternlist[] = {
+@@ -2718,6 +2719,7 @@
+ 		    }
+ 
+ 		    case FS_PATTERN:
++		    case FS_TRANSPARENT_PATTERN:
+ 		    {
+ 			/* style == 2 --> fill with pattern according to fillpattern */
+ 			/* the upper 3 nibbles of 'style' contain pattern number */
+Index: gnuplot-4.2.rc1/src/plot2d.c
+===================================================================
+--- gnuplot-4.2.rc1.orig/src/plot2d.c	2006-11-03 15:15:35.000000000 +0100
++++ gnuplot-4.2.rc1/src/plot2d.c	2006-11-03 15:21:57.000000000 +0100
+@@ -1723,7 +1723,8 @@
+                                 default_fillstyle.filldensity,
+                                 pattern_num,
+                                 default_fillstyle.border_linetype);
+-                if (this_plot->fill_properties.fillstyle == FS_PATTERN)
++                if ((this_plot->fill_properties.fillstyle == FS_PATTERN)
++		  ||(this_plot->fill_properties.fillstyle == FS_TRANSPARENT_PATTERN))
+                     pattern_num = this_plot->fill_properties.fillpattern + 1;
+                 if (this_plot->plot_style == FILLEDCURVES
+                 && this_plot->fill_properties.fillstyle == FS_EMPTY)
+Index: gnuplot-4.2.rc1/src/save.c
+===================================================================
+--- gnuplot-4.2.rc1.orig/src/save.c	2006-11-03 15:15:35.000000000 +0100
++++ gnuplot-4.2.rc1/src/save.c	2006-11-03 15:21:57.000000000 +0100
+@@ -1041,10 +1041,16 @@
+ {
+     switch(fs->fillstyle) {
+     case FS_SOLID:
+-	fprintf(fp, " solid %.2f ", fs->filldensity / 100.0);
++    case FS_TRANSPARENT_SOLID:
++	fprintf(fp, " %s solid %.2f ", 
++		fs->fillstyle == FS_SOLID ? "" : "transparent",
++		fs->filldensity / 100.0);
+ 	break;
+     case FS_PATTERN:
+-	fprintf(fp, " pattern %d ", fs->fillpattern);
++    case FS_TRANSPARENT_PATTERN:
++	fprintf(fp, " %s pattern %d ", 
++		fs->fillstyle == FS_PATTERN ? "" : "transparent",
++		fs->fillpattern);
+ 	break;
+     case FS_DEFAULT:
+ 	fprintf(fp, " default\n");
+Index: gnuplot-4.2.rc1/src/show.c
+===================================================================
+--- gnuplot-4.2.rc1.orig/src/show.c	2006-11-03 15:15:35.000000000 +0100
++++ gnuplot-4.2.rc1/src/show.c	2006-11-03 15:21:57.000000000 +0100
+@@ -1221,13 +1221,17 @@
+ 
+     switch(default_fillstyle.fillstyle) {
+     case FS_SOLID:
++    case FS_TRANSPARENT_SOLID:
+         fprintf(stderr,
+-	    "\tFill style is solid colour with density %f",
++	    "\tFill style uses %s solid colour with density %.3f",
++	    default_fillstyle.fillstyle == FS_SOLID ? "" : "transparent",
+ 	    default_fillstyle.filldensity/100.0);
+         break;
+     case FS_PATTERN:
++    case FS_TRANSPARENT_PATTERN:
+         fprintf(stderr,
+-	    "\tFill style uses patterns starting at %d",
++	    "\tFill style uses %s patterns starting at %d",
++	    default_fillstyle.fillstyle == FS_PATTERN ? "" : "transparent",
+ 	    default_fillstyle.fillpattern);
+         break;
+     default:
+Index: gnuplot-4.2.rc1/src/term_api.h
+===================================================================
+--- gnuplot-4.2.rc1.orig/src/term_api.h	2006-11-03 15:15:35.000000000 +0100
++++ gnuplot-4.2.rc1/src/term_api.h	2006-11-03 15:21:57.000000000 +0100
+@@ -134,7 +134,8 @@
+     int border_linetype;
+ } fill_style_type;
+ 
+-typedef enum t_fillstyle { FS_EMPTY, FS_SOLID, FS_PATTERN, FS_DEFAULT }
++typedef enum t_fillstyle { FS_EMPTY, FS_SOLID, FS_PATTERN, FS_DEFAULT, 
++			   FS_TRANSPARENT_SOLID, FS_TRANSPARENT_PATTERN }
+ 	     t_fillstyle;
+ #define FS_OPAQUE (FS_SOLID + (100<<4))
+ 
+@@ -396,6 +397,9 @@
+ /* Simple-minded test that point is with drawable area */
+ TBOOLEAN on_page __PROTO((int x, int y));
+ 
++/* Convert a fill style into a backwards compatible packed form */
++int style_from_fill __PROTO((struct fill_style_type *));
++
+ #ifdef LINUXVGA
+ void LINUX_setup __PROTO((void));
+ #endif
+Index: gnuplot-4.2.rc1/src/term.c
+===================================================================
+--- gnuplot-4.2.rc1.orig/src/term.c	2006-11-03 15:15:35.000000000 +0100
++++ gnuplot-4.2.rc1/src/term.c	2006-11-03 15:21:57.000000000 +0100
+@@ -2805,3 +2805,37 @@
+     if (term->path)
+ 	(*term->path)(1);
+ }
++
++/* Squeeze all fill information into the old style parameter.
++ * The terminal drivers know how to extract the information.
++ * We assume that the style (int) has only 16 bit, therefore we take
++ * 4 bits for the style and allow 12 bits for the corresponding fill parameter.
++ * This limits the number of styles to 16 and the fill parameter's
++ * values to the range 0...4095, which seems acceptable.
++ */
++int
++style_from_fill(struct fill_style_type *fs)
++{
++    int fillpar, style;
++
++    switch( fs->fillstyle ) {
++    case FS_SOLID:
++    case FS_TRANSPARENT_SOLID:
++	fillpar = fs->filldensity;
++	style = ((fillpar & 0xfff) << 4) + fs->fillstyle;
++	break;
++    case FS_PATTERN:
++    case FS_TRANSPARENT_PATTERN:
++	fillpar = fs->fillpattern;
++	style = ((fillpar & 0xfff) << 4) + fs->fillstyle;
++	break;
++    case FS_EMPTY:
++    default:
++	/* solid fill with background color */
++	style = FS_EMPTY;
++	break;
++    }
++
++    return style;
++}
++
+Index: gnuplot-4.2.rc1/src/win/wgraph.c
+===================================================================
+--- gnuplot-4.2.rc1.orig/src/win/wgraph.c	2006-11-03 15:15:36.000000000 +0100
++++ gnuplot-4.2.rc1/src/win/wgraph.c	2006-11-03 15:21:57.000000000 +0100
+@@ -942,6 +942,7 @@
+ 	     * by a W_fillstyle call. */
+ 	    switch(fillstyle & 0x0f) {
+ 		case FS_SOLID:
++		case FS_TRANSPARENT_SOLID:
+ 		    /* style == 1 --> use halftone fill pattern
+ 		     * according to filldensity. Density is from
+ 		     * 0..100 percent: */
+@@ -953,6 +954,7 @@
+ 		    SelectObject(hdc, halftone_brush[idx]);
+ 		    break;
+ 		case FS_PATTERN:
++		case FS_TRANSPARENT_PATTERN:
+ 		    /* style == 2 --> use fill pattern according to
+                      * fillpattern. Pattern number is enumerated */
+ 		    idx = fillstyle >> 4;
+Index: gnuplot-4.2.rc1/src/wxterminal/gp_cairo.c
+===================================================================
+--- gnuplot-4.2.rc1.orig/src/wxterminal/gp_cairo.c	2006-11-03 15:15:36.000000000 +0100
++++ gnuplot-4.2.rc1/src/wxterminal/gp_cairo.c	2006-11-03 15:21:57.000000000 +0100
+@@ -115,7 +115,7 @@
+ 
+ /* set a cairo pattern or solid fill depending on parameters */
+ static void gp_cairo_fill(plot_struct *plot, int fillstyle, int fillpar);
+-static void gp_cairo_fill_pattern(plot_struct *plot, int fillpar);
++static void gp_cairo_fill_pattern(plot_struct *plot, int fillstyle, int fillpar);
+ 
+ /* array of colors
+  * FIXME could be shared with all gnuplot terminals */
+@@ -1414,6 +1414,12 @@
+ 	double red = 0, green = 0, blue = 0, fact = 0;
+ 
+ 	switch (fillstyle) {
++	case FS_TRANSPARENT_SOLID:
++		red   = plot->color.r;
++		green = plot->color.g;
++		blue  = plot->color.b;
++		cairo_set_source_rgba(plot->cr, red, green, blue, (double)fillpar/100.);
++		return;
+ 	case FS_SOLID: /* solid fill */
+ 		if (fillpar==100) /* treated as a special case to accelerate common situation */ {
+ 			cairo_set_source_rgb(plot->cr, plot->color.r, plot->color.g, plot->color.b);
+@@ -1435,7 +1441,8 @@
+ 		FPRINTF((stderr,"transparent solid %lf %lf %lf\n",red, green, blue));
+ 		return;
+ 	case FS_PATTERN: /* pattern fill */
+-		gp_cairo_fill_pattern(plot,fillpar);
++	case FS_TRANSPARENT_PATTERN:
++		gp_cairo_fill_pattern(plot, fillstyle, fillpar);
+ 		FPRINTF((stderr,"pattern fillpar = %d %lf %lf %lf\n",fillpar, plot->color.r, plot->color.g, plot->color.b));
+ 		return;
+ 	case FS_EMPTY: /* fill with background plot->color */
+@@ -1453,7 +1460,7 @@
+ #define PATTERN_SIZE 8
+ 
+ /* return a pattern used for fillboxes and polygons */
+-void gp_cairo_fill_pattern(plot_struct *plot, int fillpar)
++void gp_cairo_fill_pattern(plot_struct *plot, int fillstyle, int fillpar)
+ {
+ 	cairo_surface_t *pattern_surface;
+ 	cairo_t *pattern_cr;
+@@ -1472,7 +1479,11 @@
+ 		PATTERN_SIZE);
+ 	cairo_set_matrix(pattern_cr,&context_matrix);
+ 
+-	cairo_set_source_rgb( pattern_cr, 1.0, 1.0, 1.0);
++	if (fillstyle == FS_TRANSPARENT_PATTERN)
++	    cairo_set_source_rgba( pattern_cr, 1.0, 1.0, 1.0, 0.0);
++	else
++	    cairo_set_source_rgb( pattern_cr, 1.0, 1.0, 1.0);
++
+ 	cairo_paint(pattern_cr);
+ 	cairo_set_line_width(pattern_cr, 1.0/PATTERN_SIZE);
+ 	cairo_set_line_cap  (pattern_cr, CAIRO_LINE_CAP_BUTT);
+Index: gnuplot-4.2.rc1/term/aquaterm.trm
+===================================================================
+--- gnuplot-4.2.rc1.orig/term/aquaterm.trm	2006-11-03 15:15:36.000000000 +0100
++++ gnuplot-4.2.rc1/term/aquaterm.trm	2006-11-03 15:21:58.000000000 +0100
+@@ -572,6 +572,7 @@
+     }
+     break;
+   case FS_SOLID: /* solid fill */
++  case FS_TRANSPARENT_SOLID:
+     {
+       /* Alpha channel? RGB -> HSV -> R'G'B'? */
+       float density = (100 - fillpar)*0.01;
+@@ -581,6 +582,7 @@
+     }
+     break;
+   case FS_PATTERN: /* pattern fill */
++  case FS_TRANSPARENT_PATTERN:
+     /* Can't do pattern easily, using colors. */
+     [adapter takeColorFromColormapEntry:(fillpar%CYCLIC_COLORS)+SPECIAL_COLORS];
+     break;
+Index: gnuplot-4.2.rc1/term/cgm.trm
+===================================================================
+--- gnuplot-4.2.rc1.orig/term/cgm.trm	2006-11-03 15:15:36.000000000 +0100
++++ gnuplot-4.2.rc1/term/cgm.trm	2006-11-03 15:21:58.000000000 +0100
+@@ -955,6 +955,7 @@
+     switch( style & 0xf ) {
+ 
+     case FS_SOLID:
++    case FS_TRANSPARENT_SOLID:
+ 	/* style == 1 --> fill with intensity according to filldensity */
+         filldens = (style >> 4) / 100.0;
+         if( filldens < 0.0 )
+@@ -972,6 +973,7 @@
+         break;
+ 
+     case FS_PATTERN:
++    case FS_TRANSPARENT_PATTERN:
+ 	/* Fill with background, then go back and draw a hatched pattern */
+ 	cgm_next.fill_color = 0; /* index 0 is always the background color */
+ 	cgm_current.interior_style = -1; /* invalidate previouse style */
+Index: gnuplot-4.2.rc1/term/fig.trm
+===================================================================
+--- gnuplot-4.2.rc1.orig/term/fig.trm	2006-11-03 15:15:36.000000000 +0100
++++ gnuplot-4.2.rc1/term/fig.trm	2006-11-03 15:21:58.000000000 +0100
+@@ -1028,6 +1028,7 @@
+ 
+     switch( style & 0xf ) {
+     case FS_SOLID:
++    case FS_TRANSPARENT_SOLID:
+ 	/* style == 1 --> filled with intensity according to filldensity */
+         pen_color = FIG_line.pen_color;
+         fill_color = FIG_line.pen_color;
+@@ -1042,6 +1043,7 @@
+             fill_style = 40 - fill_dens / 5;
+         break;
+     case FS_PATTERN:
++    case FS_TRANSPARENT_PATTERN:
+ 	/* style == 2 --> filled with pattern according to fillpattern */
+         pen_color = FIG_line.pen_color;
+         fill_color = WHITE;
+Index: gnuplot-4.2.rc1/term/gd.trm
+===================================================================
+--- gnuplot-4.2.rc1.orig/term/gd.trm	2006-11-03 15:15:36.000000000 +0100
++++ gnuplot-4.2.rc1/term/gd.trm	2006-11-03 15:21:58.000000000 +0100
+@@ -406,6 +406,7 @@
+ 
+ static int PNG_FillSolid __PROTO((int fillpar));
+ static int PNG_FillPattern __PROTO((int fillpar));
++static int PNG_FillTransparent __PROTO((int fillpar));
+ 
+ static int
+ PNG_FillSolid(int fillpar)
+@@ -437,10 +438,22 @@
+ }
+ 
+ static int
+-PNG_FillPattern(int fillpar)
++PNG_FillTransparent(int fillpar)
++{
++    int red   = (png_state.rgb >> 16) & 0xff;
++    int green = (png_state.rgb >> 8) & 0xff;
++    int blue  = png_state.rgb & 0xff;
++    int alpha = 127 * (float)(100-fillpar) / 100.;
++
++    return  gdImageColorExactAlpha(png_state.image, red, green, blue, alpha);
++}
++
++static int
++PNG_FillPattern(int style)
+ {
+     int rgb = png_state.rgb;
+-    fillpar %= 8;
++    int fillpar = (style >> 4) % 8;
++    style = style & 0xf;
+ 
+     if (!PNG_fill_tile.im || rgb != PNG_fill_tile.last_rgb || PNG_fill_tile.fillpar != fillpar) {
+ 
+@@ -457,15 +470,19 @@
+ 
+ 	/* create new tile */
+ #if (GD2_VERS >= 2)
+-	if (png_state.TrueColor)
++	if (png_state.TrueColor) {
+ 	    PNG_fill_tile.im = gdImageCreateTrueColor(8, 8);
+-	else
++	    /* FIXME - Doesn't work right - background goes to black.  libgd bug? */
++	    background = gdImageColorAllocateAlpha(PNG_fill_tile.im, 255, 255, 255, 127);
++	} else
+ #endif
++	{
+ 	    PNG_fill_tile.im = gdImageCreate(8, 8);
++	    background = gdImageColorAllocate(PNG_fill_tile.im, 255, 255, 255);
++	}
+ 
+-	/* background */
+-	background = gdImageColorAllocate(PNG_fill_tile.im, 255, 255, 255);
+-	/* gdImageColorTransparent(PNG_fill_tile.im, background); */
++	if (style == FS_TRANSPARENT_PATTERN)
++	    gdImageColorTransparent(PNG_fill_tile.im, background);
+ 	gdImageFilledRectangle(PNG_fill_tile.im, 0, 0, 7, 7, background);
+ 
+ 	/* foreground */
+@@ -1232,8 +1249,15 @@
+ 	case FS_SOLID: /* solid fill */
+ 	    color = PNG_FillSolid(fillpar);
+ 	    break;
++	case FS_TRANSPARENT_SOLID:
++	    if (png_state.TrueColor)
++		color = PNG_FillTransparent(fillpar);
++	    else
++		color = PNG_FillSolid(fillpar);
++	    break;
+ 	case FS_PATTERN: /* pattern fill */
+-	    color = PNG_FillPattern(fillpar);
++	case FS_TRANSPARENT_PATTERN:
++	    color = PNG_FillPattern(corners->style);
+ 	    break;
+ 	default:
+ 	    color = png_state.color;
+@@ -1270,17 +1294,22 @@
+      */
+     int fillpar = style >> 4;
+ 
+-    style &= 0xf;
+-
+-    switch (style) {
++    switch (style & 0xf) {
+ 	case FS_EMPTY: /* fill with background color */
+ 	    color = png_state.color_table[0];
+ 	    break;
+ 	case FS_SOLID: /* solid fill */
+ 	    color = PNG_FillSolid(fillpar);
+ 	    break;
++	case FS_TRANSPARENT_SOLID:
++	    if (png_state.TrueColor)
++		color = PNG_FillTransparent(fillpar);
++	    else
++		color = PNG_FillSolid(fillpar);
++	    break;
+ 	case FS_PATTERN: /* pattern fill */
+-	    color = PNG_FillPattern(fillpar);
++	case FS_TRANSPARENT_PATTERN:
++	    color = PNG_FillPattern(style);
+ 	    break;
+ 	default:
+ 	    /* should never happen */
+Index: gnuplot-4.2.rc1/term/metapost.trm
+===================================================================
+--- gnuplot-4.2.rc1.orig/term/metapost.trm	2006-11-03 15:15:37.000000000 +0100
++++ gnuplot-4.2.rc1/term/metapost.trm	2006-11-03 15:21:58.000000000 +0100
+@@ -834,11 +834,13 @@
+ 	    break;
+ 
+ 	case FS_PATTERN: /* pattern fill */
++	case FS_TRANSPARENT_PATTERN:
+ 	    /* FIXME: not yet implemented, dummy it up as fill density */
+ 	    fillpar *= 12;
+ 
+ 	default:
+ 	case FS_SOLID: /* solid fill */
++	case FS_TRANSPARENT_SOLID:
+ 	    if (fillpar < 100) {
+ 		double density = (100-fillpar) * 0.01;
+ 		fprintf(gpoutfile,"fillcolor:=currentcolor*%.2f+background*%.2f;\n",
+@@ -926,8 +928,10 @@
+ 		fprintf(gpoutfile,"fillcolor:=background;\n");
+ 		break;
+ 	case FS_PATTERN: /* pattern fill implemented as partial density */
++	case FS_TRANSPARENT_PATTERN:
+ 		fillpar *= 12;
+ 	case FS_SOLID:	/* solid fill */
++	case FS_TRANSPARENT_SOLID:
+ 		if (fillpar < 100) {
+ 		    double density = (100-fillpar) * 0.01;
+ 		    fprintf(gpoutfile,"fillcolor:=currentcolor*%.2f+background*%.2f;\n",
+Index: gnuplot-4.2.rc1/term/pdf.trm
+===================================================================
+--- gnuplot-4.2.rc1.orig/term/pdf.trm	2006-11-03 15:15:37.000000000 +0100
++++ gnuplot-4.2.rc1/term/pdf.trm	2006-11-03 15:21:58.000000000 +0100
+@@ -1249,6 +1249,26 @@
+ 	case FS_EMPTY: /* fill with white */
+ 	    PDF_setgray(myPDF, 1);
+ 	    break;
++	case FS_TRANSPARENT_SOLID:
++#if !HAVE_OLD_LIBPDF
++	    {
++		/* FIXME: This attribute will be in effect until the end of   */
++		/* the current page. We should explicitly reset it to restore */
++		/* opaque fill areas as the default. But when should it be?   */
++		char density[18];
++		double red   = PDF_current_rgb.r;
++		double green = PDF_current_rgb.g;
++		double blue  = PDF_current_rgb.b;
++		sprintf(density,"opacityfill=%4.2f", (double)fillpar*0.01);
++		i = PDF_create_gstate(myPDF, density);
++		PDF_set_gstate(myPDF, i);
++		if (PDF_monochrome)
++		    PDF_setgray_fill(myPDF, PDF_current_gray);
++		else
++		    PDF_setrgbcolor_fill(myPDF, red, green, blue);
++		break;
++	    }
++#endif
+ 	case FS_SOLID:
+ 	    {
+ 		double fact = (double)fillpar * 0.01;
+@@ -1262,9 +1282,27 @@
+ 		    PDF_setrgbcolor_fill(myPDF, red, green, blue);
+ 	    }
+ 	    break;
++
+ #if !HAVE_OLD_LIBPDF
+ 	case FS_PATTERN:
+ 	    fillpar = fillpar % (PDF_patterns + 1) /* 0 == white */;
++	    /* Fill in solid background before drawing pattern */
++	    /* NOTE:  kpdf/xpdf would accept this as part of the pattern definition */
++	    /*        but acroread does not. So for compatibility we do the fill in */
++	    /*        a separate step, despite its inefficiency.                    */
++	    if (fillpar != 0) {
++		PDF_setcolor(myPDF, "fill", "rgb", 1, 1, 1, 0 /* unused */);
++		PDF_moveto(myPDF, (int)(corners[0].x), (int)(corners[0].y));
++		for (i=1; i<points; i++)
++		    PDF_lineto(myPDF, (int)(corners[i].x), (int)(corners[i].y));
++		PDF_lineto(myPDF, (int)(corners[0].x), (int)(corners[0].y));
++		PDF_fill(myPDF);
++		PDF_restore(myPDF);
++		PDF_save(myPDF);
++	    }
++	    /* NOTE: Fall through to the actual pattern code */
++	case FS_TRANSPARENT_PATTERN:
++	    fillpar = fillpar % (PDF_patterns + 1) /* 0 == white */;
+ 	    switch (fillpar) {
+ 		case 0:
+ 		    /* fill with white */
+@@ -1275,6 +1313,7 @@
+ 	    }
+ 	    break;
+ #endif
++
+ 	default:
+ 	    break;
+     }
+Index: gnuplot-4.2.rc1/term/post.trm
+===================================================================
+--- gnuplot-4.2.rc1.orig/term/post.trm	2006-11-03 15:15:37.000000000 +0100
++++ gnuplot-4.2.rc1/term/post.trm	2006-11-03 15:21:58.000000000 +0100
+@@ -2025,6 +2025,7 @@
+     switch(style & 0xf) {
+ 
+     case FS_SOLID:
++    case FS_TRANSPARENT_SOLID:
+ 	/* style == 1 --> fill with intensity according to filldensity */
+         filldens = (style >> 4) / 100.0;
+         if(filldens < 0.0)
+@@ -2036,6 +2037,7 @@
+         break;
+ 
+     case FS_PATTERN:
++    case FS_TRANSPARENT_PATTERN:
+ 	/* style == 2 --> fill with pattern according to fillpattern */
+ 	/* the upper 3 nibbles of 'style' contain pattern number */
+ 	pattern = (style >> 4) % 8;
+@@ -2622,16 +2624,20 @@
+ 	/* General case for solid or pattern-filled polygons
+ 	 * gsave <x0> <y0> N <x1> <y1> ... <xn> <yn> density PolyFill
+ 	 */
++	int fillpar = style >> 4;
++	style = style &0xf;
++
+ 	fprintf(gppsfile, "gsave ");
+ 	fprintf(gppsfile, "%i %i N", corners[0].x, corners[0].y);
+ 	for (i = 1; i < points; i++)
+ 	    fprintf(gppsfile, " %i %i V",
+ 		corners[i].x-corners[i-1].x, corners[i].y-corners[i-1].y);
+ 
+-	switch(style & 0xf) {
++	switch(style) {
+ 	
+ 	case FS_SOLID:
+-	    filldens = (style >> 4) / 100.0;
++	case FS_TRANSPARENT_SOLID:
++	    filldens = (fillpar) / 100.0;
+ 	    if(filldens < 0.0)
+ 		filldens = 0.0;
+ 	    if(filldens >= 1.0)
+@@ -2640,8 +2646,10 @@
+ 		fprintf(gppsfile, " %.2f PolyFill\n", filldens);
+ 	    break;
+ 	    
++	case FS_TRANSPARENT_PATTERN:
++	    fprintf(gppsfile," /TransparentPatterns true def\n");
+ 	case FS_PATTERN:
+-	    pattern = (style >> 4) % 8;
++	    pattern = (fillpar) % 8;
+ 	    if (pattern == 0)  {
+ 		filldens = 0.5;
+ 		fprintf(gppsfile, " %.1f PolyFill\n", filldens);
+Index: gnuplot-4.2.rc1/term/svg.trm
+===================================================================
+--- gnuplot-4.2.rc1.orig/term/svg.trm	2006-11-03 15:15:37.000000000 +0100
++++ gnuplot-4.2.rc1/term/svg.trm	2006-11-03 15:28:35.000000000 +0100
+@@ -1057,11 +1057,13 @@
+ 	    fputs(" fill = 'white'", gpoutfile);
+ 	    break;
+ 	case FS_SOLID: /* solid fill */
++	case FS_TRANSPARENT_SOLID:
+ 	    SVG_StyleFillColor();
+ 	    if (fillpar >= 0 && fillpar < 100)
+ 		fprintf(gpoutfile, " fill-opacity = '%f'", ((double)fillpar * 0.01));
+ 	    break;
+ 	case FS_PATTERN: /* pattern fill */
++	case FS_TRANSPARENT_PATTERN:
+ 	    fprintf(gpoutfile, " fill = 'url(#gpPat%d)'", SVG_fillPatternIndex);
+ 	    break;
+ 	default:
