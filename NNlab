@@ -18,6 +18,9 @@ else
     install)
         bash ./$1.sh
         ;;
+    update)
+        git pull
+        ;;
     *)
         exec $1 "$*"
         ;;
