@@ -1,0 +1,9 @@
+bin/
+download/
+etc/
+include/
+lib/
+libexec/
+share/
+src/
+tmp/
