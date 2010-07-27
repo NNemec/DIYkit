@@ -1,7 +1,7 @@
 :include {once} NNlab.aap
 
 NAME = pytables
-VERSION = 2.1.1
+VERSION = 2.2
 
 DISTFILE = tables-$(VERSION).tar.gz
 MASTER_SITES = http://www.pytables.org/download/stable
@@ -24,9 +24,9 @@ getsrc: $SRCDIR
 
 build: $SRCDIR
     :cd $SRCDIR
-    @os.environ["CPATH"] += ":"+_no.NNlab_path+"/include/python"
+#    @os.environ["CPATH"] += ":"+_no.NNlab_path+"/include/python"
 #    @os.environ["HDF5_DIR"] = _no.NNlab_path
-    @os.environ["CFLAGS"] = "-Wno-unused -Wno-uninitialized -Wno-parentheses"
+#    @os.environ["CFLAGS"] = "-Wno-unused -Wno-uninitialized -Wno-parentheses"
     :sys python setup.py build
 
 install: build

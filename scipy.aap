@@ -1,10 +1,10 @@
 :include {once} NNlab.aap
 
 NAME = scipy
-VERSION = 0.7.1
+VERSION = 0.7.2
 
 DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = $(SOURCEFORGE)/$(NAME)
+MASTER_SITES = http://downloads.sourceforge.net/project/$(NAME)/$(NAME)/$(VERSION)
 
 SRCDIR = $WRKDIR/$NAME
 
@@ -17,8 +17,8 @@ SRCDIR = $WRKDIR/$NAME
 
 all: install
 
-$SRCDIR: #$NNlab_path/download/$DISTFILE
-#    :do unpack $NNlab_path/download/$DISTFILE
+$SRCDIR: $NNlab_path/download/$DISTFILE
+    :do unpack $NNlab_path/download/$DISTFILE
 #    :do patch $NAME
 
 getsrc: $SRCDIR
@@ -26,8 +26,8 @@ getsrc: $SRCDIR
 build: $SRCDIR
     :cd $SRCDIR
     :python
-	if "LDFLAGS" in os.environ:
-	    os.environ["LDFLAGS"] += " -shared"
+        if "LDFLAGS" in os.environ:
+            os.environ["LDFLAGS"] += " -shared"
 #    @os.environ["CPATH"] += ":"+_no.NNlab_path+"/include/python"
 #    @os.environ["CPATH"] += ":"+_no.NNlab_path+"/include/python/numarray"
     :sys python setup.py config

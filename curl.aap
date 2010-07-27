@@ -1,10 +1,10 @@
 :include {once} NNlab.aap
 
 NAME = curl
-VERSION = 7.18.0
+VERSION = 7.21.0
 
 DISTFILE = $(NAME)-$(VERSION).tar.bz2
-MASTER_SITES = http://gd.tuwien.ac.at/utils/archivers/curl
+MASTER_SITES = http://curl.haxx.se/download
 
 SRCDIR = $WRKDIR/$NAME
 

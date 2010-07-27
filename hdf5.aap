@@ -1,12 +1,11 @@
 :include {once} NNlab.aap
 
 NAME = hdf5
-VERSION = 1.6.5
+VERSION = 1.8.5
 #VERSION = 1.8.0-alpha1
 
 DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = ftp://ftp.ncsa.uiuc.edu/HDF/HDF5/current/src
-#MASTER_SITES = ftp://ftp.ncsa.uiuc.edu/HDF/pub/outgoing/hdf5/hdf5-1.8.0-pre
+MASTER_SITES = http://www.hdfgroup.org/ftp/HDF5/current/src
 
 SRCDIR = $WRKDIR/$NAME
 
@@ -26,5 +25,5 @@ getsrc: $SRCDIR
 install: $SRCDIR
     :cd $source
     :sys ./configure --prefix $PREFIX
-    :sys make
-    :sys make install
+    :sys make -C src install
+    :sys make -C tools install

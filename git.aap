@@ -1,7 +1,7 @@
 :include {once} NNlab.aap
 
 NAME = git
-VERSION = 1.5.3.8
+VERSION = 1.7.2
 
 DISTFILE = $(NAME)-$(VERSION).tar.bz2
 MASTER_SITES = http://www.kernel.org/pub/software/scm/$(NAME)
@@ -24,7 +24,7 @@ getsrc: $SRCDIR
 
 build: $SRCDIR
     :cd $SRCDIR
-    :sys ./configure --without-openssl --prefix=$PREFIX --with-curl=$PREFIX  
+    :sys ./configure --without-openssl --prefix=$PREFIX --with-curl=$PREFIX
     :sys make
 
 install: build

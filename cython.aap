@@ -1,10 +1,10 @@
 :include NNlab-include.aap
 
 NAME = cython
-VERSION = 0.11.1
+VERSION = 0.12.1
 
 DISTFILE = Cython-$(VERSION).tar.gz
-MASTER_SITES = http://www.cython.org
+MASTER_SITES = http://cython.org/release
 
 SRCDIR = $WRKDIR/$NAME
 
