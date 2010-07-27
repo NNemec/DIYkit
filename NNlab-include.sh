@@ -26,26 +26,27 @@ function DOWNLOAD_ARCHIVE() {(
     if [ -s $DISTFILE ] ; then
         echo "Found $DOWNLOADDIR/$DISTFILE -- do not download again"
     else
-        rm -f $DISTFILE
-        wget $ARCHIVE_URL
+        rm -f $TMPDIR/$DISTFILE
+        ( cd $TMPDIR ; wget $ARCHIVE_URL )
     fi
-    if [ ! -s $DISTFILE ] ; then
+    if [ ! -s $TMPDIR/$DISTFILE ] ; then
         echo Download unsuccessful!
         echo URL: $ARCHIVE_URL
         echo Filename: $DISTFILE
         exit 1
     fi
-    case `file -i $DISTFILE` in
+    case `file -i $TMPDIR/$DISTFILE` in
     *application/x-gzip*)
         ;;
     *application/x-bzip2*)
         ;;
     *)
         echo "Download unsuccessful (filetype not recognized)"
-        file -i $DISTFILE
+        file -i $TMPDIR/$DISTFILE
         exit 1
         ;;
     esac
+    mv $TMPDIR/$DISTFILE .
 )}
 
 function UNPACK_ARCHIVE() {(
