@@ -3,14 +3,6 @@
 . ~/NNlab/NNlab.sh
 
 (
-AAP=`which aap`
-if [ ! -x "$AAP" ] ; then
-    AAP=$NNlab_path/bin/aap
-fi
-if [ ! -x "$AAP" ] ; then
-    echo "ERROR: AAP not installed!"
-fi
-
 cd $NNlab_path
 
 if [ $# -eq 0 ] ; then
@@ -23,22 +15,12 @@ else
     shift
 
     case $CMD in
-    getsrc|update|build|install|doc)
-	PACKAGE=$1
-#        if [ ! -e $PACKAGE.aap ] ; then
-	$AAP -f NNlab.aap $PACKAGE.aap
-#	fi
-	$AAP -f $PACKAGE.aap $CMD
-	;;
+    install)
+        bash ./$1.sh
+        ;;
     *)
-	exec $1 "$*"
-	;;
+        exec $1 "$*"
+        ;;
     esac
-
-    if [ "$CMD" == "install" ] ; then 
-	if [ -e ~/mnt/local/NNlab ] ; then
-	    unison NNlab_local
-	fi
-    fi
 fi
 )

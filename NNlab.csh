@@ -9,8 +9,6 @@ else
     setenv LIB lib
 fi
 
-setenv NNlab_home http://www.tcm.phy.cam.ac.uk/~nn245/NNlab
-
 set path = ( . $NNlab_path/bin `echo $path | sed "s&\. &&;s&$NNlab_path/bin &&"` )
 
 setenv PYTHONPATH $NNlab_path/$LIB/python2.6

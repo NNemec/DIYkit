@@ -9,8 +9,6 @@ else
     LIB=lib
 fi
 
-export NNlab_home=http://www.tcm.phy.cam.ac.uk/~nn245/NNlab
-
 export PATH=`echo $PATH | sed "s/\.://g;s&$NNlab_path/[^:]*:&&g"`
 export PATH=$NNlab_path/bin:$PATH
 export PATH=.:$PATH
