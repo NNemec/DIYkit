@@ -4,6 +4,11 @@ if [ -z "$NAME" ] ; then
     exit 1
 fi
 
+if $DEPENDENCY_ONLY && [ ! -z "$AVAILABLE" ] && $AVAILABLE 2>&1 >/dev/null ; then
+    echo "NNlab: found $NAME installed"
+    exit 0
+fi
+
 if [ -z "$NNlab_path" ] ; then
     NNlab_path=$HOME/NNlab
 fi
@@ -76,3 +81,7 @@ function APPLY_PATCH() {(
 export CPPFLAGS="$CPPFLAGS -I$PREFIX/include"
 export LDFLAGS="$LDFLAGS -L$PREFIX/lib"
 
+function INSTALL {(
+    echo NNlab: Installing dependency $1
+    $NNlab_path/NNlab install $1
+)}

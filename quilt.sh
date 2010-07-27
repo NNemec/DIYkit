@@ -3,6 +3,7 @@
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://download.savannah.gnu.org/releases/${NAME}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+   AVAILABLE="quilt --version"
 
 . $NNlab_path/NNlab-include.sh
 

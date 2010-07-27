@@ -3,6 +3,7 @@
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=http://curl.haxx.se/download
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+   AVAILABLE="pkg-config --exists libcurl"
 
 . $NNlab_path/NNlab-include.sh
 

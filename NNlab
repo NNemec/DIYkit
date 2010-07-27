@@ -18,11 +18,14 @@ else
     install)
         bash ./$1.sh
         ;;
+    depend)
+        DEPENDENCY_ONLY=true bash ./$1.sh
+        ;;
     update)
         git pull
         ;;
     *)
-        exec $1 "$*"
+        exec $CMD "$*"
         ;;
     esac
 fi

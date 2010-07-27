@@ -3,8 +3,11 @@
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=http://www.kernel.org/pub/software/scm/${NAME}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+   AVAILABLE="git --version"
 
 . $NNlab_path/NNlab-include.sh
+
+NNlab depend curl
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
