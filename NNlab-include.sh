@@ -21,18 +21,18 @@ TMPDIR=$NNlab_path/tmp
 DOWNLOADDIR=$NNlab_path/download
 
 function DOWNLOAD_ARCHIVE() {(
-    echo "NNlab: downloading archive $DISTFILE (from $ARCHIVE_URL) ..."
     mkdir -p $DOWNLOADDIR
     cd $DOWNLOADDIR
     if [ -s $DISTFILE ] ; then
         echo "Found $DOWNLOADDIR/$DISTFILE -- do not download again"
-    else
-        mkdir -p $TMPDIR
-        rm -f $TMPDIR/$DISTFILE
-        ( cd $TMPDIR ; wget $ARCHIVE_URL )
+        return
     fi
+    echo "NNlab: downloading archive $DISTFILE (from $ARCHIVE_URL) ..."
+    mkdir -p $TMPDIR
+    rm -f $TMPDIR/$DISTFILE
+    ( cd $TMPDIR ; wget $ARCHIVE_URL )
     if [ ! -s $TMPDIR/$DISTFILE ] ; then
-        echo Download unsuccessful!
+        echo "NNlab: Download unsuccessful! (file not found or empty)"
         echo URL: $ARCHIVE_URL
         echo Filename: $DISTFILE
         exit 1
@@ -43,7 +43,7 @@ function DOWNLOAD_ARCHIVE() {(
     *application/x-bzip2*)
         ;;
     *)
-        echo "Download unsuccessful (filetype not recognized)"
+        echo "NNlab: Download unsuccessful! (filetype not recognized)"
         file -i $TMPDIR/$DISTFILE
         exit 1
         ;;
@@ -75,7 +75,7 @@ function UNPACK_ARCHIVE() {(
     mv ./* $SRCDIR/$NAME
     cd ..
     rmdir ./$NAME
-    echo "... done."
+    echo "... done unpacking."
 )}
 
 function APPLY_PATCH() {(
