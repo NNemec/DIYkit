@@ -3,6 +3,7 @@ download/
 etc/
 include/
 lib/
+lib64/
 libexec/
 share/
 src/

@@ -1,7 +1,7 @@
         NAME=stgit
      VERSION=0.14.1
     DISTFILE=${NAME}-${VERSION}.tar.gz
- MASTER_SITE=http://homepage.ntlworld.com/cmarinas/$(NAME)
+ MASTER_SITE=http://homepage.ntlworld.com/cmarinas/${NAME}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
    AVAILABLE="stg -v"
 

@@ -1,3 +1,5 @@
+set -e # exit shell on errors
+
 if [ -z "$NAME" ] ; then
     echo "NNlab-include.sh should only included by NNlab installation scripts"
     echo "(variable \$NAME not defined)"
