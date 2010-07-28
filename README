@@ -1,18 +1,69 @@
-NNlab -- simple $HOME installation of source packages
+NNlab -- simple and clean $HOME installation of source packages
 =====================================================
 
+If you frequently work on Unix/Linux systems that you do not
+administrate yourself, NNlab is the solution to comfortably install
+software into your $HOME directory:
+
+-> Create a single directory (e.g. ~/NNlab/ ) for user-installed
+libraries and programs.
+
+-> Set up the environment to access the installed software
+
+-> Download, compile and install a large number of pre-configured
+software packages. (Automatically resolving any dependencies.)
+
+-> Easily add missing software packages. (Feel free to contribute them
+back!)
 
 
+INITIAL SET-UP
+==============
 
-INSTALLATION
-============
+Currently, NNlab can only be obtained via git. A tar archive will
+be made available in the near future. Ask for it if you require this.
 
-If git is available, install by checking out
+Follow these steps:
+
+Check out the NNlab directory directly into your $HOME directory
     git clone git://github.com/NNemec/NNlab.git
 
-If you want to contribute to the repository, ask the author for access and use
-    git clone git@github.com:NNemec/NNlab.git
-
-Add the following line to your .bashrc:
+Add the following line to your ~/.bashrc file:
     [ -d ~/NNlab ] && . ~/NNlab/NNlab.sh
 
+Close the current shell and start a new one to activate the NNlab
+environment.
+
+
+INSTALLING SOFTWARE
+===================
+
+The following actions can be performed anywhere from the command line:
+
+View the available pre-configured packages:
+   NNlab avail
+
+Install a pre-configured package (e.g. NumPy) type:
+   NNlab install numpy
+
+Conditionally install a package if it is not available:
+   NNlab depend numpy
+
+
+ADDING NEW SOFTWARE PACKAGES
+============================
+
+Simply add a new *.sh files to the ~/NNlab/ directory. See the existing
+packages for examples. Software using autoconf or similar standards
+can be added with just a few lines. Beyond this, the files are plain
+bash scripts that can accomodate arbitrarily non-standard installation
+procedures.
+
+
+CONTACT THE AUTHOR
+==================
+
+Currently the NNlab system is in early development. If you want to use
+it, I would be delighted to hear about your experience!
+
+                                 Norbert Nemec <Norbert@Nemec-online.de>

@@ -21,6 +21,9 @@ else
     depend)
         DEPENDENCY_ONLY=true bash ./$1.sh
         ;;
+    avail)
+        ( for x in *.sh ; do basename $x .sh ; done ) | grep -v NNlab | sort
+        ;;
     update)
         git pull
         ;;

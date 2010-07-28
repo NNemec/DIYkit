@@ -8,3 +8,4 @@ libexec/
 share/
 src/
 tmp/
+*~
