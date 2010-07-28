@@ -16,7 +16,7 @@ else
 
     case $CMD in
     install)
-        bash ./$1.sh
+        bash ./$1.nnl
         ;;
     depend)
         DEPENDENCY_ONLY=true bash ./$1.nnl

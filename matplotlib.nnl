@@ -1,11 +1,14 @@
         NAME=matplotlib
      VERSION=1.0.0
     DISTFILE=${NAME}-${VERSION}.tar.gz
- MASTER_SITE=http://download.sourceforge.net/projects/matplotlib/matplotlib
+ MASTER_SITE=http://download.sourceforge.net/project/matplotlib/matplotlib/${VERSION}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
    AVAILABLE="python -c 'import matplotlib'"
 
 . $NNlab_path/NNlab-include.sh
+
+NNlab depend numpy
+# NNlab depend pygtk
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
@@ -14,36 +17,3 @@ UNPACK_ARCHIVE
 cd $SRCDIR/$NAME
 python setup.py build
 python setup.py install --prefix $PREFIX
-:include {once} NNlab.aap
-
-NAME = matplotlib
-VERSION = 1.0.0
-
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = $(SOURCEFORGE)/$(NAME)-1.0
-
-SRCDIR = $WRKDIR/$NAME
-
-:recipe {fetch = $NNlab_home/$(NAME).aap}
-
-# depends on: python-gtk2-dev
-
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
-
-all: install
-
-$SRCDIR: $NNlab_path/download/$DISTFILE
-    :do unpack $NNlab_path/download/$DISTFILE
-#     :do patch $NAME
-
-getsrc: $SRCDIR
-
-build: $SRCDIR
-    :cd $SRCDIR
-    @os.environ["PKG_CONFIG_PATH"] = _no.NNlab_path+"/lib/pkgconfig"
-    :sys python setup.py build
-
-install: build
-    :cd $SRCDIR
-    @os.environ["PKG_CONFIG_PATH"] = _no.NNlab_path+"/lib/pkgconfig"
-    :sys python setup.py install --prefix $PREFIX

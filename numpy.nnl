@@ -1,7 +1,7 @@
         NAME=numpy
      VERSION=1.4.1
     DISTFILE=${NAME}-${VERSION}.tar.gz
- MASTER_SITE=http://downloads.sourceforge.net/project/numpy/NumPy/1.4.1
+ MASTER_SITE=http://downloads.sourceforge.net/project/numpy/NumPy/${VERSION}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
    AVAILABLE="python -d 'import numpy'"
 
