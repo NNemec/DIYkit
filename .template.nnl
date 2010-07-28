@@ -7,11 +7,11 @@
 
 . $NNlab_path/NNlab-include.sh
 
-NNlab depend somepkg
+# NNlab depend somepkg
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
-# PATCH_ARCHIVE
+# APPLY_PATCHES
 
 ######### autoconf
 cd $SRCDIR/$NAME

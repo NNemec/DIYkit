@@ -3,6 +3,7 @@ bin/
 download/
 etc/
 include/
+info/
 lib/
 lib64/
 libexec/

@@ -80,9 +80,9 @@ function UNPACK_ARCHIVE() {(
     echo "... done unpacking."
 )}
 
-function APPLY_PATCH() {(
-    cd $SRCDIR
-    ln -sf $NNlab_patch/patches/$NAME patches
+function APPLY_PATCHES() {(
+    cd $SRCDIR/$NAME
+    ln -sf $NNlab_path/patches/$NAME ./patches
     quilt push -a
 )}
 
