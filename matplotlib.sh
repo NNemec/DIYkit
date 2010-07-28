@@ -1,3 +1,19 @@
+        NAME=matplotlib
+     VERSION=1.0.0
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://download.sourceforge.net/projects/matplotlib/matplotlib
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+   AVAILABLE="python -c 'import matplotlib'"
+
+. $NNlab_path/NNlab-include.sh
+
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+# PATCH_ARCHIVE
+
+cd $SRCDIR/$NAME
+python setup.py build
+python setup.py install --prefix $PREFIX
 :include {once} NNlab.aap
 
 NAME = matplotlib
