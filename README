@@ -53,11 +53,22 @@ Conditionally install a package if it is not available:
 ADDING NEW SOFTWARE PACKAGES
 ============================
 
-Simply add a new *.sh files to the ~/NNlab/ directory. See the existing
+Simply add a new *.nnl file to the ~/NNlab/ directory. See the existing
 packages for examples. Software using autoconf or similar standards
-can be added with just a few lines. Beyond this, the files are plain
-bash scripts that can accomodate arbitrarily non-standard installation
+can be added with just a few lines. The files are plain bash scripts
+flexible enough to accomodate arbitrarily non-standard installation
 procedures.
+
+
+ADVANCED USAGE
+==============
+
+Temporary deactivation
+----------------------
+
+To deactivate NNlab temporarily within a running shell, issue
+    . ~/NNlab/NNlab-off.sh
+which will clear the environment of all traces of NNlab.
 
 
 CONTACT THE AUTHOR
