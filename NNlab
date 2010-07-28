@@ -19,10 +19,10 @@ else
         bash ./$1.sh
         ;;
     depend)
-        DEPENDENCY_ONLY=true bash ./$1.sh
+        DEPENDENCY_ONLY=true bash ./$1.nnl
         ;;
     avail)
-        ( for x in *.sh ; do basename $x .sh ; done ) | grep -v NNlab | sort
+        ( for x in *.nnl ; do basename $x .nnl ; done ) | sort
         ;;
     update)
         git pull

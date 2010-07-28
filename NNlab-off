@@ -1,8 +1,0 @@
-#!/bin/bash
-
-unset LD_LIBRARY_PATH
-unset CPATH
-unset NNlab_home
-export PATH=`echo $PATH | sed "s/\.://;s&$NNlab_path/bin:&&"`
-unset PYTHONPATH
-unset NNlab_path
