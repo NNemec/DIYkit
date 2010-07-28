@@ -21,6 +21,7 @@ TMPDIR=$NNlab_path/tmp
 DOWNLOADDIR=$NNlab_path/download
 
 function DOWNLOAD_ARCHIVE() {(
+    echo "NNlab: downloading archive $DISTFILE (from $ARCHIVE_URL) ..."
     mkdir -p $DOWNLOADDIR
     cd $DOWNLOADDIR
     if [ -s $DISTFILE ] ; then
@@ -48,9 +49,11 @@ function DOWNLOAD_ARCHIVE() {(
         ;;
     esac
     mv $TMPDIR/$DISTFILE .
+    echo "... done downloading."
 )}
 
 function UNPACK_ARCHIVE() {(
+    echo "NNlab: unpacking archive $DISTFILE ..."
     mkdir -p $TMPDIR
     cd $TMPDIR
     rm -rf ./$NAME
@@ -72,6 +75,7 @@ function UNPACK_ARCHIVE() {(
     mv ./* $SRCDIR/$NAME
     cd ..
     rmdir ./$NAME
+    echo "... done."
 )}
 
 function APPLY_PATCH() {(
@@ -82,8 +86,3 @@ function APPLY_PATCH() {(
 
 export CPPFLAGS="$CPPFLAGS -I$PREFIX/include"
 export LDFLAGS="$LDFLAGS -L$PREFIX/lib"
-
-function INSTALL() {(
-    echo NNlab: Installing dependency $1
-    $NNlab_path/NNlab install $1
-)}
