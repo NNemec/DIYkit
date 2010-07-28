@@ -10,7 +10,7 @@ export PATH=`PATH_PREPEND "$PATH" $NNlab_path/bin`
 export CPATH=`PATH_PREPEND "$CPATH" $NNlab_path/include`
 export LIBRARYPATH=`PATH_PREPEND "$LIBRARYPATH" $NNlab_path/lib`
 export LD_LIBRARY_PATH=`PATH_PREPEND "$LD_LIBRARY_PATH" $NNlab_path/lib`
-export PYTHONPATH=`PATH_PREPEND "$PYTHONPATH" $NNlab_path/lib/python2.6/site-packages`
+export PYTHONPATH=`PATH_PREPEND "$PYTHONPATH" $NNlab_path/lib*/python2.*/site-packages`
 export PKG_CONFIG_PATH=`PATH_PREPEND "$PKG_CONFIG_PATH" $NNlab_path/lib/pkgconfig`
 
 unset PATH_PREPEND

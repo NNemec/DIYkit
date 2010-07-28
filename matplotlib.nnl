@@ -1,7 +1,7 @@
         NAME=matplotlib
      VERSION=1.0.0
     DISTFILE=${NAME}-${VERSION}.tar.gz
- MASTER_SITE=http://download.sourceforge.net/project/matplotlib/matplotlib/${VERSION}
+ MASTER_SITE=http://download.sourceforge.net/project/matplotlib/matplotlib/matplotlib-1.0
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
    AVAILABLE="python -c 'import matplotlib'"
 

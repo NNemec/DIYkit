@@ -3,7 +3,7 @@
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://downloads.sourceforge.net/project/scipy/scipy/${VERSION}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="python -d 'import scipy'"
+   AVAILABLE="python -c 'import scipy'"
 
 . $NNlab_path/NNlab-include.sh
 

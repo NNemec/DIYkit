@@ -3,7 +3,7 @@
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://downloads.sourceforge.net/project/numpy/NumPy/${VERSION}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="python -d 'import numpy'"
+   AVAILABLE="python -c 'import numpy'"
 
 . $NNlab_path/NNlab-include.sh
 
