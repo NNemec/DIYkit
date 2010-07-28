@@ -19,7 +19,8 @@ done
 
 unset PATH_PREPEND
 
-alias NNlab=$NNlab_path/NNlab
+#alias NNlab=$NNlab_path/NNlab
+function NNlab() { $NNlab_path/NNlab "$@"; }
 
 ####################
 
