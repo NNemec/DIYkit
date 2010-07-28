@@ -9,11 +9,11 @@
 
 NNlab depend hdf5
 NNlab depend numpy
+NNlab depend numexpr
 NNlab depend cython
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
-# PATCH_ARCHIVE
 
 cd $SRCDIR/$NAME
 python setup.py build

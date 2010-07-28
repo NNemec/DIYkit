@@ -9,10 +9,10 @@
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
-# PATCH_ARCHIVE
 
 ######### autoconf
 cd $SRCDIR/$NAME
 ./configure --prefix $PREFIX
 make -C src install
+make -C test install
 make -C tools install

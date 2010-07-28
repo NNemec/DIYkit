@@ -78,13 +78,10 @@ function UNPACK_ARCHIVE() {(
     cd ..
     rmdir ./$NAME
     echo "... done unpacking."
+    if [ -f $NNlab_path/patches/$NAME/series ] ; then
+        echo "NNlab: applying patches"
+        cd $SRCDIR/$NAME
+        ln -sf $NNlab_path/patches/$NAME ./patches
+        quilt push -a
+    fi
 )}
-
-function APPLY_PATCHES() {(
-    cd $SRCDIR/$NAME
-    ln -sf $NNlab_path/patches/$NAME ./patches
-    quilt push -a
-)}
-
-export CPPFLAGS="$CPPFLAGS -I$PREFIX/include"
-export LDFLAGS="$LDFLAGS -L$PREFIX/lib"

@@ -9,7 +9,6 @@
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
-# PATCH_ARCHIVE
 
 ######### autoconf
 cd $SRCDIR/$NAME

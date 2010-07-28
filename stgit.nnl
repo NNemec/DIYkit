@@ -11,7 +11,6 @@ NNlab depend git
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
-# PATCH_ARCHIVE
 
 cd $SRCDIR/$NAME
 python setup.py build

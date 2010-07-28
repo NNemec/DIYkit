@@ -8,11 +8,10 @@
 . $NNlab_path/NNlab-include.sh
 
 NNlab depend numpy
-# NNlab depend pygtk
+NNlab depend pygtk
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
-# PATCH_ARCHIVE
 
 cd $SRCDIR/$NAME
 python setup.py build

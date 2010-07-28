@@ -11,10 +11,8 @@ NNlab depend numpy
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
-# PATCH_ARCHIVE
 
 cd $SRCDIR/$NAME
-export LDFLAGS=-shared
 python setup.py config
 python setup.py build
 python setup.py install --prefix $PREFIX
