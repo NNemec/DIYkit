@@ -1,4 +1,4 @@
-export NNlab_path=~/NNlab
+[ -z "$NNlab_path" ] && export NNlab_path=~/NNlab
 
 PATH_PREPEND() {
     echo -n $2

@@ -4,13 +4,12 @@ if [ -z "$NAME" ] ; then
     exit 1
 fi
 
+[ -z "$NNlab_path" ] && NNlab_path=~/NNlab
+. $NNlab_path/NNlab.sh
+
 if $DEPENDENCY_ONLY && [ -n "$AVAILABLE" ] && $AVAILABLE ; then
     echo "NNlab: found $NAME installed"
     exit 0
-fi
-
-if [ -z "$NNlab_path" ] ; then
-    NNlab_path=$HOME/NNlab
 fi
 
 PREFIX=$NNlab_path
