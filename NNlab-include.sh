@@ -4,7 +4,7 @@ if [ -z "$NAME" ] ; then
     exit 1
 fi
 
-if $DEPENDENCY_ONLY && [ ! -z "$AVAILABLE" ] && $AVAILABLE 2>&1 >/dev/null ; then
+if $DEPENDENCY_ONLY && [ -n "$AVAILABLE" ] && $AVAILABLE ; then
     echo "NNlab: found $NAME installed"
     exit 0
 fi
@@ -26,6 +26,7 @@ function DOWNLOAD_ARCHIVE() {(
     if [ -s $DISTFILE ] ; then
         echo "Found $DOWNLOADDIR/$DISTFILE -- do not download again"
     else
+        mkdir -p $TMPDIR
         rm -f $TMPDIR/$DISTFILE
         ( cd $TMPDIR ; wget $ARCHIVE_URL )
     fi
