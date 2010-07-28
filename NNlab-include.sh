@@ -5,7 +5,7 @@ if [ -z "$NAME" ] ; then
 fi
 
 [ -z "$NNlab_path" ] && NNlab_path=~/NNlab
-alias NNlab=$NNlab_path/NNlab
+NNlab() { $NNlab_path/NNlab "$@" }
 
 if [ -n "$DEPENDENCY_ONLY" ] && [ -n "$AVAILABLE" ] && sh -c "$AVAILABLE" ; then
     echo "NNlab: found $NAME installed"
@@ -19,7 +19,7 @@ DOCDIR=$NNlab_path/doc
 TMPDIR=$NNlab_path/tmp
 DOWNLOADDIR=$NNlab_path/download
 
-function DOWNLOAD_ARCHIVE() {(
+DOWNLOAD_ARCHIVE() (
     mkdir -p $DOWNLOADDIR
     cd $DOWNLOADDIR
     if [ -s $DISTFILE ] ; then
@@ -47,9 +47,9 @@ function DOWNLOAD_ARCHIVE() {(
         ;;
     esac
     mv $TMPDIR/$DISTFILE .
-)}
+)
 
-function UNPACK_ARCHIVE() {(
+UNPACK_ARCHIVE() (
     mkdir -p $TMPDIR
     cd $TMPDIR
     rm -rf ./$NAME
@@ -71,18 +71,18 @@ function UNPACK_ARCHIVE() {(
     mv ./* $SRCDIR/$NAME
     cd ..
     rmdir ./$NAME
-)}
+)
 
-function APPLY_PATCH() {(
+APPLY_PATCH() (
     cd $SRCDIR
     ln -sf $NNlab_patch/patches/$NAME patches
     quilt push -a
-)}
+)
 
 export CPPFLAGS="$CPPFLAGS -I$PREFIX/include"
 export LDFLAGS="$LDFLAGS -L$PREFIX/lib"
 
-function INSTALL {(
+INSTALL() (
     echo NNlab: Installing dependency $1
     $NNlab_path/NNlab install $1
-)}
+)
