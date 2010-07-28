@@ -1,0 +1,12 @@
+INSTALLATION
+============
+
+If git is available, install by checking out
+    git clone git://github.com/NNemec/NNlab.git
+
+If you want to contribute to the repository, ask the author for access and use
+    git clone git@github.com:NNemec/NNlab.git
+
+Add the following line to your .bashrc:
+    [ -d ~/NNlab ] && . ~/NNlab/NNlab.sh
+
