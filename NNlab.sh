@@ -1,14 +1,9 @@
 export NNlab_path=~/NNlab
-if [ -e ~/local/NNlab ] ; then
-    export NNlab_path=~/local/NNlab
-fi
 
 PATH_PREPEND() {
-    if [ -z "$1" ] ; then
-        echo $2
-    else
-        echo $2`echo :$1 | sed "s#:$2##g"`
-    fi
+    echo -n $2
+    [ -n "$1" ] && echo -n $(echo :$1 | sed "s#:$2##g")
+    echo
 }
 
 export PATH=`PATH_PREPEND "$PATH" $NNlab_path/bin`
@@ -18,7 +13,9 @@ export LD_LIBRARY_PATH=`PATH_PREPEND "$LD_LIBRARY_PATH" $NNlab_path/lib`
 export PYTHONPATH=`PATH_PREPEND "$PYTHONPATH" $NNlab_path/lib/python2.6/site-packages`
 export PKG_CONFIG_PATH=`PATH_PREPEND "$PKG_CONFIG_PATH" $NNlab_path/lib/pkgconfig`
 
-unset LIB PATH_PREPEND
+unset PATH_PREPEND
+
+alias NNlab=$NNlab_path/NNlab
 
 ####################
 
