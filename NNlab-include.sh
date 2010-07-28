@@ -85,6 +85,3 @@ function APPLY_PATCHES() {(
     ln -sf $NNlab_path/patches/$NAME ./patches
     quilt push -a
 )}
-
-export CPPFLAGS="$CPPFLAGS -I$PREFIX/include"
-export LDFLAGS="$LDFLAGS -L$PREFIX/lib"
