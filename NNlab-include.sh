@@ -5,9 +5,9 @@ if [ -z "$NAME" ] ; then
 fi
 
 [ -z "$NNlab_path" ] && NNlab_path=~/NNlab
-. $NNlab_path/NNlab.sh
+alias NNlab=$NNlab_path/NNlab
 
-if $DEPENDENCY_ONLY && [ -n "$AVAILABLE" ] && $AVAILABLE ; then
+if $DEPENDENCY_ONLY && [ -n "$AVAILABLE" ] && sh -c "$AVAILABLE" ; then
     echo "NNlab: found $NAME installed"
     exit 0
 fi
