@@ -17,8 +17,3 @@ cd $SRCDIR/$NAME
 ./configure --prefix $PREFIX
 make
 make install
-
-mkdir -p $NNlab_path/NNlab.sh.d
-cat > $NNlab_path/NNlab.sh.d/$NAME.sh <<'EOF'
-export PYTHONPATH=$(PATH_PREPEND "$PYTHONPATH" $NNlab_path/lib*/python2.*/site-packages/gtk-2.0)
-EOF

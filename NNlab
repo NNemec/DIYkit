@@ -2,34 +2,39 @@
 
 . ~/NNlab/NNlab.sh
 
+if [ $# -eq 0 ] ; then
+    exec bash
+fi
+
 (
 cd $NNlab_path
 
-if [ $# -eq 0 ] ; then
-    if [ "`basename -- $0`" == "NNlab" ] ; then
-        exec bash
+if [ $(uname -m) == "x86_64" -a ! -L lib64 ] ; then
+    mkdir -p lib
+    if [ -e lib64 ] ; then
+        echo "ERROR: $NNlab_path/lib64/ is not a link to lib/."
+        echo "Please move all of its contents to lib/ and replace it by a symbolic link"
     fi
-else
-
-    CMD=$1
-    shift
-
-    case $CMD in
-    install)
-        bash ./$1.nnl
-        ;;
-    depend)
-        DEPENDENCY_ONLY=true bash ./$1.nnl
-        ;;
-    avail)
-        ( for x in *.nnl ; do basename $x .nnl ; done ) | sort
-        ;;
-    update)
-        git pull
-        ;;
-    *)
-        exec $CMD "$*"
-        ;;
-    esac
+    ln -s lib lib64
 fi
+
+CMD=$1 ; shift
+
+case $CMD in
+install)
+    bash ./$1.nnl
+    ;;
+depend)
+    DEPENDENCY_ONLY=true bash ./$1.nnl
+    ;;
+avail)
+    ( for x in *.nnl ; do basename $x .nnl ; done ) | sort
+    ;;
+update)
+    git pull
+    ;;
+*)
+    exec $CMD "$*"
+    ;;
+esac
 )

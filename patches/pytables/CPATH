@@ -1,0 +1,17 @@
+Index: pytables/setup.py
+===================================================================
+--- pytables.orig/setup.py	2010-07-01 12:04:59.000000000 +0100
++++ pytables/setup.py	2010-07-28 17:54:40.258000000 +0100
+@@ -94,10 +94,12 @@
+ 
+ if os.name == 'posix':
+     default_header_dirs = ['/usr/include', '/usr/local/include']
++    default_header_dirs += os.environ.get('CPATH','').replace(':',' ').split()
+     default_library_dirs = [
+         os.path.join(_tree, _arch)
+         for _tree in ('/', '/usr', '/usr/local')
+         for _arch in ('lib64', 'lib') ]
++    default_library_dirs += os.environ.get('LIBRARY_PATH','').replace(':',' ').split()
+     default_runtime_dirs = default_library_dirs
+ 
+ elif os.name == 'nt':

@@ -5,7 +5,7 @@ etc/
 include/
 info/
 lib/
-lib64/
+lib64
 libexec/
 share/
 src/
