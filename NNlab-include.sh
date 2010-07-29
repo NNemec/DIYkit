@@ -8,7 +8,6 @@ fi
 
 [ -z "$NNlab_path" ] && NNlab_path=~/NNlab
 . $NNlab_path/NNlab.sh
-#function NNlab() { $NNlab_path/NNlab "$@"; }
 
 if [ -n "$DEPENDENCY_ONLY" ] && [ -n "$AVAILABLE" ] && sh -c "$AVAILABLE" ; then
     echo "NNlab: found $NAME installed"
