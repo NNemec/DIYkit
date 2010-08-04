@@ -12,4 +12,4 @@ UNPACK_ARCHIVE
 
 cd $SRCDIR/$NAME
 make
-install -m 755 ./symlinks $PREFIX/bin
+install -m 755 -D ./symlinks $PREFIX/bin/symlinks
