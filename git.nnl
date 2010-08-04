@@ -13,6 +13,7 @@ DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
 cd $SRCDIR/$NAME
+export PYTHON_PATH=python
 ./configure --without-openssl --prefix=$PREFIX --with-curl=$PREFIX
 make
 make install
