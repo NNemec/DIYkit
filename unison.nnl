@@ -1,0 +1,18 @@
+        NAME=unison
+     VERSION=2.32.52
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://www.seas.upenn.edu/~bcpierce/unison//download/releases/stable
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+   AVAILABLE="unison -version"
+
+. $NNlab_path/NNlab-include.sh
+
+NNlab depend ocaml
+
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+
+cd $SRCDIR/$NAME
+./configure --prefix $PREFIX
+make
+make install
