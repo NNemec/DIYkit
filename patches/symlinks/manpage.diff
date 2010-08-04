@@ -1,0 +1,24 @@
+The date, section and synopsis of the symlinks manpage have been fixed.
+
+Provided by: Sven Joachim <svenjoac@gmx.de>
+
+---
+ symlinks.8 |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/symlinks.8
++++ b/symlinks.8
+@@ -1,11 +1,11 @@
+-.TH SYMLINKS 8 "November 1994" "Version 1.1"
++.TH SYMLINKS 1 "November 1996" "Version 1.2"
+ 
+ .SH NAME
+ symlinks \- symbolic link maintenance utility
+ .SH SYNOPSIS
+ .B symlinks
+ [
+-.B -cdrv
++.B -cdrstv
+ ]
+ dirlist
+ .SH DESCRIPTION

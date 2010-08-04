@@ -1,0 +1,102 @@
+While it would be possible to split this patch into several ones,
+further editing would become rather tedious because these patches
+had overlapping lines.  Here is a summary of what is done and
+which problems are solved:
+
+- "#define _FILE_OFFSET_BITS 64" etc suppresses annoying warning
+  messages for files > 2 GB, see http://bugs.debian.org/167122.
+
+- "#include <stdlib.h>" removes a bunch of compiler warnings.
+
+- "shorten_path (new, path);" ensures that links converted from
+  absolute to relative are also shortened.  See
+  http://bugs.debian.org/78600, http://bugs.debian.org/153496 and
+  http://bugs.debian.org/368941. 
+
+- The usage_error() function prints all available commandline options.
+
+- The return value of main() is int and return is used there instead
+  of exit(), fixing remaining compiler warnings.
+
+- We build with _D_GNU_SOURCE and use the GNU extension
+  get_current_dir_name() instead of getcwd().  This solves the problem
+  of incorrect shortening if the path "symlinks" operates on contains
+  itself a symlink.  See http://bugs.debian.org/61140.
+
+Provided by: Sven Joachim <svenjoac@gmx.de>
+
+---
+ symlinks.c |   27 ++++++++++++++++++++++-----
+ 1 file changed, 22 insertions(+), 5 deletions(-)
+
+--- a/symlinks.c
++++ b/symlinks.c
+@@ -1,4 +1,9 @@
++#define _FILE_OFFSET_BITS 64
++#define _LARGEFILE_SOURCE
++#define _LARGEFILE64_SOURCE
++
+ #include <unistd.h>
++#include <stdlib.h>
+ #ifndef _POSIX_SOURCE
+ #define _POSIX_SOURCE
+ #endif
+@@ -235,6 +240,7 @@
+ 		strcpy (np, tail);
+ 		(void) tidy_path(new);
+ 	}
++	shorten_path (new, path);
+ 	if (!testing) {
+ 		if (unlink (path)) {
+ 			perror(path);
+@@ -285,18 +291,24 @@
+ static void usage_error (void)
+ {
+ 	fprintf(stderr, progver, progname);
+-	fprintf(stderr, "Usage:\t%s [-crsv] dirlist\n\n", progname);
++	fprintf(stderr, "Usage:\t%s [-cdrstv] dirlist\n\n", progname);
+ 	fprintf(stderr, "Flags:\t-c == change absolute/messy links to relative\n"
+ 		"\t-d == delete dangling links\n"
+ 		"\t-r == recurse into subdirs\n"
+-		"\t-s == shorten lengthy links\n"
++		"\t-s == shorten lengthy links (only displayed if -c not specified)\n"
++		"\t-t == test mode, don't actually change anything\n"
+ 		"\t-v == verbose (show all symlinks)\n\n");
+ 	exit(1);
+ }
+ 
+-void main(int argc, char **argv)
++int main(int argc, char **argv)
+ {
++#ifdef _GNU_SOURCE
++	static char path[PATH_MAX+2];
++	char* cwd = get_current_dir_name();
++#else
+ 	static char path[PATH_MAX+2], cwd[PATH_MAX+2];
++#endif
+ 	int dircount = 0;
+ 	char c, *p;
+ 
+@@ -305,9 +317,14 @@
+         else
+                 progname++;
+ 
++#ifdef _GNU_SOURCE
++	if (NULL == cwd) {
++		fprintf(stderr,"get_current_dir_name() failed\n");
++#else
+ 	if (NULL == getcwd(cwd,PATH_MAX)) {
+ 		fprintf(stderr,"getcwd() failed\n");
+-		exit (1);
++#endif
++		return (1);
+ 	}
+ 	if (!*cwd || cwd[strlen(cwd)-1] != '/')
+ 		strcat(cwd,"/");
+@@ -342,5 +359,5 @@
+ 	}
+ 	if (dircount == 0)
+ 		usage_error();
+-	exit (0);
++	return (0);
+ }

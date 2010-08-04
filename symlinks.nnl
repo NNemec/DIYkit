@@ -1,0 +1,15 @@
+        NAME=symlinks
+     VERSION=1.2
+    DISTFILE=${NAME}_${VERSION}.orig.tar.gz
+ MASTER_SITE=ftp://ftp.de.debian.org/debian/pool/main/s/${NAME}
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+   AVAILABLE="symlinks -t ."
+
+. $NNlab_path/NNlab-include.sh
+
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+
+cd $SRCDIR/$NAME
+make
+install -m 755 ./symlinks $PREFIX/bin
