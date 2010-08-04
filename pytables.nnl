@@ -8,6 +8,7 @@
 . $NNlab_path/NNlab-include.sh
 
 NNlab depend hdf5
+NNlab depend python
 NNlab depend numpy
 NNlab depend numexpr
 NNlab depend cython
