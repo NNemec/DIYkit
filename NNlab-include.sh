@@ -84,3 +84,14 @@ function UNPACK_ARCHIVE() {(
         quilt push -a
     fi
 )}
+
+function GIT_CLONE() {(
+    cd $SRCDIR
+    if [ -d $NAME/.git/ ] ; then
+        cd $NAME
+        git pull
+    else
+        rm -rf $NAME
+        git clone $GIT_URL $NAME
+    fi
+)}
