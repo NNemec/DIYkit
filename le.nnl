@@ -1,0 +1,17 @@
+        NAME=le
+     VERSION=1.14.3
+    DISTFILE=${NAME}-${VERSION}.tar.bz2
+ MASTER_SITE=ftp://ftp.yars.free.net/pub/source/${NAME}
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+   AVAILABLE="le --version"
+
+. $NNlab_path/NNlab-include.sh
+
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+
+######### autoconf
+cd $SRCDIR/$NAME
+./configure --prefix $PREFIX
+make
+make install
