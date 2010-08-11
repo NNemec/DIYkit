@@ -1,0 +1,6 @@
+config.sub.diff
+parser.c.diff
+tsocks.8.diff
+tsocks.c.diff
+tsocks.conf.5.diff
+tsocks.manpages.diff

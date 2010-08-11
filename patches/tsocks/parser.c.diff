@@ -1,0 +1,34 @@
+Index: tsocks/parser.c
+===================================================================
+--- tsocks.orig/parser.c	2010-08-08 19:10:26.000000000 +0100
++++ tsocks/parser.c	2010-08-08 19:10:36.000000000 +0100
+@@ -6,10 +6,13 @@
+ 
+ #include <netinet/in.h>
+ #include <sys/socket.h>
++#include <sys/types.h>
+ #include <arpa/inet.h>
++#include <pwd.h>
+ #include <string.h>
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <unistd.h>
+ #include <errno.h>
+ #include <config.h>
+ #include "common.h"
+@@ -48,12 +51,11 @@
+ 
+ 	/* If a filename wasn't provided, use the default */
+ 	if (filename == NULL) {
+-		strncpy(line, CONF_FILE, sizeof(line) - 1);
+-		/* Insure null termination */
+-		line[sizeof(line) - 1] = (char) 0;
+-		filename = line;
++		filename = find_config(line);
+ 	}
+ 
++	show_msg(MSGDEBUG, "using %s as configuration file\n", line);
++
+ 	/* Read the configuration file */
+ 	if ((conf = fopen(filename, "r")) == NULL) {
+ 		show_msg(MSGERR, "Could not open socks configuration file "

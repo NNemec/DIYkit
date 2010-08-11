@@ -1,0 +1,20 @@
+Index: tsocks/tsocks.conf.5
+===================================================================
+--- tsocks.orig/tsocks.conf.5	2010-08-08 19:10:26.000000000 +0100
++++ tsocks/tsocks.conf.5	2010-08-08 19:11:38.000000000 +0100
+@@ -126,6 +126,15 @@
+ range 150.0.0.0 to 150.255.255.255 when the connection request is for ports
+ 80-1024.
+ 
++.TP
++.I fallback
++This directive allows to fall back to direct connection if no default
++server present in the configuration and fallback = yes.
++If fallback = no or not specified and there is no default server, the
++tsocks gives an error message and aborts.
++This parameter protects the user against accidentally establishing
++unwanted unsockified (ie. direct) connection.
++
+ .SH UTILITIES
+ tsocks comes with two utilities that can be useful in creating and verifying
+ the tsocks configuration file. 
