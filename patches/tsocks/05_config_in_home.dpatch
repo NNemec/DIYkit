@@ -5,9 +5,10 @@
 ## DP: Additionally search for the configuration file in user home directory
 
 @DPATCH@
-diff -urNad tsocks-1.8beta5~/parser.c tsocks-1.8beta5/parser.c
---- tsocks-1.8beta5~/parser.c	2008-03-03 14:05:14.000000000 +0100
-+++ tsocks-1.8beta5/parser.c	2008-03-03 14:05:36.000000000 +0100
+Index: tsocks/parser.c
+===================================================================
+--- tsocks.orig/parser.c	2010-08-11 13:18:40.000000000 +0100
++++ tsocks/parser.c	2010-08-11 13:18:42.000000000 +0100
 @@ -36,6 +36,32 @@
  static int handle_defpass(struct parsedfile *, int, char *);
  static int make_netent(char *value, struct netent **ent);

@@ -1,7 +1,7 @@
 Index: tsocks/tsocks.c
 ===================================================================
---- tsocks.orig/tsocks.c	2010-08-08 19:10:26.000000000 +0100
-+++ tsocks/tsocks.c	2010-08-08 19:10:40.000000000 +0100
+--- tsocks.orig/tsocks.c	2010-08-11 13:18:19.000000000 +0100
++++ tsocks/tsocks.c	2010-08-11 13:18:38.000000000 +0100
 @@ -289,11 +289,13 @@
     show_msg(MSGDEBUG, "Picked server %s for connection\n",
              (path->address ? path->address : "(Not Provided)"));

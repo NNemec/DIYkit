@@ -1,0 +1,40 @@
+Index: tsocks/tsocks
+===================================================================
+--- tsocks.orig/tsocks	2010-08-11 13:20:26.000000000 +0100
++++ tsocks/tsocks	2010-08-11 13:16:01.000000000 +0100
+@@ -37,13 +37,13 @@
+ # This script is originally from the debian tsocks package by 
+ # Tamas Szerb <toma@rulez.org>
+ 
+-if [ $# = 0 ] ; then
+-   echo "$0: insufficient arguments"
+-   exit
+-fi
++#if [ $# = 0 ] ; then
++#   echo "$0: insufficient arguments"
++#   exit
++#fi
+ 
+ case "$1" in
+-	on)
++	-on)
+ 		if [ -z "$LD_PRELOAD" ]
+ 			then
+ 				export LD_PRELOAD="/usr/lib/libtsocks.so"
+@@ -52,14 +52,14 @@
+ 				export LD_PRELOAD="/usr/lib/libtsocks.so $LD_PRELOAD"
+ 		fi
+ 	;;
+-	off)
++	-off)
+ 		export LD_PRELOAD=`echo -n $LD_PRELOAD | sed 's/\/usr\/lib\/libtsocks.so \?//'`
+ 		if [ -z "$LD_PRELOAD" ]
+ 			then
+ 				unset LD_PRELOAD
+ 		fi
+ 	;;
+-	show|sh)
++	-show|-sh)
+ 		echo "LD_PRELOAD=\"$LD_PRELOAD\""
+ 	;;
+ 	-h|-?)

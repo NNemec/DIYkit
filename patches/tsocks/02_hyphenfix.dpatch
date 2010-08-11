@@ -5,9 +5,10 @@
 ## DP: No description.
 
 @DPATCH@
-diff -urNad tsocks-1.8beta5~/tsocks.8 tsocks-1.8beta5/tsocks.8
---- tsocks-1.8beta5~/tsocks.8	2007-03-30 11:07:38.000000000 +0200
-+++ tsocks-1.8beta5/tsocks.8	2007-03-30 11:15:41.000000000 +0200
+Index: tsocks/tsocks.8
+===================================================================
+--- tsocks.orig/tsocks.8	2010-08-11 13:18:38.000000000 +0100
++++ tsocks/tsocks.8	2010-08-11 13:18:41.000000000 +0100
 @@ -13,11 +13,11 @@
  The syntax to force preload of the library for different shells is
  specified below:
@@ -88,9 +89,10 @@ diff -urNad tsocks-1.8beta5~/tsocks.8 tsocks-1.8beta5/tsocks.8
  
  .SH SEE ALSO
  tsocks.conf(5)
-diff -urNad tsocks-1.8beta5~/tsocks.conf.5 tsocks-1.8beta5/tsocks.conf.5
---- tsocks-1.8beta5~/tsocks.conf.5	2002-05-18 04:13:08.000000000 +0200
-+++ tsocks-1.8beta5/tsocks.conf.5	2007-03-30 11:16:38.000000000 +0200
+Index: tsocks/tsocks.conf.5
+===================================================================
+--- tsocks.orig/tsocks.conf.5	2010-08-11 13:18:39.000000000 +0100
++++ tsocks/tsocks.conf.5	2010-08-11 13:18:41.000000000 +0100
 @@ -66,7 +66,7 @@
  .I server
  The IP address of the SOCKS server (e.g "server = 10.1.4.253"). Only one
@@ -115,9 +117,9 @@ diff -urNad tsocks-1.8beta5~/tsocks.conf.5 tsocks-1.8beta5/tsocks.conf.5
 -80-1024.
 +80\-1024.
  
- .SH UTILITIES
- tsocks comes with two utilities that can be useful in creating and verifying
-@@ -146,12 +146,12 @@
+ .TP
+ .I fallback
+@@ -155,12 +155,12 @@
  extremely useful in debugging problems.
  
  validateconf can read a configuration file from a location other than the 

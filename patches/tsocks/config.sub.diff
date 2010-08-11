@@ -1,7 +1,7 @@
 Index: tsocks/config.sub
 ===================================================================
---- tsocks.orig/config.sub	2010-08-08 19:10:26.000000000 +0100
-+++ tsocks/config.sub	2010-08-08 19:10:32.000000000 +0100
+--- tsocks.orig/config.sub	2010-08-11 13:18:19.000000000 +0100
++++ tsocks/config.sub	2010-08-11 13:18:22.000000000 +0100
 @@ -1,9 +1,10 @@
  #! /bin/sh
  # Configuration validation subroutine script.

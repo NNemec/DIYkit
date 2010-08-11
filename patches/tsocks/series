@@ -4,3 +4,14 @@ tsocks.8.diff
 tsocks.c.diff
 tsocks.conf.5.diff
 tsocks.manpages.diff
+01_symbolexport.dpatch
+02_hyphenfix.dpatch
+03_fixloop.dpatch
+04_getpeername.dpatch
+05_config_in_home.dpatch
+06_fallback.dpatch
+plus-tsocks
+plus-tsocks.1
+plus-saveme.8
+plus-saveme.9
+plus-saveme.1

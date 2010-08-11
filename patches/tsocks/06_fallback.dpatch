@@ -7,8 +7,10 @@
 ## DP: fallback = yes.
 
 @DPATCH@
---- tsocks-1.8beta5.orig/parser.h	2002-02-10 08:26:27.000000000 +0100
-+++ tsocks-1.8beta5/parser.h	2008-03-16 13:33:49.000000000 +0100
+Index: tsocks/parser.h
+===================================================================
+--- tsocks.orig/parser.h	2010-08-11 13:18:19.000000000 +0100
++++ tsocks/parser.h	2010-08-11 13:18:44.000000000 +0100
 @@ -33,6 +33,7 @@
     struct netent *localnets;
     struct serverent defaultserver;
@@ -17,8 +19,10 @@
  };
  
  /* Functions provided by parser module */
---- tsocks-1.8beta5.orig/parser.c	2008-03-16 13:32:47.000000000 +0100
-+++ tsocks-1.8beta5/parser.c	2008-03-16 13:36:37.000000000 +0100
+Index: tsocks/parser.c
+===================================================================
+--- tsocks.orig/parser.c	2010-08-11 13:18:42.000000000 +0100
++++ tsocks/parser.c	2010-08-11 13:18:44.000000000 +0100
 @@ -35,6 +35,7 @@
  static int handle_defuser(struct parsedfile *, int, char *);
  static int handle_defpass(struct parsedfile *, int, char *);
@@ -56,8 +60,10 @@
  /* Construct a netent given a string like                             */
  /* "198.126.0.1[:portno[-portno]]/255.255.255.0"                      */
  int make_netent(char *value, struct netent **ent) {
---- tsocks-1.8beta5.orig/tsocks.c	2008-03-16 13:32:47.000000000 +0100
-+++ tsocks-1.8beta5/tsocks.c	2008-03-16 13:40:23.000000000 +0100
+Index: tsocks/tsocks.c
+===================================================================
+--- tsocks.orig/tsocks.c	2010-08-11 13:18:42.000000000 +0100
++++ tsocks/tsocks.c	2010-08-11 13:18:44.000000000 +0100
 @@ -294,11 +294,20 @@
              (path->address ? path->address : "(Not Provided)"));
     if (path->address == NULL) {
@@ -84,11 +90,13 @@
     }
        else 
           show_msg(MSGERR, "Connection needs to be made "
---- tsocks-1.8beta5.orig/tsocks.conf.5	2002-05-18 04:13:08.000000000 +0200
-+++ tsocks-1.8beta5/tsocks.conf.5	2008-03-16 22:54:41.000000000 +0100
-@@ -126,6 +126,15 @@
- range 150.0.0.0 to 150.255.255.255 when the connection request is for ports
- 80-1024.
+Index: tsocks/tsocks.conf.5
+===================================================================
+--- tsocks.orig/tsocks.conf.5	2010-08-11 13:18:41.000000000 +0100
++++ tsocks/tsocks.conf.5	2010-08-11 13:18:44.000000000 +0100
+@@ -135,6 +135,15 @@
+ This parameter protects the user against accidentally establishing
+ unwanted unsockified (ie. direct) connection.
  
 +.TP
 +.I fallback

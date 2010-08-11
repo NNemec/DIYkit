@@ -1,7 +1,7 @@
 Index: tsocks/tsocks.conf.5
 ===================================================================
---- tsocks.orig/tsocks.conf.5	2010-08-08 19:10:26.000000000 +0100
-+++ tsocks/tsocks.conf.5	2010-08-08 19:11:38.000000000 +0100
+--- tsocks.orig/tsocks.conf.5	2010-08-11 13:18:19.000000000 +0100
++++ tsocks/tsocks.conf.5	2010-08-11 13:18:39.000000000 +0100
 @@ -126,6 +126,15 @@
  range 150.0.0.0 to 150.255.255.255 when the connection request is for ports
  80-1024.

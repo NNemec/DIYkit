@@ -12,7 +12,7 @@
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
-#cd $SRCDIR/$NAME
-#./configure --prefix $PREFIX
-#make
-#make install
+cd $SRCDIR/$NAME
+./configure --prefix $PREFIX
+make
+make install

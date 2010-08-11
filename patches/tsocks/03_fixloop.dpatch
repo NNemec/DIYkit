@@ -5,10 +5,11 @@
 ## DP: No description.
 
 @DPATCH@
-diff -urNad tsocks-1.8beta5~/tsocks.c tsocks-1.8beta5/tsocks.c
---- tsocks-1.8beta5~/tsocks.c	2002-07-16 00:50:52.000000000 +0200
-+++ tsocks-1.8beta5/tsocks.c	2007-04-02 19:48:26.000000000 +0200
-@@ -988,6 +988,10 @@
+Index: tsocks/tsocks.c
+===================================================================
+--- tsocks.orig/tsocks.c	2010-08-11 13:18:38.000000000 +0100
++++ tsocks/tsocks.c	2010-08-11 13:18:41.000000000 +0100
+@@ -990,6 +990,10 @@
        if (rc > 0) {
           conn->datadone += rc;
           rc = 0;
