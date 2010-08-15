@@ -1,3 +1,5 @@
+# Transparent socks5 proxy - allows arbitrary programs to use socks5
+
         NAME=tsocks
      VERSION=1.8beta5
     DISTFILE=${NAME}-${VERSION}.tar.gz
@@ -6,8 +8,6 @@
    AVAILABLE="tsocks -sh"
 
 . $NNlab_path/NNlab-include.sh
-
-# NNlab depend somepkg
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE

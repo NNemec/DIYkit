@@ -1,3 +1,5 @@
+# C-Extensions for Python
+
         NAME=cython
      VERSION=0.12.1
     DISTFILE=Cython-${VERSION}.tar.gz

@@ -1,3 +1,5 @@
+# Command line tool to normalize symbolic links
+
         NAME=symlinks
      VERSION=1.2
     DISTFILE=${NAME}_${VERSION}.orig.tar.gz

@@ -1,3 +1,5 @@
+# Compiler for D programming language (Digital Mars)
+
         NAME=dmd2
      VERSION=2.048
     DISTFILE=dmd.${VERSION}.zip

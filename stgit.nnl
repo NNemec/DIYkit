@@ -1,3 +1,5 @@
+# Stacked GIT - patch manager on top of GIT
+
         NAME=stgit
      VERSION=0.14.1
     DISTFILE=${NAME}-${VERSION}.tar.gz

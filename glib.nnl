@@ -1,3 +1,4 @@
+# Core library of GNOME
         NAME=glib
      VERSION=2.24.1
     DISTFILE=${NAME}-${VERSION}.tar.bz2

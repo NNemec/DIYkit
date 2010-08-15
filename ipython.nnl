@@ -1,3 +1,4 @@
+# Interactive Python shell
         NAME=ipython
      VERSION=0.10
     DISTFILE=${NAME}-${VERSION}.tar.gz

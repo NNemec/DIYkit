@@ -1,3 +1,5 @@
+# Numerical arrays in Python
+
         NAME=numpy
      VERSION=1.4.1
     DISTFILE=${NAME}-${VERSION}.tar.gz

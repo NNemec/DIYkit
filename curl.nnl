@@ -1,3 +1,5 @@
+# Multi-protocol file transfer library
+
         NAME=curl
      VERSION=7.21.0
     DISTFILE=${NAME}-${VERSION}.tar.bz2

@@ -1,3 +1,5 @@
+# HDF5-based numerical data management library in Python
+
         NAME=pytables
      VERSION=2.2
     DISTFILE=tables-${VERSION}.tar.gz

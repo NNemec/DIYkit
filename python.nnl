@@ -1,3 +1,5 @@
+# The Python programming language
+
         NAME=python
      VERSION=2.7
     DISTFILE=Python-${VERSION}.tar.bz2

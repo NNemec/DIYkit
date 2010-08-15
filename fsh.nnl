@@ -1,3 +1,5 @@
+# Fast SSH remote command execution
+
         NAME=fsh
      VERSION=1.2
     DISTFILE=${NAME}-${VERSION}.tar.gz

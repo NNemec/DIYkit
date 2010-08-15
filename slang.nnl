@@ -1,3 +1,5 @@
+# The S-Lang programming language
+
         NAME=slang
      VERSION=2.2.2
     DISTFILE=${NAME}-${VERSION}.tar.bz2

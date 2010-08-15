@@ -1,3 +1,5 @@
+# The O'Caml programming language
+
         NAME=ocaml
      VERSION=3.11.2
     DISTFILE=${NAME}-${VERSION}.tar.bz2

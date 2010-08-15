@@ -1,3 +1,5 @@
+# Python bindings for GTK+
+
         NAME=pygtk
      VERSION=2.16.0
     DISTFILE=${NAME}-${VERSION}.tar.bz2

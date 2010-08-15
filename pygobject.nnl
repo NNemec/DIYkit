@@ -1,3 +1,4 @@
+# Python bindings for GObjects (GNOME)
         NAME=pygobject
      VERSION=2.16.1
     DISTFILE=${NAME}-${VERSION}.tar.bz2

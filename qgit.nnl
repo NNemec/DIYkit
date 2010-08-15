@@ -1,3 +1,5 @@
+# Qt GUI for the GIT version control
+
         NAME=qgit
      GIT_URL=git://git.kernel.org/pub/scm/qgit/qgit4.git
    AVAILABLE="pkg-config --exists template"

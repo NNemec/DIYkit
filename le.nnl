@@ -1,3 +1,5 @@
+# Text mode text editor
+
         NAME=le
      VERSION=1.14.3
     DISTFILE=${NAME}-${VERSION}.tar.bz2

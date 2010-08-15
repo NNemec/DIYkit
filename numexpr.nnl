@@ -1,3 +1,5 @@
+# Numerical expression library in Python
+
         NAME=numexpr
      VERSION=1.3.1
     DISTFILE=${NAME}-${VERSION}.tar.gz

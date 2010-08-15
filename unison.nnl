@@ -1,3 +1,5 @@
+# File synchronizer
+
         NAME=unison
      VERSION=2.32.52
     DISTFILE=${NAME}-${VERSION}.tar.gz

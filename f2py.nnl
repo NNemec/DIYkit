@@ -1,3 +1,5 @@
+# Fortran to Python interface generator
+
         NAME=f2py
      VERSION=2.45.241_1926
     DISTFILE=F2PY-$(VERSION).tar.gz

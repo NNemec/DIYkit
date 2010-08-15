@@ -1,3 +1,5 @@
+# Simple patch queue manager
+
         NAME=quilt
      VERSION=0.48
     DISTFILE=${NAME}-${VERSION}.tar.gz

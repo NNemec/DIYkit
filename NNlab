@@ -28,7 +28,9 @@ depend)
     DEPENDENCY_ONLY=true bash ./$1.nnl
     ;;
 avail)
-    ( for x in *.nnl ; do basename $x .nnl ; done ) | sort
+    for pkg in $( ( for x in *.nnl ; do basename $x .nnl ; done ) | sort ) ; do
+        echo "$(printf "%-15s " $pkg)$(head -n 1 $pkg.nnl | grep "^#")"
+    done
     ;;
 update)
     git pull

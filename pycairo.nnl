@@ -1,3 +1,4 @@
+# Python bindings for the CAIRO graphics library
         NAME=pycairo
      VERSION=1.6.4
     DISTFILE=${NAME}-${VERSION}.tar.gz
