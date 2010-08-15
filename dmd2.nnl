@@ -14,13 +14,14 @@ UNPACK_ARCHIVE
 
 ######### autoconf
 cd $SRCDIR/$NAME
-install -m 755 -D ./linux/bin/dmd $PREFIX/bin/dmd
-install -m 755 -D ./linux/bin/rdmd $PREFIX/bin/rdmd
+install -m 755 -D ./linux/bin/dmd $PREFIX/bin/dmd2
+ln -sf dmd2 $PREFIX/bin/dmd
+install -m 755 -D ./linux/bin/rdmd $PREFIX/bin/rdmd2
+ln -sf rdmd2 $PREFIX/bin/rdmd
 install -m 644 -D ./linux/lib/libdruntime.a $PREFIX/lib/libdruntime.a
 install -m 644 -D ./linux/lib/libphobos2.a $PREFIX/lib/libphobos2.a
-install -m 644 -D ./man/man1/dmd.1 $PREFIX/man/man1/dmd.1
-install -m 644 -D ./man/man1/dmd.conf.5 $PREFIX/man/man5/dmd.conf.5
-install -m 644 -D ./man/man1/rdmd.1 $PREFIX/man/man1/rdmd.1
+install -m 644 -D ./man/man1/dmd.1 $PREFIX/man/man1/dmd2.1
+install -m 644 -D ./man/man1/rdmd.1 $PREFIX/man/man1/rdmd2.1
 
 mkdir -p $NNlab_path/NNlab.sh.d
 cat > $NNlab_path/NNlab.sh.d/dmd2.sh << EOF
