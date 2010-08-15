@@ -43,6 +43,8 @@ function DOWNLOAD_ARCHIVE() {(
         ;;
     *application/x-bzip2*)
         ;;
+    *application/zip*)
+        ;;
     *)
         echo "NNlab: Download unsuccessful! (filetype not recognized)"
         file -i $TMPDIR/$DISTFILE
@@ -66,6 +68,9 @@ function UNPACK_ARCHIVE() {(
         ;;
     *.tar.bz2)
         tar xfj $DOWNLOADDIR/$DISTFILE
+        ;;
+    *.zip)
+        unzip $DOWNLOADDIR/$DISTFILE
         ;;
     *)
         echo "Unknown archive format"

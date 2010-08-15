@@ -2,6 +2,7 @@ NNlab.sh.d/
 bin/
 download/
 etc/
+import/
 include/
 info/
 lib/

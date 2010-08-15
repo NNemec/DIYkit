@@ -1,0 +1,44 @@
+        NAME=dmd2
+     VERSION=2.048
+    DISTFILE=dmd.${VERSION}.zip
+ MASTER_SITE=http://ftp.digitalmars.com
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+   AVAILABLE=""
+
+. $NNlab_path/NNlab-include.sh
+
+# NNlab depend somepkg
+
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+
+######### autoconf
+cd $SRCDIR/$NAME
+install -m 755 -D ./linux/bin/dmd $PREFIX/bin/dmd
+install -m 755 -D ./linux/bin/rdmd $PREFIX/bin/rdmd
+install -m 644 -D ./linux/lib/libdruntime.a $PREFIX/lib/libdruntime.a
+install -m 644 -D ./linux/lib/libphobos2.a $PREFIX/lib/libphobos2.a
+install -m 644 -D ./man/man1/dmd.1 $PREFIX/man/man1/dmd.1
+install -m 644 -D ./man/man1/dmd.conf.5 $PREFIX/man/man5/dmd.conf.5
+install -m 644 -D ./man/man1/rdmd.1 $PREFIX/man/man1/rdmd.1
+
+mkdir -p $NNlab_path/NNlab.sh.d
+cat > $NNlab_path/NNlab.sh.d/dmd2.sh << EOF
+export DFLAGS="-I$PREFIX/import/druntime -I$PREFIX/import/phobos -L-L$PREFIX/lib"
+EOF
+
+. $NNlab_path/NNlab.sh.d/dmd2.sh
+
+( cd src/druntime/import
+    for di in $(find . -name "*.di") ; do
+        install -m 644 -D $di $PREFIX/import/druntime/$di
+    done
+)
+
+mv ./src/phobos/std/openrj.d ./src/phobos/std/openrj.d.rename
+( cd $TMPDIR
+    for d in etc/c std std/c std/c/linux ; do
+        mkdir -p $SRCDIR/$NAME/src/phobos/$d
+        dmd -c -I$SRCDIR/$NAME/src/phobos -Hd$PREFIX/import/phobos/$d $SRCDIR/$NAME/src/phobos/$d/*.d
+    done
+)
