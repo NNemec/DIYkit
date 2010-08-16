@@ -1,25 +1,26 @@
 set -e # exit shell on errors
 
-if [ -z "$NAME" ] ; then
-    echo "NNlab-include.sh should only included by NNlab installation scripts"
-    echo "(variable \$NAME not defined)"
+case "$0" in
+*.diy) ;;
+*)
+    echo "DIYkit-include.sh should only included by .diy installation scripts"
     exit 1
 fi
 
-[ -z "$NNlab_path" ] && NNlab_path=~/NNlab
-. $NNlab_path/NNlab.sh
+[ -z "$DIYkit" ] && export DIYkit=~/DIYkit
+. $DIYkit/DIYkit.sh
 
 if [ -n "$DEPENDENCY_ONLY" ] && [ -n "$AVAILABLE" ] && sh -c "$AVAILABLE" ; then
-    echo "NNlab: found $NAME installed"
+    echo "DIYkit: found $NAME installed"
     exit 0
 fi
 
-PREFIX=$NNlab_path
-SRCDIR=$NNlab_path/src
-BINDIR=$NNlab_path/bin
-DOCDIR=$NNlab_path/doc
-TMPDIR=$NNlab_path/tmp
-DOWNLOADDIR=$NNlab_path/download
+PREFIX=$DIYkit
+SRCDIR=$DIYkit/src
+BINDIR=$DIYkit/bin
+DOCDIR=$DIYkit/doc
+TMPDIR=$DIYkit/tmp
+DOWNLOADDIR=$DIYkit/download
 
 function DOWNLOAD_ARCHIVE() {(
     mkdir -p $DOWNLOADDIR
@@ -28,12 +29,12 @@ function DOWNLOAD_ARCHIVE() {(
         echo "Found $DOWNLOADDIR/$DISTFILE -- do not download again"
         return
     fi
-    echo "NNlab: downloading archive $DISTFILE (from $ARCHIVE_URL) ..."
+    echo "DIYkit: downloading archive $DISTFILE (from $ARCHIVE_URL) ..."
     mkdir -p $TMPDIR
     rm -f $TMPDIR/$DISTFILE
     ( cd $TMPDIR ; wget $ARCHIVE_URL )
     if [ ! -s $TMPDIR/$DISTFILE ] ; then
-        echo "NNlab: Download unsuccessful! (file not found or empty)"
+        echo "DIYkit: Download unsuccessful! (file not found or empty)"
         echo URL: $ARCHIVE_URL
         echo Filename: $DISTFILE
         exit 1
@@ -46,7 +47,7 @@ function DOWNLOAD_ARCHIVE() {(
     *application/zip*)
         ;;
     *)
-        echo "NNlab: Download unsuccessful! (filetype not recognized)"
+        echo "DIYkit: Download unsuccessful! (filetype not recognized)"
         file -i $TMPDIR/$DISTFILE
         exit 1
         ;;
@@ -56,7 +57,7 @@ function DOWNLOAD_ARCHIVE() {(
 )}
 
 function UNPACK_ARCHIVE() {(
-    echo "NNlab: unpacking archive $DISTFILE ..."
+    echo "DIYkit: unpacking archive $DISTFILE ..."
     mkdir -p $TMPDIR
     cd $TMPDIR
     rm -rf ./$NAME
@@ -82,10 +83,10 @@ function UNPACK_ARCHIVE() {(
     cd ..
     rmdir ./$NAME
     echo "... done unpacking."
-    if [ -f $NNlab_path/patches/$NAME/series ] ; then
-        echo "NNlab: applying patches"
+    if [ -f $DIYkit/patches/$NAME/series ] ; then
+        echo "DIYkit: applying patches"
         cd $SRCDIR/$NAME
-        ln -sf $NNlab_path/patches/$NAME ./patches
+        ln -sf $DIYkit/patches/$NAME ./patches
         quilt push -a
     fi
 )}
