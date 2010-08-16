@@ -3,28 +3,15 @@
 
         NAME=mercurial
      VERSION=0.8
-
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://www.selenic.com/mercurial/release
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-SRCDIR = $WRKDIR/$NAME
+. $DIYkit/DIYkit-include.sh
 
-:recipe {fetch = $NNlab_home/${NAME}.aap}
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
-
-all: install
-
-$SRCDIR: $NNlab_path/download/$DISTFILE
-    :do unpack $NNlab_path/download/$DISTFILE
-#    :do patch $NAME
-
-getsrc: $SRCDIR
-
-install: $SRCDIR
-    :cd $source
-    :sys python setup.py install --prefix $PREFIX
-
-$DOCDIR/$NAME: $SRCDIR
-    :cd $DOCDIR
-    :symlink {q} $SRCDIR/doc ./$NAME
+cd $SRCDIR
+python setup.py build
+python setup.py install --prefix $PREFIX

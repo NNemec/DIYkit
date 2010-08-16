@@ -3,31 +3,24 @@
 
         NAME=netcdf
      VERSION=3.6.1
-
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=ftp://ftp.unidata.ucar.edu/pub/netcdf
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-:recipe {fetch = $NNlab_home/${NAME}.aap}
+. $DIYkit/DIYkit-include.sh
 
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+CHECK_AVAILABLE "pkg-config --exists template"
+DEPENDS_ON somepkg
+DEPENDS_ON anotherpkg
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+if [ -d $SRCDIR/src ] ; then
+    mv $SRCDIR $SRCDIR-tmp
+    mv $SRCDIR-tmp/src $SRCDIR
+    rm -rf $SRCDIR-tmp
+fi
 
-all: install
-
-SRCDIR = $WRKDIR/$NAME
-
-$SRCDIR: $NNlab_path/download/$DISTFILE
-    :do unpack $NNlab_path/download/$DISTFILE
-    :move $SRCDIR $SRCDIR-tmp
-    :move $SRCDIR-tmp/src $SRCDIR
-    :del {r}{f} $SRCDIR-tmp
-
-getsrc: $SRCDIR
-
-build: $SRCDIR
-    :cd $SRCDIR
-    :sys FC="ifort" F90="ifort" FFLAGS="-i-static" CPPFLAGS="-fPIC -DpgiFortran" ./configure --prefix $PREFIX
-    :sys make
-
-install: build
-    :cd $SRCDIR
-    :sys make install
+cd $SRCDIR
+FC="ifort" F90="ifort" FFLAGS="-i-static" CPPFLAGS="-fPIC -DpgiFortran" ./configure --prefix $PREFIX
+make
+make install

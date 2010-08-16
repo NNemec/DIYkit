@@ -3,36 +3,20 @@
 
         NAME=skencil
      VERSION=0.6.17
-
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/sketch
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-SRCDIR = $WRKDIR/$NAME
+. $DIYkit/DIYkit-include.sh
 
-:recipe {fetch = $NNlab_home/${NAME}.aap}
+CHECK_AVAILABLE "pkg-config --exists template"
+DEPENDS_ON somepkg
+DEPENDS_ON anotherpkg
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-# depends on:
-
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
-
-all: install
-
-$SRCDIR: $NNlab_path/download/$DISTFILE
-    :do unpack $NNlab_path/download/$DISTFILE
-#    :do patch $NAME
-
-getsrc: $SRCDIR
-
-install: $SRCDIR
-    :cd $source
-    :python
-	if "LDFLAGS" in os.environ:
-	    os.environ["LDFLAGS"]  += " -L/usr/X11R6/lib"
-	    print "LDFLAGS = ",os.environ["LDFLAGS"]
-    :sys python setup.py configure --tk-flags="`os.environ.get("CPPFLAGS")`"
-    :sys python setup.py build
-    :sys python setup.py install --prefix=$PREFIX
-
-$DOCDIR/$NAME: $SRCDIR
-    :cd $DOCDIR
-    :symlink {q} $SRCDIR/doc ./$NAME
+cd $SRCDIR
+export LDFLAGS="$LDFLAGS -L/usr/X11R6/lib"
+python setup.py configure --tk-flags="$CPPFLAGS"
+python setup.py build
+python setup.py install --prefix=$PREFIX

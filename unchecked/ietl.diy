@@ -3,31 +3,17 @@
 
         NAME=ietl
      VERSION=2.2
-
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://www.comp-phys.org/software/${NAME}
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-SRCDIR = $WRKDIR/$NAME
+. $DIYkit/DIYkit-include.sh
 
-:recipe {fetch = $NNlab_home/${NAME}.aap}
+DEPENDS_ON atlas
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-# depends on:
-
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
-
-all: install
-
-$SRCDIR: $NNlab_path/download/$DISTFILE
-    :do unpack $NNlab_path/download/$DISTFILE
-    :do patch $NAME
-
-getsrc: $SRCDIR
-
-build: $SRCDIR
-    :cd $SRCDIR
-    :sys ./configure --prefix $PREFIX --with-blitz=$PREFIX --with-boost=$PREFIX/include/boost-1_32 --with-atlas-dir=`os.environ['HOME']`/lib/atlas
-    :sys make
-
-install: build
-    :cd $SRCDIR
-    :sys make install
+cd $SRCDIR
+./configure --prefix $PREFIX --with-blitz=$PREFIX --with-boost=$PREFIX/include/boost-1_32 --with-atlas-dir=$HOME/lib/atlas
+make
+make install

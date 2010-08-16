@@ -3,34 +3,15 @@
 
         NAME=cvsps
      VERSION=2.1
-
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://www.cobite.com/cvsps
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-SRCDIR = $WRKDIR/$NAME
+. $DIYkit/DIYkit-include.sh
 
-# depends on:
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
-
-all: install
-
-$SRCDIR: $NNlab_path/download/$DISTFILE
-    :do unpack $NNlab_path/download/$DISTFILE
-#    :do patch $NAME
-
-getsrc: $SRCDIR
-
-# make
-build: $SRCDIR
-    :cd $SRCDIR
-    :sys make
-
-install: build
-    :cd $SRCDIR
-    :sys make install prefix=$PREFIX
-
-
-$DOCDIR/$NAME: $SRCDIR
-    :cd $DOCDIR
-    :symlink {q} $SRCDIR/doc ./$NAME
+cd $SRCDIR
+make
+make install prefix=$PREFIX

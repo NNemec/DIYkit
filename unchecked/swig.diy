@@ -3,37 +3,16 @@
 
         NAME=swig
      VERSION=1.3.29
-
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/${NAME}
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-SRCDIR = $WRKDIR/$NAME
+. $DIYkit/DIYkit-include.sh
 
-:recipe {fetch = $NNlab_home/${NAME}.aap}
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-# depends on:
-
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
-
-all: install
-
-$SRCDIR: $NNlab_path/download/$DISTFILE
-    :do unpack $NNlab_path/download/$DISTFILE
-#    :do patch $NAME
-
-getsrc: $SRCDIR
-
-# make
-build: $SRCDIR
-    :cd $SRCDIR
-    :sys ./configure --prefix $PREFIX
-    :sys make
-
-install: build
-    :cd $SRCDIR
-    :sys make install
-
-
-$DOCDIR/$NAME: $SRCDIR
-    :cd $DOCDIR
-    :symlink {q} $SRCDIR/doc ./$NAME
+cd $SRCDIR
+./configure --prefix $PREFIX
+make
+make install

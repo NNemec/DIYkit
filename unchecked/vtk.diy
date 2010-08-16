@@ -5,49 +5,32 @@
      VERSION=5.0.2
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://www.vtk.org/files/release/5.0
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-SRCDIR = $WRKDIR/$NAME
+. $DIYkit/DIYkit-include.sh
 
-:recipe {fetch = $NNlab_home/${NAME}.aap}
+DEPENDS_ON cmake
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-# depends on:
+cd $SRCDIR
 
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+for opt in /usr/include /usr/include/tcl* $CPPFLAGS ; do
+    case $opt in
+    -I*) opt=${opt:2} ;;
+    esac
+    [ -e $opt/tcl.h ] && TCL_INCLUDE_PATH=$opt
+done
 
-all: install
+cmake -D CMAKE_INSTALL_PREFIX:PATH=$PREFIX \
+      -D VTK_WRAP_PYTHON:BOOL=ON \
+      -D BUILD_SHARED_LIBS:BOOL=ON \
+      -D PYTHON_INCLUDE_PATH:PATH=$PREFIX/include/python2.4 \
+      -D PYTHON_LIBRARY:FILEPATH=$PREFIX/lib/libpython2.4.so \
+      -D TCL_INCLUDE_PATH:PATH=$TCL_INCLUDE_PATH \
+      -D VTK_USE_GL2PS:BOOL=ON \
+      -D VTK_OPENGL_HAS_OSMESA:BOOL=OFF \
+      $SRCDIR
 
-$SRCDIR: $NNlab_path/download/$DISTFILE
-    :do unpack $NNlab_path/download/$DISTFILE
-#    :do patch $NAME
-
-getsrc: $SRCDIR
-
-build: $SRCDIR
-    @for opt in os.getenv('CPPFLAGS','').split(' ') + ['/usr/include'] + glob('/usr/include/tcl*/'):
-	@if opt[:2] == '-I':
-	    @os = os[2:]
-	@if os.path.exists(os.path.join(opt,'tcl.h')):
-	    @TCL_INCLUDE_PATH = opt
-    :cd $SRCDIR
-    :sys cmake -D CMAKE_INSTALL_PREFIX:PATH=$PREFIX \
-               -D VTK_WRAP_PYTHON:BOOL=ON \
-	       -D BUILD_SHARED_LIBS:BOOL=ON \
-	       -D PYTHON_INCLUDE_PATH:PATH=$PREFIX/include/python2.4 \
-	       -D PYTHON_LIBRARY:FILEPATH=$PREFIX/lib/libpython2.4.so \
-	       -D TCL_INCLUDE_PATH:PATH=$TCL_INCLUDE_PATH \
-	       -D VTK_USE_GL2PS:BOOL=ON \
-	       -D VTK_OPENGL_HAS_OSMESA:BOOL=OFF \
-	       $SRCDIR
-
-#	       -D OSMESA_INCLUDE_DIR:PATH=/usr/include/GL \
-#	       -D OSMESA_LIBRARY:PATH=/usr/X11R6/lib/libOSMesa.so \
-#	       -D VTK_USE_MANGLED_MESA:BOOL=ON \
-#    :sys make
-
-install: build
-    :cd $SRCDIR
-    :sys make install
-
-$DOCDIR/$NAME: $SRCDIR
-    :cd $DOCDIR
-    :symlink {q} $SRCDIR/doc ./$NAME
+make
+make install

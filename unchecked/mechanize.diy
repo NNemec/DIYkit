@@ -3,33 +3,15 @@
 
         NAME=mechanize
      VERSION=0.1.6b
-
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://wwwsearch.sourceforge.net/mechanize/src
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-SRCDIR = $WRKDIR/$NAME
+. $DIYkit/DIYkit-include.sh
 
-# depends on:
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
-
-all: install
-
-$SRCDIR: $NNlab_path/download/$DISTFILE
-    :do unpack $NNlab_path/download/$DISTFILE
-#    :do patch $NAME
-
-getsrc: $SRCDIR
-
-# python
-build: $SRCDIR
-    :cd $SRCDIR
-    :sys python setup.py build
-
-install: build
-    :cd $SRCDIR
-    :sys python setup.py install --prefix $PREFIX
-
-$DOCDIR/$NAME: $SRCDIR
-    :cd $DOCDIR
-    :symlink {q} $SRCDIR/doc ./$NAME
+cd $SRCDIR
+python setup.py build
+python setup.py install --prefix $PREFIX

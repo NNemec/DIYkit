@@ -3,46 +3,25 @@
 
         NAME=slepc
      VERSION=2.3.1
-
     DISTFILE=${NAME}-${VERSION}.tgz
  MASTER_SITE=http://www.grycap.upv.es/slepc/download/distrib
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-SRCDIR = $WRKDIR/$NAME
+. $DIYkit/DIYkit-include.sh
 
-:recipe {fetch = $NNlab_home/${NAME}.aap}
+CHECK_AVAILABLE "pkg-config --exists template"
+DEPENDS_ON somepkg
+DEPENDS_ON anotherpkg
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-# depends on:
+cd $SRCDIR
 
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+######### autoconf
+./configure --prefix $PREFIX
+make
+make install
 
-all: install
-
-$SRCDIR: $NNlab_path/download/$DISTFILE
-    :do unpack $NNlab_path/download/$DISTFILE
-#    :do patch $NAME
-
-getsrc: $SRCDIR
-
-# make
-build: $SRCDIR
-    :cd $SRCDIR
-    :sys ./configure --prefix $PREFIX
-    :sys make
-
-install: build
-    :cd $SRCDIR
-    :sys make install
-
-
-# python
-build: $SRCDIR
-    :cd $SRCDIR
-    :sys python setup.py build --prefix $PREFIX
-
-install: build
-    :cd $SRCDIR
-    :sys python setup.py install --prefix $PREFIX
-
-$DOCDIR/$NAME: $SRCDIR
-    :cd $DOCDIR
-    :symlink {q} $SRCDIR/doc ./$NAME
+######### python
+python setup.py build
+python setup.py install --prefix $PREFIX

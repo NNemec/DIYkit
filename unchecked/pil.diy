@@ -2,33 +2,18 @@
 # DIY package: ???
 
         NAME=pil
-     VERSION=1.1.5
-
+     VERSION=1.1.7
     DISTFILE=Imaging-${VERSION}.tar.gz
  MASTER_SITE=http://effbot.org/downloads
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-SRCDIR = $WRKDIR/$NAME
+. $DIYkit/DIYkit-include.sh
 
-:recipe {fetch = $NNlab_home/${NAME}.aap}
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-# depends on:
-
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
-
-all: install
-
-$SRCDIR: $NNlab_path/download/$DISTFILE
-    :do unpack $NNlab_path/download/$DISTFILE
-#    :do patch $NAME
-
-getsrc: $SRCDIR
-
-install: $SRCDIR
-    :cd $source
-    :sys python setup.py install --prefix $PREFIX
-    :copy $SRCDIR/libImaging/Imaging.h $PREFIX/include/python2.4
-    :copy $SRCDIR/libImaging/ImPlatform.h $PREFIX/include/python2.4
-
-$DOCDIR/$NAME: $SRCDIR
-    :cd $DOCDIR
-    :symlink {q} $SRCDIR/doc ./$NAME
+cd $SRCDIR
+python setup.py build
+python setup.py install --prefix $PREFIX
+# install -m 644 -D libImaging/Imaging.h $PREFIX/include/python2.4
+# install -m 644 -D libImaging/ImPlatform.h $PREFIX/include/python2.4

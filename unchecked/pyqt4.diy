@@ -3,31 +3,16 @@
 
         NAME=pyqt4
      VERSION=4.0.1
-
     DISTFILE=PyQt-x11-gpl-${VERSION}.tar.gz
  MASTER_SITE=http://www.riverbankcomputing.com/Downloads/PyQt4/GPL
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-SRCDIR = $WRKDIR/$NAME
+. $DIYkit/DIYkit-include.sh
 
-:recipe {fetch = $NNlab_home/${NAME}.aap}
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-# depends on:
-
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
-
-all: install
-
-$SRCDIR: $NNlab_path/download/$DISTFILE
-    :do unpack $NNlab_path/download/$DISTFILE
-    :do patch $NAME
-
-getsrc: $SRCDIR
-
-build: $SRCDIR
-    :cd $SRCDIR
-    :sys python configure.py
-    :sys make
-
-install: build
-    :cd $SRCDIR
-    :sys make install
+cd $SRCDIR
+python ./configure.py --prefix $PREFIX
+make
+make install

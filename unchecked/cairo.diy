@@ -3,35 +3,22 @@
 
         NAME=cairo
      VERSION=1.4.10
-
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://cairographics.org/releases
-#  MASTER_SITE=ftp://ftp.somewhere.com
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-SRCDIR = $WRKDIR/$NAME
+. $DIYkit/DIYkit-include.sh
 
-# depends on:
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+cd $SRCDIR
 
-all: install
-
-$SRCDIR: # $NNlab_path/download/$DISTFILE
-#    :do unpack $NNlab_path/download/$DISTFILE
-#    :do patch $NAME
-
-getsrc: $SRCDIR
-
-# make
-build: $SRCDIR
-    :cd $SRCDIR
-    :sys ./configure --prefix $PREFIX
-    :sys make
-    :sys make -C test pdf2svg
-    :sys make -C test svg2pdf
-
-install: build
-    :cd $SRCDIR
-    :sys make install
-    :copy test/pdf2svg $PREFIX/bin/
-    :copy test/svg2pdf $PREFIX/bin/
+######### autoconf
+./configure --prefix $PREFIX
+make
+make -C test pdf2svg
+make -C test svg2pdf
+make install
+install -m 755 -D test/pdf2svg $PREFIX/bin/pdf2svg
+install -m 755 -D test/svg2pdf $PREFIX/bin/svg2pdf

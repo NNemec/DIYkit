@@ -13,12 +13,10 @@ DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
 cd $SRCDIR
-
 ./configure --prefix $PREFIX --enable-unicode
 make
 make -C contrib
-
 make install
 make install -C contrib
-cd $SRCDIR/$NAME/wxPython
+cd $SRCDIR/wxPython
 python setup.py install --prefix $PREFIX BUILD_GLCANVAS=False UNICODE=True

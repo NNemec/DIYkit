@@ -3,33 +3,19 @@
 
         NAME=gtkmathview
      VERSION=0.7.8
-
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://helm.cs.unibo.it/mml-widget/sources/
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-SRCDIR = $WRKDIR/$NAME
+. $DIYkit/DIYkit-include.sh
 
-# :recipe {fetch = $NNlab_home/${NAME}.aap}
+CHECK_AVAILABLE "pkg-config --exists template"
+DEPENDS_ON somepkg
+DEPENDS_ON anotherpkg
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
-
-all: install
-
-$SRCDIR: $NNlab_path/download/$DISTFILE
-    :do unpack $NNlab_path/download/$DISTFILE
-#    :do patch $NAME
-
-getsrc: $SRCDIR
-
-build: $SRCDIR
-    :cd $source
-    :sys ./configure --prefix $PREFIX --disable-gtk
-    :sys make
-
-install: build
-    :cd $source
-    :sys make install
-
-$DOCDIR/$NAME: $SRCDIR
-    :cd $DOCDIR
-    :symlink {q} $SRCDIR/doc ./$NAME
+cd $SRCDIR
+./configure --prefix $PREFIX --disable-gtk
+make
+make install

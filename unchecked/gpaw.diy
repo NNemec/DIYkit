@@ -2,38 +2,17 @@
 # DIYkit package: ???
 
         NAME=gpaw
-#     VERSION=0.4.2734
-#     VERSION=0.5.2972
+     VERSION=0.7.2.6974
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=https://wiki.fysik.dtu.dk/gpaw-files
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-#    DISTFILE=${NAME}-${VERSION}.tar.gz
-# MASTER_SITE=https://wiki.fysik.dtu.dk/gpaw-files
-# MASTER_SITE=https://wiki.fysik.dtu.dk/${NAME}
+. $DIYkit/DIYkit-include.sh
 
-SRCDIR = $WRKDIR/$NAME
+DEPENDS_ON ase
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-:recipe {fetch = $NNlab_home/${NAME}.aap}
-
-#:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
-
-all: install
-
-#$SRCDIR: $NNlab_path/download/$DISTFILE
-#    :do unpack $NNlab_path/download/$DISTFILE
-#    :do patch $NAME
-
-getsrc: $SRCDIR
-    :pass
-
-
-# python
-build: $SRCDIR
-    :cd $SRCDIR
-    :sys python setup.py build
-
-install: build
-    :cd $SRCDIR
-    :sys python setup.py install --prefix $PREFIX
-
-$DOCDIR/$NAME: $SRCDIR
-    :cd $DOCDIR
-    :symlink {q} $SRCDIR/doc ./$NAME
+cd $SRCDIR
+python setup.py build
+python setup.py install --prefix $PREFIX
