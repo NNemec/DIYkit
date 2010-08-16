@@ -1,7 +1,6 @@
 # Qt GUI for the GIT version control
 
         NAME=qgit
-     GIT_URL=git://git.kernel.org/pub/scm/qgit/qgit4.git
    AVAILABLE="pkg-config --exists template"
 
 . $DIYkit/DIYkit-include.sh
@@ -9,7 +8,7 @@
 DIYkit depend git
 DIYkit depend qconf
 
-GIT_CLONE
+GIT_CLONE git://git.kernel.org/pub/scm/qgit/qgit4.git
 
 ######### autoconf
 cd $SRCDIR/$NAME

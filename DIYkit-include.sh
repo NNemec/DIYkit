@@ -92,6 +92,7 @@ function UNPACK_ARCHIVE() {(
 )}
 
 function GIT_CLONE() {(
+    GIT_URL=$1
     cd $SRCDIR
     if [ -d $NAME/.git/ ] ; then
         cd $NAME
