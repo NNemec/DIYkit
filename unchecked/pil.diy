@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = pil
-VERSION = 1.1.5
+        NAME=pil
+     VERSION=1.1.5
 
-DISTFILE = Imaging-$(VERSION).tar.gz
-MASTER_SITES = http://effbot.org/downloads
+    DISTFILE=Imaging-${VERSION}.tar.gz
+ MASTER_SITE=http://effbot.org/downloads
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = pyqt3
-VERSION = 3.16
+        NAME=pyqt3
+     VERSION=3.16
 
-DISTFILE = PyQt-x11-gpl-$(VERSION).tar.gz
-MASTER_SITES = http://www.riverbankcomputing.com/Downloads/PyQt3/GPL
+    DISTFILE=PyQt-x11-gpl-${VERSION}.tar.gz
+ MASTER_SITE=http://www.riverbankcomputing.com/Downloads/PyQt3/GPL
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

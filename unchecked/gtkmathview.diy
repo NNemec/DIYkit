@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = gtkmathview
-VERSION = 0.7.8
+        NAME=gtkmathview
+     VERSION=0.7.8
 
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = http://helm.cs.unibo.it/mml-widget/sources/
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://helm.cs.unibo.it/mml-widget/sources/
 
 SRCDIR = $WRKDIR/$NAME
 
-# :recipe {fetch = $NNlab_home/$(NAME).aap}
+# :recipe {fetch = $NNlab_home/${NAME}.aap}
 
 :attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
 

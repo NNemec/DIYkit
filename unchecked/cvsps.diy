@@ -1,10 +1,10 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = cvsps
-VERSION = 2.1
+        NAME=cvsps
+     VERSION=2.1
 
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = http://www.cobite.com/cvsps
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://www.cobite.com/cvsps
 
 SRCDIR = $WRKDIR/$NAME
 

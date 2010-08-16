@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = pyrex
-VERSION = 0.9.4.1
+        NAME=pyrex
+     VERSION=0.9.4.1
 
-DISTFILE = Pyrex-$(VERSION).tar.gz
-MASTER_SITES = http://www.cosc.canterbury.ac.nz/~greg/python/Pyrex
+    DISTFILE=Pyrex-${VERSION}.tar.gz
+ MASTER_SITE=http://www.cosc.canterbury.ac.nz/~greg/python/Pyrex
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

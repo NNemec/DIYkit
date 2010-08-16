@@ -1,11 +1,11 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = bibus
-VERSION = 1.3.0
+        NAME=bibus
+     VERSION=1.3.0
 
-DISTFILE = $(NAME)-$(VERSION).zip
-MASTER_SITES = $(SOURCEFORGE)/bibus-biblio
-# MASTER_SITES = ftp://ftp.somewhere.com
+    DISTFILE=${NAME}-${VERSION}.zip
+ MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/bibus-biblio
+#  MASTER_SITE=ftp://ftp.somewhere.com
 
 SRCDIR = $WRKDIR/$NAME
 

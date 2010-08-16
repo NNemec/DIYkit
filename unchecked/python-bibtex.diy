@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = python-bibtex
-VERSION = 1.3.4
+        NAME=python-bibtex
+     VERSION=1.3.4
 
-DISTFILE = pyblio-$(VERSION).tar.gz
-MASTER_SITES = $(SOURCEFORGE)/pybliographer
+    DISTFILE=pyblio-${VERSION}.tar.gz
+ MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/pybliographer
 
 SRCDIR = $WRKDIR/$NAME
 
-# :recipe {fetch = $NNlab_home/$(NAME).aap}
+# :recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

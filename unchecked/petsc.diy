@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = petsc
-VERSION = 2.3.1
+        NAME=petsc
+     VERSION=2.3.1
 
-DISTFILE = $(NAME)-lite-$(VERSION).tar.gz
-MASTER_SITES = ftp://ftp.mcs.anl.gov/pub/$(NAME)
+    DISTFILE=${NAME}-lite-${VERSION}.tar.gz
+ MASTER_SITE=ftp://ftp.mcs.anl.gov/pub/${NAME}
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

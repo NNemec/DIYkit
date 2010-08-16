@@ -1,11 +1,11 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = dateutil
-VERSION = 1.2
+        NAME=dateutil
+     VERSION=1.2
 
-DISTFILE = python-$(NAME)-$(VERSION).tar.bz2
-MASTER_SITES = http://labix.org/download/python-$NAME
-# MASTER_SITES = ftp://ftp.somewhere.com
+    DISTFILE=python-${NAME}-${VERSION}.tar.bz2
+ MASTER_SITE=http://labix.org/download/python-$NAME
+#  MASTER_SITE=ftp://ftp.somewhere.com
 
 SRCDIR = $WRKDIR/$NAME
 

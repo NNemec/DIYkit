@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = gnuplot
-VERSION = 4.2.rc1
+        NAME=gnuplot
+     VERSION=4.2.rc1
 
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = $(SOURCEFORGE)/$(NAME)
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/${NAME}
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

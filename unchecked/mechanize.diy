@@ -1,10 +1,10 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = mechanize
-VERSION = 0.1.6b
+        NAME=mechanize
+     VERSION=0.1.6b
 
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = http://wwwsearch.sourceforge.net/mechanize/src
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://wwwsearch.sourceforge.net/mechanize/src
 
 SRCDIR = $WRKDIR/$NAME
 

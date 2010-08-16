@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = gmp
-VERSION = 4.2.1
+        NAME=gmp
+     VERSION=4.2.1
 
-DISTFILE = $(NAME)-$(VERSION).tar.bz2
-MASTER_SITES = http://ftp.sunet.se/pub/gnu/$(NAME)
+    DISTFILE=${NAME}-${VERSION}.tar.bz2
+ MASTER_SITE=http://ftp.sunet.se/pub/gnu/${NAME}
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

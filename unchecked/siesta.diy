@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = siesta
+        NAME=siesta
 
-VERSION = 2.0
+     VERSION=2.0
 
-DISTFILE = $NNlab_path/download/$(NAME)-$(VERSION).tgz
+    DISTFILE=$NNlab_path/download/${NAME}-${VERSION}.tgz
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 all: install
 
@@ -16,7 +16,7 @@ $SRCDIR:
     :cd $TMPDIR
     :do extract $DISTFILE
     :del {r}{f} $SRCDIR
-    :move $(NAME)-$(VERSION) $SRCDIR
+    :move ${NAME}-${VERSION} $SRCDIR
     :do patch $NAME
 
 getsrc: $SRCDIR

@@ -1,12 +1,12 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = netcdf
-VERSION = 3.6.1
+        NAME=netcdf
+     VERSION=3.6.1
 
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = ftp://ftp.unidata.ucar.edu/pub/netcdf
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=ftp://ftp.unidata.ucar.edu/pub/netcdf
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 :attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
 

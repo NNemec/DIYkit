@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = fltk
-VERSION = 1.1.6
+        NAME=fltk
+     VERSION=1.1.6
 
-DISTFILE = $(NAME)-$(VERSION)-source.tar.bz2
-MASTER_SITES = ftp://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/$(NAME)/$(VERSION)/
+    DISTFILE=${NAME}-${VERSION}-source.tar.bz2
+ MASTER_SITE=ftp://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/${NAME}/${VERSION}/
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

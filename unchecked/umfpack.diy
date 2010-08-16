@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = umfpack
-VERSION = 5.0
+        NAME=umfpack
+     VERSION=5.0
 
-DISTFILE = UMFPACK.tar.gz
-MASTER_SITES = http://www.cise.ufl.edu/research/sparse/umfpack/current
+    DISTFILE=UMFPACK.tar.gz
+ MASTER_SITE=http://www.cise.ufl.edu/research/sparse/umfpack/current
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

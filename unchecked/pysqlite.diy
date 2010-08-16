@@ -1,10 +1,10 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = pysqlite
-VERSION = 2.3.3
+        NAME=pysqlite
+     VERSION=2.3.3
 
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = http://initd.org/pub/software/$(NAME)/releases/2.3/$(VERSION)
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://initd.org/pub/software/${NAME}/releases/2.3/${VERSION}
 
 SRCDIR = $WRKDIR/$NAME
 

@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = netcdf4
-VERSION = 4.0-alpha13
+        NAME=netcdf4
+     VERSION=4.0-alpha13
 
-DISTFILE = netcdf-$(VERSION).tar.gz
-MASTER_SITES = ftp://ftp.unidata.ucar.edu/pub/netcdf
+    DISTFILE=netcdf-${VERSION}.tar.gz
+ MASTER_SITE=ftp://ftp.unidata.ucar.edu/pub/netcdf
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

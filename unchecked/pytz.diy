@@ -1,10 +1,10 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = pytz
-VERSION = 2006p
+        NAME=pytz
+     VERSION=2006p
 
-DISTFILE = $(NAME)-$(VERSION).tar.bz2
-MASTER_SITES = $(SOURCEFORGE)/$(NAME)
+    DISTFILE=${NAME}-${VERSION}.tar.bz2
+ MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/${NAME}
 
 SRCDIR = $WRKDIR/$NAME
 

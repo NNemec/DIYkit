@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = slepc
-VERSION = 2.3.1
+        NAME=slepc
+     VERSION=2.3.1
 
-DISTFILE = $(NAME)-$(VERSION).tgz
-MASTER_SITES = http://www.grycap.upv.es/slepc/download/distrib
+    DISTFILE=${NAME}-${VERSION}.tgz
+ MASTER_SITE=http://www.grycap.upv.es/slepc/download/distrib
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

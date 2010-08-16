@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
+# DIYkit package: ???
 
-NAME = ScientificPython
-VERSION = 2.4.9
-
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = http://starship.python.net/~hinsen/ScientificPython
+        NAME=ScientificPython
+     VERSION=2.4.9
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://starship.python.net/~hinsen/ScientificPython
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

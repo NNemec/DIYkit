@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = sparselib++
-VERSION = 1.6
+        NAME=sparselib++
+     VERSION=1.6
 
-DISTFILE = sparselib_1_6.zip
-MASTER_SITES = http://math.nist.gov/$(NAME)
+    DISTFILE=sparselib_1_6.zip
+ MASTER_SITE=http://math.nist.gov/${NAME}
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

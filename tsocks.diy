@@ -4,7 +4,7 @@
         NAME=tsocks
      VERSION=1.8beta5
     DISTFILE=${NAME}-${VERSION}.tar.gz
- MASTER_SITE=http://download.sourceforge.net/project/tsocks/tsocks/1.8%20beta%205
+ MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/1.8%20beta%205
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
 . $DIYkit/DIYkit-include.sh

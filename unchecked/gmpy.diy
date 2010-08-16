@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = gmpy
-VERSION = 1.01
+        NAME=gmpy
+     VERSION=1.01
 
-DISTFILE = $(NAME)-sources-101.zip
-MASTER_SITES = $(SOURCEFORGE)/$(NAME)
+    DISTFILE=${NAME}-sources-101.zip
+ MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/${NAME}
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

@@ -4,7 +4,7 @@
         NAME=scipy
      VERSION=0.8.0
     DISTFILE=${NAME}-${VERSION}.tar.gz
- MASTER_SITE=http://downloads.sourceforge.net/project/scipy/scipy/${VERSION}
+ MASTER_SITE=http://downloads.sourceforge.net/project/${NAME}/${NAME}/${VERSION}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
 . $DIYkit/DIYkit-include.sh

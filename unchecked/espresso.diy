@@ -1,11 +1,11 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = espresso
-VERSION = 3.2
+        NAME=espresso
+     VERSION=3.2
 
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = http://www.pwscf.org/downloads/PWcodes/codes/$(VERSION)
-# MASTER_SITES = ftp://ftp.somewhere.com
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://www.pwscf.org/downloads/PWcodes/codes/${VERSION}
+#  MASTER_SITE=ftp://ftp.somewhere.com
 
 SRCDIR = $WRKDIR/$NAME
 

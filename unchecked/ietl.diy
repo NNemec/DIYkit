@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = ietl
-VERSION = 2.2
+        NAME=ietl
+     VERSION=2.2
 
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = http://www.comp-phys.org/software/$(NAME)
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://www.comp-phys.org/software/${NAME}
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

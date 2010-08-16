@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = cogito
-VERSION = 0.18.2
+        NAME=cogito
+     VERSION=0.18.2
 
-DISTFILE = $(NAME)-$(VERSION).tar.bz2
-MASTER_SITES = http://www.kernel.org/pub/software/scm/$(NAME)
+    DISTFILE=${NAME}-${VERSION}.tar.bz2
+ MASTER_SITE=http://www.kernel.org/pub/software/scm/${NAME}
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

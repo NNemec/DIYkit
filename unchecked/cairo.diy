@@ -1,11 +1,11 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = cairo
-VERSION = 1.4.10
+        NAME=cairo
+     VERSION=1.4.10
 
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = http://cairographics.org/releases
-# MASTER_SITES = ftp://ftp.somewhere.com
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://cairographics.org/releases
+#  MASTER_SITE=ftp://ftp.somewhere.com
 
 SRCDIR = $WRKDIR/$NAME
 

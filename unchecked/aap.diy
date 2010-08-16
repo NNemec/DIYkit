@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = aap
-#VERSION = 1.0
+        NAME=aap
+#     VERSION=1.0
 
-#DISTFILE = $(NAME)-$(VERSION).tar.gz
-#MASTER_SITES = ftp://ftp.somewhere.com
+#    DISTFILE=${NAME}-${VERSION}.tar.gz
+# MASTER_SITE=ftp://ftp.somewhere.com
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

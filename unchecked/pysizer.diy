@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = pysizer
-VERSION = 0.1.1
+        NAME=pysizer
+     VERSION=0.1.1
 
-DISTFILE = sizer-$(VERSION).tar.gz
-MASTER_SITES = http://pysizer.8325.org/dist
+    DISTFILE=sizer-${VERSION}.tar.gz
+ MASTER_SITE=http://pysizer.8325.org/dist
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

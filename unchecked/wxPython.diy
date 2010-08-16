@@ -1,18 +1,18 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = wxPython
-#VERSION = 2.8.3.0
-#VERSION = 2.7.2.0
-VERSION = 2.6.3.2
-#VERSION = 2.6.1.0
+        NAME=wxPython
+#     VERSION=2.8.3.0
+#     VERSION=2.7.2.0
+     VERSION=2.6.3.2
+#     VERSION=2.6.1.0
 
-DISTFILE = $(NAME)-src-$(VERSION).tar.bz2
-#DISTFILE = $(NAME)-src-$(VERSION).tar.gz
-MASTER_SITES = $(SOURCEFORGE)/wxpython
+    DISTFILE=${NAME}-src-${VERSION}.tar.bz2
+#    DISTFILE=${NAME}-src-${VERSION}.tar.gz
+ MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/wxpython
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

@@ -1,10 +1,10 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = t1lib
-VERSION = 5.1.1
+        NAME=t1lib
+     VERSION=5.1.1
 
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = ftp://sunsite.unc.edu/pub/Linux/libs/graphics
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=ftp://sunsite.unc.edu/pub/Linux/libs/graphics
 
 SRCDIR = $WRKDIR/$NAME
 

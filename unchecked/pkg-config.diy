@@ -1,14 +1,15 @@
-:include NNlab-include.aap
+#!/bin/bash
+# DIYkit package: ???
 
-NAME = pkg-config
-VERSION = 0.23
+        NAME=pkg-config
+     VERSION=0.23
 
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = http://pkgconfig.freedesktop.org/releases
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://pkgconfig.freedesktop.org/releases
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 :attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
 

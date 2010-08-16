@@ -1,10 +1,10 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = sqlite
-VERSION = 3.3.13
+        NAME=sqlite
+     VERSION=3.3.13
 
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = http://sqlite.org
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://sqlite.org
 
 SRCDIR = $WRKDIR/$NAME
 

@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = pyxml
-VERSION = 0.8.4
+        NAME=pyxml
+     VERSION=0.8.4
 
-DISTFILE = PyXML-$(VERSION).tar.gz
-MASTER_SITES = $(SOURCEFORGE)/$(NAME)
+    DISTFILE=PyXML-${VERSION}.tar.gz
+ MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/${NAME}
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

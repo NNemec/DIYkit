@@ -1,14 +1,14 @@
-:include NNlab-include.aap
+#!/bin/bash
+# DIYkit package: ???
 
-NAME = mpi4py
-VERSION = 1.0.0
-
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = http://mpi4py.googlecode.com/files
+        NAME=mpi4py
+     VERSION=1.0.0
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://mpi4py.googlecode.com/files
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 :attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
 

@@ -1,10 +1,10 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = ruby
-VERSION = 1.8.6
+        NAME=ruby
+     VERSION=1.8.6
 
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = ftp://ftp.ruby-lang.org/pub/$(NAME)
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=ftp://ftp.ruby-lang.org/pub/${NAME}
 
 SRCDIR = $WRKDIR/$NAME
 

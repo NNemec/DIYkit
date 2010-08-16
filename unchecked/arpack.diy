@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
+# DIY package: ???
 
-NAME = arpack
-VERSION = 96
-
-DISTFILE = $(NAME)$(VERSION).tar.gz
-MASTER_SITES = http://www.caam.rice.edu/software/ARPACK/SRC/
+        NAME=arpack
+     VERSION=96
+    DISTFILE=${NAME}${VERSION}.tar.gz
+ MASTER_SITE=http://www.caam.rice.edu/software/ARPACK/SRC/
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = vtk
-VERSION = 5.0.2
+        NAME=vtk
+     VERSION=5.0.2
 
-DISTFILE = $(NAME)-$(VERSION).tar.gz
-MASTER_SITES = http://www.vtk.org/files/release/5.0
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://www.vtk.org/files/release/5.0
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

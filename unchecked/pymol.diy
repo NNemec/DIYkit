@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = pymol
-VERSION = 0_98
+        NAME=pymol
+     VERSION=0_98
 
-DISTFILE = $(NAME)-$(VERSION)-src.tgz
-MASTER_SITES = $(SOURCEFORGE)/$(NAME)
+    DISTFILE=${NAME}-${VERSION}-src.tgz
+ MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/${NAME}
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 

@@ -1,14 +1,14 @@
-:include {once} NNlab.aap
+#!/bin/bash
 
-NAME = mayavi
-VERSION = 1.5
+        NAME=mayavi
+     VERSION=1.5
 
-DISTFILE = MayaVi-$(VERSION).tar.gz
-MASTER_SITES = $(SOURCEFORGE)/$(NAME)
+    DISTFILE=MayaVi-${VERSION}.tar.gz
+ MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/${NAME}
 
 SRCDIR = $WRKDIR/$NAME
 
-:recipe {fetch = $NNlab_home/$(NAME).aap}
+:recipe {fetch = $NNlab_home/${NAME}.aap}
 
 # depends on:
 
