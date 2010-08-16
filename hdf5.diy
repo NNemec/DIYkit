@@ -6,7 +6,7 @@
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
    AVAILABLE="gcc -lhdf5 -shared -o /dev/null"
 
-. $NNlab_path/NNlab-include.sh
+. $DIYkit/DIYkit-include.sh
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE

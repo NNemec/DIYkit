@@ -7,9 +7,9 @@
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
    AVAILABLE="unison -version"
 
-. $NNlab_path/NNlab-include.sh
+. $DIYkit/DIYkit-include.sh
 
-NNlab depend ocaml
+DIYkit depend ocaml
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE

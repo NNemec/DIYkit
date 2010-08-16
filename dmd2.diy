@@ -7,9 +7,9 @@
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
    AVAILABLE=""
 
-. $NNlab_path/NNlab-include.sh
+. $DIYkit/DIYkit-include.sh
 
-# NNlab depend somepkg
+# DIYkit depend somepkg
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
@@ -25,12 +25,12 @@ install -m 644 -D ./linux/lib/libphobos2.a $PREFIX/lib/libphobos2.a
 install -m 644 -D ./man/man1/dmd.1 $PREFIX/man/man1/dmd2.1
 install -m 644 -D ./man/man1/rdmd.1 $PREFIX/man/man1/rdmd2.1
 
-mkdir -p $NNlab_path/NNlab.sh.d
-cat > $NNlab_path/NNlab.sh.d/dmd2.sh << EOF
+mkdir -p $DIYkit/DIYkit.sh.d
+cat > $DIYkit/DIYkit.sh.d/dmd2.sh << EOF
 export DFLAGS="-I$PREFIX/import/druntime -I$PREFIX/import/phobos -L-L$PREFIX/lib"
 EOF
 
-. $NNlab_path/NNlab.sh.d/dmd2.sh
+. $DIYkit/DIYkit.sh.d/dmd2.sh
 
 ( cd src/druntime/import
     for di in $(find . -name "*.di") ; do

@@ -7,9 +7,9 @@
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
    AVAILABLE="mc -V"
 
-. $NNlab_path/NNlab-include.sh
+. $DIYkit/DIYkit-include.sh
 
-NNlab depend slang
+DIYkit depend slang
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE

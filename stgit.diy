@@ -7,10 +7,10 @@
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
    AVAILABLE="stg -v"
 
-. $NNlab_path/NNlab-include.sh
+. $DIYkit/DIYkit-include.sh
 
-NNlab depend python
-NNlab depend git
+DIYkit depend python
+DIYkit depend git
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE

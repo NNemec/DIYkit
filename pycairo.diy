@@ -6,9 +6,9 @@
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
    AVAILABLE="python -c 'import cairo'"
 
-. $NNlab_path/NNlab-include.sh
+. $DIYkit/DIYkit-include.sh
 
-NNlab depend python
+DIYkit depend python
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE

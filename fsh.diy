@@ -7,7 +7,7 @@
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
    AVAILABLE="fsh -V"
 
-. $NNlab_path/NNlab-include.sh
+. $DIYkit/DIYkit-include.sh
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
