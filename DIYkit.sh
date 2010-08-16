@@ -55,5 +55,4 @@ complete -F _diy diy
 
 ####################
 
-#export GUILE_LOAD_PATH=$DIYkit/share/guile/1.8
 #export GPAW_SETUP_PATH=$DIYkit/data/gpaw-setups

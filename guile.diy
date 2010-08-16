@@ -2,7 +2,7 @@
 # DIY package: ???
 
         NAME=guile
-     VERSION=1.8.6
+     VERSION=1.8.7
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=ftp://ftp.gnu.org/pub/gnu/${NAME}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
@@ -16,3 +16,7 @@ cd $SRCDIR
 ./configure --prefix $PREFIX
 make
 make install
+
+cat > DIYkit.sh.d/${NAME}.sh << EOF
+export GUILE_LOAD_PATH=$PREFIX/share/guile/1.8
+EOF
