@@ -1,0 +1,15 @@
+#!/bin/bash
+# DIYkit package: ???
+
+        NAME=latexdiff
+    DISTFILE=${NAME}.zip
+ MASTER_SITE=http://mirror.ctan.org/support
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+
+. $DIYkit/DIYkit-include.sh
+
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+
+cd $SRCDIR
+make INSTALLPATH=$PREFIX install
