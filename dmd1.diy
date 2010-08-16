@@ -1,0 +1,37 @@
+#!/bin/bash
+# DIYkit package: Compiler for D programming language (Digital Mars)
+
+        NAME=dmd1
+     VERSION=1.063
+    DISTFILE=dmd.${VERSION}.zip
+ MASTER_SITE=http://ftp.digitalmars.com
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+
+. $DIYkit/DIYkit-include.sh
+
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+
+cd $SRCDIR
+install -m 755 -D ./linux/bin/dmd $PREFIX/bin/dmd1.bin
+install -m 755 -D ./linux/bin/rdmd $PREFIX/bin/rdmd1.bin
+install -m 644 -D ./linux/lib/libphobos.a $PREFIX/lib/libphobos.a
+install -m 644 -D ./man/man1/dmd.1 $PREFIX/man/man1/dmd1.1
+install -m 644 -D ./man/man1/rdmd.1 $PREFIX/man/man1/rdmd1.1
+
+cat > $TMPDIR/dmd1.wrap << EOF
+#!/bin/sh
+export DFLAGS="-I$PREFIX/import/druntime -I$PREFIX/import/phobos -L-L$PREFIX/lib"
+exec $0.bin "$@"
+EOF
+install -m 755 -D $TMPDIR/dmd1.wrap $PREFIX/bin/dmd1
+install -m 755 -D $TMPDIR/dmd1.wrap $PREFIX/bin/rdmd1
+[ -e $PREFIX/bin/dmd ] || ln -s dmd1 $PREFIX/bin/dmd
+[ -e $PREFIX/bin/rdmd ] || ln -s rdmd1 $PREFIX/bin/rdmd
+
+( cd $TMPDIR
+    for d in etc/c std std/c std/c/linux ; do
+        mkdir -p $SRCDIR/import1/phobos/$d
+        dmd -c -I$SRCDIR/src/phobos -Hd$PREFIX/import1/phobos/$d $SRCDIR/src/phobos/$d/*.d
+    done
+)

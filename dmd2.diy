@@ -14,31 +14,32 @@ UNPACK_ARCHIVE
 
 cd $SRCDIR
 install -m 755 -D ./linux/bin/dmd $PREFIX/bin/dmd2
-ln -sf dmd2 $PREFIX/bin/dmd
 install -m 755 -D ./linux/bin/rdmd $PREFIX/bin/rdmd2
-ln -sf rdmd2 $PREFIX/bin/rdmd
 install -m 644 -D ./linux/lib/libdruntime.a $PREFIX/lib/libdruntime.a
 install -m 644 -D ./linux/lib/libphobos2.a $PREFIX/lib/libphobos2.a
 install -m 644 -D ./man/man1/dmd.1 $PREFIX/man/man1/dmd2.1
 install -m 644 -D ./man/man1/rdmd.1 $PREFIX/man/man1/rdmd2.1
 
-mkdir -p $DIYkit/DIYkit.sh.d
-cat > $DIYkit/DIYkit.sh.d/dmd2.sh << EOF
-export DFLAGS="-I$PREFIX/import/druntime -I$PREFIX/import/phobos -L-L$PREFIX/lib"
+cat > $TMPDIR/dmd2.wrap << EOF
+#!/bin/sh
+export DFLAGS="-I$PREFIX/import2/druntime -I$PREFIX/import2/phobos -L-L$PREFIX/lib"
+exec $0.bin "$@"
 EOF
-
-. $DIYkit/DIYkit.sh.d/dmd2.sh
+install -m 755 -D $TMPDIR/dmd2.wrap $PREFIX/bin/dmd2
+install -m 755 -D $TMPDIR/dmd2.wrap $PREFIX/bin/rdmd2
+[ -e $PREFIX/bin/dmd ] || ln -s dmd2 $PREFIX/bin/dmd
+[ -e $PREFIX/bin/rdmd ] || ln -s rdmd2 $PREFIX/bin/rdmd
 
 ( cd src/druntime/import
     for di in $(find . -name "*.di") ; do
-        install -m 644 -D $di $PREFIX/import/druntime/$di
+        install -m 644 -D $di $PREFIX/import2/druntime/$di
     done
 )
 
 mv ./src/phobos/std/openrj.d ./src/phobos/std/openrj.d.rename
 ( cd $TMPDIR
     for d in etc/c std std/c std/c/linux ; do
-        mkdir -p $SRCDIR/src/phobos/$d
-        dmd -c -I$SRCDIR/src/phobos -Hd$PREFIX/import/phobos/$d $SRCDIR/src/phobos/$d/*.d
+        mkdir -p $SRCDIR/import2/phobos/$d
+        dmd -c -I$SRCDIR/src/phobos -Hd$PREFIX/import2/phobos/$d $SRCDIR/src/phobos/$d/*.d
     done
 )
