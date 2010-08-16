@@ -27,6 +27,30 @@ function diy() {
     esac
 }
 
+_diy () {
+    local cur cmds cmdOpts opt helpCmds optBase i
+
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+
+    cmds='avail install off update'
+
+    if [[ $COMP_CWORD -eq 1 ]] ; then
+        COMPREPLY=( $( compgen -W "$cmds" -- $cur ) )
+        return 0
+    fi
+
+    cmdOpts=
+    case ${COMP_WORDS[1]} in
+    install)
+        pkgs=$( for x in *.diy ; do basename $x .diy ; done )
+        COMPREPLY=( $( compgen -W "$pkgs" -- $cur ) )
+        return 0
+        ;;
+    esac
+}
+complete -F _diy diy
+
 ####################
 
 #export GUILE_LOAD_PATH=$DIYkit/share/guile/1.8
