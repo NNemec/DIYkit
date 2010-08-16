@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=cogito
      VERSION=0.18.2

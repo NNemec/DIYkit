@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=pyqt3
      VERSION=3.16

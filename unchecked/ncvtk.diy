@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=ncvtk
      VERSION=1.7.5

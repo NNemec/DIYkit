@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=sparselib++
      VERSION=1.6

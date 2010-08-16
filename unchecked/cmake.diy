@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=cmake
      VERSION=2.2.2

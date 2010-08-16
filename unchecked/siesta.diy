@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=siesta
 
@@ -23,7 +24,7 @@ getsrc: $SRCDIR
 
 build: $SRCDIR
     :sys set
-    
+
     :cd $SRCDIR/Src
 #    :sys FC="ifort" ./configure --enable-fast --with-netcdf=$PREFIX/lib/libnetcdf.a --prefix=$PREFIX
     :sys make
@@ -51,7 +52,7 @@ install: build
 $SRCDIR/Docs/siesta.aux: $SRCDIR
     :cd $WRKDIR/$NAME/Docs/
     :sys latex siesta.tex
-    
+
 $SRCDIR/Docs/siesta: $SRCDIR/Docs/siesta.aux
     :cd $SRCDIR/Docs/
     :sys latex2html siesta.tex
@@ -59,7 +60,7 @@ $SRCDIR/Docs/siesta: $SRCDIR/Docs/siesta.aux
 $SRCDIR/Pseudo/atom/Docs/atom.aux: $SRCDIR
     :cd $SRCDIR/Pseudo/atom/Docs/
     :sys latex atom.tex
-    
+
 $SRCDIR/Pseudo/atom/Docs/atom: $SRCDIR/Pseudo/atom/Docs/atom.aux
     :cd $SRCDIR/Pseudo/atom/Docs/
     :sys latex2html atom.tex

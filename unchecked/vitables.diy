@@ -1,8 +1,8 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=vitables
      VERSION=2.0
-
     DISTFILE=ViTables-${VERSION}.tar.gz
  MASTER_SITE=http://download.berlios.de/${NAME}
 

@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=pyvtk
      VERSION=0.4.70

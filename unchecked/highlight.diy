@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=highlight
      VERSION=2.4.8

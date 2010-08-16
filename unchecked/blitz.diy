@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=blitz
      VERSION=0.9

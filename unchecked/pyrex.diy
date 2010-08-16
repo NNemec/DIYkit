@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=pyrex
      VERSION=0.9.4.1

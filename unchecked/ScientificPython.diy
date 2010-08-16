@@ -5,23 +5,17 @@
      VERSION=2.4.9
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://starship.python.net/~hinsen/ScientificPython
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-SRCDIR = $WRKDIR/$NAME
+. $DIYkit/DIYkit-include.sh
 
-:recipe {fetch = $NNlab_home/${NAME}.aap}
+CHECK_AVAILABLE "XXXXX pkg-config --exists template XXXXX"
+DEPENDS_ON somepkg
+DEPENDS_ON anotherpkg
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-# depends on:
-
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
-
-all: install
-
-$SRCDIR: $NNlab_path/download/$DISTFILE
-    :do unpack $NNlab_path/download/$DISTFILE
-
-getsrc: $SRCDIR
-
-install: $SRCDIR
-    :cd $source
-    @os.environ["NETCDF_PREFIX"] = _no.NNlab_path
-    :sys python setup.py install --prefix $PREFIX
+cd $SRCDIR/$NAME
+XXXX export NETCDF_PREFIX=????
+python setup.py build
+python setup.py install --prefix $PREFIX

@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=pysparse
      VERSION=0.34.032

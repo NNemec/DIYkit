@@ -1,39 +1,24 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=wxPython
-#     VERSION=2.8.3.0
-#     VERSION=2.7.2.0
      VERSION=2.6.3.2
-#     VERSION=2.6.1.0
-
     DISTFILE=${NAME}-src-${VERSION}.tar.bz2
-#    DISTFILE=${NAME}-src-${VERSION}.tar.gz
  MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/wxpython
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-SRCDIR = $WRKDIR/$NAME
+. $DIYkit/DIYkit-include.sh
 
-:recipe {fetch = $NNlab_home/${NAME}.aap}
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-# depends on:
+cd $SRCDIR
 
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
+./configure --prefix $PREFIX --enable-unicode
+make
+make -C contrib
 
-all: install
-
-$SRCDIR: # $NNlab_path/download/$DISTFILE
-#    :do unpack $NNlab_path/download/$DISTFILE
-
-getsrc: $SRCDIR
-
-build: $SRCDIR
-    :cd $SRCDIR
-    :sys ./configure --prefix $PREFIX --enable-unicode
-    :sys make
-    :sys make -C contrib
-    
-install: build
-    :cd $SRCDIR
-    :sys make install
-    :sys make install -C contrib
-    :cd $SRCDIR/wxPython
-    :sys python setup.py install --prefix $PREFIX BUILD_GLCANVAS=False UNICODE=True
+make install
+make install -C contrib
+cd $SRCDIR/$NAME/wxPython
+python setup.py install --prefix $PREFIX BUILD_GLCANVAS=False UNICODE=True

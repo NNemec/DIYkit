@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=netcdf4
      VERSION=4.0-alpha13

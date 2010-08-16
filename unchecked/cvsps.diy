@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=cvsps
      VERSION=2.1

@@ -5,22 +5,16 @@
      VERSION=24.2
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/numpy
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-SRCDIR = $WRKDIR/$NAME
+. $DIYkit/DIYkit-include.sh
 
-:recipe {fetch = $NNlab_home/${NAME}.aap}
+CHECK_AVAILABLE "XXXXX pkg-config --exists template XXXXX"
+DEPENDS_ON somepkg
+DEPENDS_ON anotherpkg
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-# depends on:
-
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
-
-all: install
-
-$SRCDIR: $NNlab_path/download/$DISTFILE
-    :do unpack $NNlab_path/download/$DISTFILE
-
-getsrc: $SRCDIR
-
-install: $SRCDIR
-    :cd $source
-    :sys python setup.py install --prefix $PREFIX
+cd $SRCDIR/$NAME
+python setup.py build
+python setup.py install --prefix $PREFIX

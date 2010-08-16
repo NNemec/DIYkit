@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=pyssh
      VERSION=0.3

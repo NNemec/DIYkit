@@ -15,13 +15,13 @@ DEPENDS_ON anotherpkg
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
-######### autoconf
 cd $SRCDIR/$NAME
+
+######### autoconf
 ./configure --prefix $PREFIX
 make
 make install
 
 ######### python
-cd $SRCDIR/$NAME
 python setup.py build
 python setup.py install --prefix $PREFIX

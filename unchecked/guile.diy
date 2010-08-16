@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=guile
      VERSION=1.8.6

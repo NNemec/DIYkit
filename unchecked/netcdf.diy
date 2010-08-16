@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=netcdf
      VERSION=3.6.1

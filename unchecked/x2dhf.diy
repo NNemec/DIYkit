@@ -1,31 +1,18 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=x2dhf
      VERSION=2.0
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://www.fizyka.umk.pl/~jkob/2dhf
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
-SRCDIR = $WRKDIR/$NAME
+. $DIYkit/DIYkit-include.sh
 
-:recipe {fetch = $NNlab_home/${NAME}.aap}
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
 
-:attr {fetch = $*MASTER_SITES/%basename%} $NNlab_path/download/$DISTFILE
-
-all: install
-
-$SRCDIR: $NNlab_path/download/$DISTFILE
-    :do unpack $NNlab_path/download/$DISTFILE
-#    :do patch $NAME
-
-getsrc: $SRCDIR
-    :pass
-
-# make
-build: $SRCDIR
-    :cd $SRCDIR
-    :sys ./configure --prefix $PREFIX
-    :sys make
-
-install: build
-    :cd $SRCDIR
-    :sys make install
+cd $SRCDIR/$NAME
+./configure --prefix $PREFIX
+make
+make install

@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=bibus
      VERSION=1.3.0

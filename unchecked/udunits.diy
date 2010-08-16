@@ -1,8 +1,8 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=udunits
      VERSION=1.12.4
-
     DISTFILE=${NAME}-${VERSION}.tar.Z
  MASTER_SITE=ftp://ftp.unidata.ucar.edu/pub/${NAME}
 

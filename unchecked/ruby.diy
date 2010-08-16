@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=ruby
      VERSION=1.8.6

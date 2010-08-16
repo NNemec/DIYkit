@@ -1,4 +1,5 @@
 #!/bin/bash
+# DIY package: ???
 
         NAME=numarray
      VERSION=1.5.2
