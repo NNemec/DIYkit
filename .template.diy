@@ -1,14 +1,17 @@
+#!/bin/bash
+# DIYkit package template
+
         NAME=template
      VERSION=1.0
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://someserver.com/download
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="pkg-config --exists template"
 
 . $DIYkit/DIYkit-include.sh
 
-# diy depend somepkg
-
+CHECK_AVAILABLE "pkg-config --exists template"
+DEPENDS_ON somepkg
+DEPENDS_ON anotherpkg
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

@@ -1,17 +1,17 @@
-# Python library for scientific computing
+#!/bin/bash
+# DIYkit package: Python library for scientific computing
 
         NAME=scipy
      VERSION=0.8.0
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://downloads.sourceforge.net/project/scipy/scipy/${VERSION}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="python -c 'import scipy'"
 
 . $DIYkit/DIYkit-include.sh
 
-DIYkit depend python
-DIYkit depend numpy
-
+CHECK_AVAILABLE "python -c 'import scipy'"
+DEPENDS_ON python
+DEPENDS_ON numpy
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

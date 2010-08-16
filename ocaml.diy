@@ -1,14 +1,15 @@
-# The O'Caml programming language
+#!/bin/bash
+# DIYkit package: The O'Caml programming language
 
         NAME=ocaml
      VERSION=3.11.2
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=http://caml.inria.fr/pub/distrib/ocaml-3.11
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="ocaml -version"
 
 . $DIYkit/DIYkit-include.sh
 
+CHECK_AVAILABLE "ocaml -version"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

@@ -1,15 +1,16 @@
-# Version Control System
+#!/bin/bash
+# DIYkit package: Version Control System
+
         NAME=git
      VERSION=1.7.2
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=http://www.kernel.org/pub/software/scm/${NAME}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="git --version"
 
 . $DIYkit/DIYkit-include.sh
 
-DIYkit depend curl
-
+CHECK_AVAILABLE "git --version"
+DEPENDS_ON curl
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

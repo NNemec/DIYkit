@@ -1,14 +1,15 @@
-# Fast SSH remote command execution
+#!/bin/bash
+# DIYkit package: Fast SSH remote command execution
 
         NAME=fsh
      VERSION=1.2
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://www.lysator.liu.se/${NAME}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="fsh -V"
 
 . $DIYkit/DIYkit-include.sh
 
+CHECK_AVAILABLE "fsh -V"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

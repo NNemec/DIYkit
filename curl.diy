@@ -1,14 +1,15 @@
-# Multi-protocol file transfer library
+#!/bin/bash
+# DIYkit package: Multi-protocol file transfer library
 
         NAME=curl
      VERSION=7.21.0
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=http://curl.haxx.se/download
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="pkg-config --exists libcurl"
 
 . $DIYkit/DIYkit-include.sh
 
+CHECK_AVAILABLE "pkg-config --exists libcurl"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

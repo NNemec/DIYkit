@@ -1,16 +1,16 @@
-# File synchronizer
+#!/bin/bash
+# DIYkit package: File synchronizer
 
         NAME=unison
      VERSION=2.32.52
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://www.seas.upenn.edu/~bcpierce/unison//download/releases/stable
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="unison -version"
 
 . $DIYkit/DIYkit-include.sh
 
-DIYkit depend ocaml
-
+CHECK_AVAILABLE "unison -version"
+DEPENDS_ON ocaml
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

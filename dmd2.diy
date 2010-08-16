@@ -1,20 +1,17 @@
-# Compiler for D programming language (Digital Mars)
+#!/bin/bash
+# DIYkit package: Compiler for D programming language (Digital Mars)
 
         NAME=dmd2
      VERSION=2.048
     DISTFILE=dmd.${VERSION}.zip
  MASTER_SITE=http://ftp.digitalmars.com
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE=""
 
 . $DIYkit/DIYkit-include.sh
-
-# DIYkit depend somepkg
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
-######### autoconf
 cd $SRCDIR/$NAME
 install -m 755 -D ./linux/bin/dmd $PREFIX/bin/dmd2
 ln -sf dmd2 $PREFIX/bin/dmd

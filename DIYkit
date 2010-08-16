@@ -21,9 +21,6 @@ case $CMD in
 install)
     bash ./$1.diy
     ;;
-depend)
-    DEPENDENCY_ONLY=true bash ./$1.diy
-    ;;
 avail)
     for pkg in $( ( for x in *.diy ; do basename $x .diy ; done ) | sort ) ; do
         echo "$(printf "%-15s " $pkg)$(head -n 1 $pkg.diy | grep "^#")"

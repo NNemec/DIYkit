@@ -1,14 +1,15 @@
-# Simple patch queue manager
+#!/bin/bash
+# DIYkit package: Simple patch queue manager
 
         NAME=quilt
      VERSION=0.48
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://download.savannah.gnu.org/releases/${NAME}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="quilt --version"
 
 . $DIYkit/DIYkit-include.sh
 
+CHECK_AVAILABLE "quilt --version"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

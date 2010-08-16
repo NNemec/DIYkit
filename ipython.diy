@@ -1,14 +1,17 @@
-# Interactive Python shell
+#!/bin/bash
+# DIYkit package: Interactive Python shell
+
         NAME=ipython
      VERSION=0.10
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://ipython.scipy.org/dist/${VERSION}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="ipython -Version"
 
 . $DIYkit/DIYkit-include.sh
 
-DIYkit depend python
+CHECK_AVAILABLE "ipython -Version"
+
+DEPENDS_ON python
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE

@@ -5,14 +5,12 @@ case "$0" in
 *)
     echo "DIYkit-include.sh should only included by .diy installation scripts"
     exit 1
-fi
+esac
 
-[ -z "$DIYkit" ] && export DIYkit=~/DIYkit
-. $DIYkit/DIYkit.sh
-
-if [ -n "$DEPENDENCY_ONLY" ] && [ -n "$AVAILABLE" ] && sh -c "$AVAILABLE" ; then
-    echo "DIYkit: found $NAME installed"
-    exit 0
+if [ -z "$DIYkit" ] ; then
+    echo "DIYkit installation scripts should only be called via"
+    echo "    diy install <pkg>"
+    exit 1
 fi
 
 PREFIX=$DIYkit
@@ -21,6 +19,19 @@ BINDIR=$DIYkit/bin
 DOCDIR=$DIYkit/doc
 TMPDIR=$DIYkit/tmp
 DOWNLOADDIR=$DIYkit/download
+
+function CHECK_AVAILABLE() {(
+    CHECK_COMMAND="$1"
+    if [ -n "$DEPENDENCY_ONLY" ] && sh -c "$CHECK_COMMAND" ; then
+        echo "DIYkit: found $NAME installed"
+        exit 0
+    fi
+)}
+
+function DEPENDS_ON() {(
+    PKG="$1"
+    DEPENDENCY_ONLY=true bash $DIYkit/$PKG.diy
+)}
 
 function DOWNLOAD_ARCHIVE() {(
     mkdir -p $DOWNLOADDIR

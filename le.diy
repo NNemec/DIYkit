@@ -1,18 +1,18 @@
-# Text mode text editor
+#!/bin/bash
+# DIYkit package: Text mode text editor
 
         NAME=le
      VERSION=1.14.3
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=ftp://ftp.yars.free.net/pub/source/${NAME}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="le --version"
 
 . $DIYkit/DIYkit-include.sh
 
+CHECK_AVAILABLE "le --version"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
-######### autoconf
 cd $SRCDIR/$NAME
 ./configure --prefix $PREFIX
 make

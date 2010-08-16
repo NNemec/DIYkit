@@ -1,14 +1,15 @@
-# Command line tool to normalize symbolic links
+#!/bin/bash
+# DIYkit package: Command line tool to normalize symbolic links
 
         NAME=symlinks
      VERSION=1.2
     DISTFILE=${NAME}_${VERSION}.orig.tar.gz
  MASTER_SITE=ftp://ftp.de.debian.org/debian/pool/main/s/${NAME}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="symlinks -t ."
 
 . $DIYkit/DIYkit-include.sh
 
+CHECK_AVAILABLE "symlinks -t ."
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

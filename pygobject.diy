@@ -1,15 +1,16 @@
-# Python bindings for GObjects (GNOME)
+#!/bin/bash
+# DIYkit package: Python bindings for GObjects (GNOME)
+
         NAME=pygobject
      VERSION=2.16.1
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=http://ftp.gnome.org/pub/GNOME/sources/pygobject/2.16
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="pkg-config --exists pygobject-2.0"
 
 . $DIYkit/DIYkit-include.sh
 
-DIYkit depend python
-
+CHECK_AVAILABLE "pkg-config --exists pygobject-2.0"
+DEPENDS_ON python
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

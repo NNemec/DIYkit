@@ -1,13 +1,15 @@
-# Core library of GNOME
+#!/bin/bash
+# DIYkit package: Core library of GNOME
+
         NAME=glib
      VERSION=2.24.1
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=http://ftp.gnome.org/pub/gnome/sources/${NAME}/2.24 
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="pkg-config --exists glib-2.0"
 
 . $DIYkit/DIYkit-include.sh
 
+CHECK_AVAILABLE "pkg-config --exists glib-2.0"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

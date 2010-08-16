@@ -1,15 +1,16 @@
-# Midnight Commander
+#!/bin/bash
+# DIYkit package: Midnight Commander
 
         NAME=mc
      VERSION=4.7.0.7
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://www.midnight-commander.org/downloads
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="mc -V"
 
 . $DIYkit/DIYkit-include.sh
 
-DIYkit depend slang
+CHECK_AVAILABLE "mc -V"
+DEPENDS_ON slang
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE

@@ -1,20 +1,20 @@
-# HDF5-based numerical data management library in Python
+#!/bin/bash
+# DIYkit package: HDF5-based numerical data management library in Python
 
         NAME=pytables
      VERSION=2.2
     DISTFILE=tables-${VERSION}.tar.gz
  MASTER_SITE=http://www.pytables.org/download/stable
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-   AVAILABLE="python -c 'import tables'"
 
 . $DIYkit/DIYkit-include.sh
 
-DIYkit depend hdf5
-DIYkit depend python
-DIYkit depend numpy
-DIYkit depend numexpr
-DIYkit depend cython
-
+CHECK_AVAILABLE "python -c 'import tables'"
+DEPENDS_ON hdf5
+DEPENDS_ON python
+DEPENDS_ON numpy
+DEPENDS_ON numexpr
+DEPENDS_ON cython
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
