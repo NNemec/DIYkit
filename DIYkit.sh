@@ -21,7 +21,6 @@ done
 
 unset PATH_PREPEND
 
-#alias diy=$DIYkit/DIYkit
 function diy() {
     case "$1" in
     off) . $DIYkit/DIYkit-off.sh ;;
