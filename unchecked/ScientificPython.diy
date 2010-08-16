@@ -2,20 +2,16 @@
 # DIYkit package: ???
 
         NAME=ScientificPython
-     VERSION=2.4.9
+     VERSION=2.8
     DISTFILE=${NAME}-${VERSION}.tar.gz
- MASTER_SITE=http://starship.python.net/~hinsen/ScientificPython
+ MASTER_SITE=https://sourcesup.cru.fr/frs/download.php/2309
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "XXXXX pkg-config --exists template XXXXX"
-DEPENDS_ON somepkg
-DEPENDS_ON anotherpkg
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
-cd $SRCDIR/$NAME
-XXXX export NETCDF_PREFIX=????
+cd $SRCDIR
 python setup.py build
 python setup.py install --prefix $PREFIX

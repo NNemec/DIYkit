@@ -2,9 +2,9 @@
 # DIY package: ???
 
         NAME=bibus
-     VERSION=1.3.0
-    DISTFILE=${NAME}-${VERSION}.zip
- MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/bibus-biblio
+     VERSION=1.5.1
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://download.sourceforge.net/project/bibus-biblio/bibus-biblio/${NAME}-${VERSION}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
 . $DIYkit/DIYkit-include.sh
@@ -13,8 +13,5 @@ DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
 cd $SRCDIR
-
-XXX python=???
-
-make DESTDIR=$PREFIX python=$PREFIX/bin/python sysconfdir=$PREFIX/etc install
+make DESTDIR=$PREFIX python=$(which python) sysconfdir=$PREFIX/etc install
 ln -sf ../share/bibus/bibusStart.py $PREFIX/bin/bibus
