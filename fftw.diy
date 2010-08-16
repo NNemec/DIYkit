@@ -2,7 +2,7 @@
 # DIYkit package: ???
 
         NAME=fftw
-     VERSION=3.1.2
+     VERSION=3.2.2
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://www.fftw.org
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
