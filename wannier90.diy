@@ -1,0 +1,16 @@
+#!/bin/bash
+# DIYkit package: ???
+
+        NAME=wannier90
+     VERSION=1.2
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://www.wannier.org/code
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+
+. $DIYkit/DIYkit-include.sh
+
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+
+cd $SRCDIR
+make wannier

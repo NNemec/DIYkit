@@ -1,0 +1,41 @@
+Index: wannier90/make.sys
+===================================================================
+--- wannier90.orig/make.sys	2010-08-16 16:00:44.000000000 +0100
++++ wannier90/make.sys	2009-10-29 10:20:06.000000000 +0000
+@@ -1,15 +1,23 @@
++#===================
++# g95
++#===================
++F90 = gfortran
++FCOPTS = -O2 
++LDOPTS = -O2
++
++
++#=======================
++# ATLAS Blas and LAPACK
++#=======================
++#LIBDIR = /usr/local/lib
++#LIBS = -L$(LIBDIR)  -llapack -lf77blas -lcblas -latlas
++
++
++#=======================
++# NETLIB LAPACK and BLAS
++#=======================
++#LIBDIR = /usr/local/lib
++#LIBS = -L$(LIBDIR)  -llapack -lblas
++
+ 
+-#=================================================
+-# For Linux with intel version 8/9 
+-#=================================================
+-F90 = ifort
+-FCOPTS = -O2
+-LDOPTS = -O2 -Vaxlib 
+-#FCOPTS = -O0 -g -warn all -CB
+-#LDOPTS = -O0 -Vaxlib
+-#======================
+-# INTEL MKL
+-#======================
+-LIBDIR = /home/aam/Intel/mkl721/lib/em64t
+-LIBS = -L$(LIBDIR) -lmkl_lapack -lmkl_em64t /home/aam/Intel/mkl721/lib/em64t/libguide.a -lpthread
+ 

@@ -1,0 +1,18 @@
+#!/bin/bash
+# DIYkit package: ???
+
+        NAME=opium
+     VERSION=3.5
+    DISTFILE=${NAME}-v${VERSION}-src.tgz
+ MASTER_SITE=https://downloads.sourceforge.net/project/${NAME}/${NAME}/${NAME}-v${VERSION}
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+
+. $DIYkit/DIYkit-include.sh
+
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+
+cd $SRCDIR
+./configure --prefix $PREFIX
+make
+install -m 755 -D opium $PREFIX/bin/opium

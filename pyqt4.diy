@@ -2,13 +2,14 @@
 # DIY package: ???
 
         NAME=pyqt4
-     VERSION=4.0.1
+     VERSION=4.7.3
     DISTFILE=PyQt-x11-gpl-${VERSION}.tar.gz
- MASTER_SITE=http://www.riverbankcomputing.com/Downloads/PyQt4/GPL
+ MASTER_SITE=http://www.riverbankcomputing.com/static/Downloads/PyQt4
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
 . $DIYkit/DIYkit-include.sh
 
+CHECK_AVAILABLE "python -c 'import PyQt4'"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

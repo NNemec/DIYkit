@@ -20,13 +20,14 @@ DOCDIR=$DIYkit/doc
 TMPDIR=$DIYkit/tmp
 DOWNLOADDIR=$DIYkit/download
 
-function CHECK_AVAILABLE() {(
+function CHECK_AVAILABLE() {
     CHECK_COMMAND="$1"
     if [ -n "$DEPENDENCY_ONLY" ] && sh -c "$CHECK_COMMAND" ; then
         echo "DIYkit: found $NAME installed"
         exit 0
     fi
-)}
+    unset CHECK_COMMAND
+}
 
 function DEPENDS_ON() {(
     PKG="$1"
@@ -75,7 +76,7 @@ function UNPACK_ARCHIVE() {(
     mkdir ./$NAME
     cd ./$NAME
     case $DISTFILE in
-    *.tar.gz)
+    *.tar.gz|*.tgz)
         tar xfz $DOWNLOADDIR/$DISTFILE
         ;;
     *.tar.bz2)

@@ -9,6 +9,7 @@
 
 . $DIYkit/DIYkit-include.sh
 
+DEPENDS_ON pyqt4
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
