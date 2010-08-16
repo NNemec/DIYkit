@@ -13,7 +13,7 @@ CHECK_AVAILABLE "quilt --version"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
-cd $SRCDIR/$NAME
+cd $SRCDIR
 ./configure --prefix=$PREFIX
 make
 make install

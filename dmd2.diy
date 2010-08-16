@@ -12,7 +12,7 @@
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
-cd $SRCDIR/$NAME
+cd $SRCDIR
 install -m 755 -D ./linux/bin/dmd $PREFIX/bin/dmd2
 ln -sf dmd2 $PREFIX/bin/dmd
 install -m 755 -D ./linux/bin/rdmd $PREFIX/bin/rdmd2
@@ -38,7 +38,7 @@ EOF
 mv ./src/phobos/std/openrj.d ./src/phobos/std/openrj.d.rename
 ( cd $TMPDIR
     for d in etc/c std std/c std/c/linux ; do
-        mkdir -p $SRCDIR/$NAME/src/phobos/$d
-        dmd -c -I$SRCDIR/$NAME/src/phobos -Hd$PREFIX/import/phobos/$d $SRCDIR/$NAME/src/phobos/$d/*.d
+        mkdir -p $SRCDIR/src/phobos/$d
+        dmd -c -I$SRCDIR/src/phobos -Hd$PREFIX/import/phobos/$d $SRCDIR/src/phobos/$d/*.d
     done
 )

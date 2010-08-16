@@ -14,7 +14,7 @@ DEPENDS_ON curl
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
-cd $SRCDIR/$NAME
+cd $SRCDIR
 export PYTHON_PATH=python
 ./configure --without-openssl --prefix=$PREFIX --with-curl=$PREFIX
 make

@@ -15,7 +15,7 @@ DEPENDS_ON python
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
-cd $SRCDIR/$NAME
+cd $SRCDIR
 ./configure --prefix $PREFIX
 make
 make install

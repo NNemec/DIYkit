@@ -15,7 +15,7 @@ UNPACK_ARCHIVE
 
 XXXXXXXXXX-unfinished-XXXXXXXXXX
 
-cd $SRCDIR/$NAME
+cd $SRCDIR
 #./configure --prefix $PREFIX
 #make
 #make install

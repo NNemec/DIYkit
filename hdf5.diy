@@ -13,7 +13,7 @@ CHECK_AVAILABLE "gcc -lhdf5 -shared -o /dev/null"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
-cd $SRCDIR/$NAME
+cd $SRCDIR
 ./configure --prefix $PREFIX
 make -C src install
 make -C test install

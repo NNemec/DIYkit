@@ -14,7 +14,7 @@ if [ -z "$DIYkit" ] ; then
 fi
 
 PREFIX=$DIYkit
-SRCDIR=$DIYkit/src
+SRCDIR=$DIYkit/src/$NAME
 BINDIR=$DIYkit/bin
 DOCDIR=$DIYkit/doc
 TMPDIR=$DIYkit/tmp
@@ -88,15 +88,15 @@ function UNPACK_ARCHIVE() {(
         echo "Unknown archive format"
         ;;
     esac
-    mkdir -p $SRCDIR
-    rm -rf $SRCDIR/$NAME
-    mv ./* $SRCDIR/$NAME
+    mkdir -p $DIYkit/src
+    rm -rf $SRCDIR
+    mv ./* $SRCDIR
     cd ..
     rmdir ./$NAME
     echo "... done unpacking."
     if [ -f $DIYkit/patches/$NAME/series ] ; then
         echo "DIYkit: applying patches"
-        cd $SRCDIR/$NAME
+        cd $SRCDIR
         ln -sf $DIYkit/patches/$NAME ./patches
         quilt push -a
     fi
@@ -104,7 +104,7 @@ function UNPACK_ARCHIVE() {(
 
 function GIT_CLONE() {(
     GIT_URL=$1
-    cd $SRCDIR
+    cd $DIYkit/src
     if [ -d $NAME/.git/ ] ; then
         cd $NAME
         git pull

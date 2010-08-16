@@ -13,6 +13,6 @@ CHECK_AVAILABLE "symlinks -t ."
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
-cd $SRCDIR/$NAME
+cd $SRCDIR
 make
 install -m 755 -D ./symlinks $PREFIX/bin/symlinks

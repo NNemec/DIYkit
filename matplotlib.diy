@@ -18,6 +18,6 @@ DEPENDS_ON pygtk
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
-cd $SRCDIR/$NAME
+cd $SRCDIR
 python setup.py build
 python setup.py install --prefix $PREFIX
