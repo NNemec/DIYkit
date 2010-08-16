@@ -7,6 +7,8 @@ PATH_PREPEND() {
 }
 
 export PATH=$(PATH_PREPEND "$PATH" $DIYkit/bin)
+export MANPATH=$(PATH_PREPEND "$MANPATH" $DIYkit/man)
+export MANPATH=$(PATH_REMOVE "$MANPATH" $DIYkit/share/man)
 export CPATH=$(PATH_PREPEND "$CPATH" $DIYkit/include)
 export LIBRARY_PATH=$(PATH_PREPEND "$LIBRARY_PATH" $DIYkit/lib)
 export LD_LIBRARY_PATH=$(PATH_PREPEND "$LD_LIBRARY_PATH" $DIYkit/lib)
