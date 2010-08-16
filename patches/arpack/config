@@ -1,0 +1,60 @@
+Index: arpack/ARmake.inc
+===================================================================
+--- arpack.orig/ARmake.inc	1996-04-26 20:12:57.000000000 +0100
++++ arpack/ARmake.inc	2010-08-16 14:58:13.000000000 +0100
+@@ -27,13 +27,6 @@
+ #
+ home = $(HOME)/ARPACK
+ #
+-#  %--------------------------------------%
+-#  | The platform identifier to suffix to |
+-#  | the end of library names             |
+-#  %--------------------------------------%
+-#
+-PLAT = SUN4
+-#
+ #  %------------------------------------------------------%
+ #  | The directories to find the various pieces of ARPACK |
+ #  %------------------------------------------------------%
+@@ -57,7 +50,7 @@
+ # | The name of the libraries to be created/linked to |
+ # %---------------------------------------------------%
+ #
+-ARPACKLIB  = $(home)/libarpack_$(PLAT).a
++ARPACKLIB  = $(home)/libarpack.a
+ LAPACKLIB = 
+ BLASLIB = 
+ #
+@@ -101,8 +94,8 @@
+ # | for your system.                        |
+ # %-----------------------------------------%
+ #
+-FC      = f77
+-FFLAGS	= -O -cg89
++FC      = gfortran
++FFLAGS	= -O3
+ 
+ LDFLAGS = 
+ CD      = cd
+@@ -112,8 +105,6 @@
+ LN      = ln
+ LNFLAGS = -s
+ 
+-MAKE    = /bin/make
+-
+ RM      = rm
+ RMFLAGS = -f
+ 
+Index: arpack/Makefile
+===================================================================
+--- arpack.orig/Makefile	1996-09-24 15:55:31.000000000 +0100
++++ arpack/Makefile	2010-08-16 14:58:05.000000000 +0100
+@@ -14,6 +14,8 @@
+ #
+ ############################################################################
+ 
++home = $(PWD)
++
+ include ARmake.inc
+ 
+ PRECISIONS = single double complex complex16

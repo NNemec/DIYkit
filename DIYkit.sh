@@ -43,7 +43,7 @@ _diy () {
     cmdOpts=
     case ${COMP_WORDS[1]} in
     install)
-        pkgs=$( for x in *.diy ; do basename $x .diy ; done )
+        pkgs=$( for x in $DIYkit/*.diy ; do basename $x .diy ; done )
         COMPREPLY=( $( compgen -W "$pkgs" -- $cur ) )
         return 0
         ;;

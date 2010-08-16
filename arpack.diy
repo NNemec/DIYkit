@@ -13,4 +13,5 @@ DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
 cd $SRCDIR
-make
+make home=$SRCDIR lib
+install -m 644 -D libarpack.a $PREFIX/lib
