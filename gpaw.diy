@@ -16,3 +16,7 @@ UNPACK_ARCHIVE
 cd $SRCDIR
 python setup.py build
 python setup.py install --prefix $PREFIX
+
+cat > DIYkit.sh.d/${NAME}.sh << EOF
+export GPAW_SETUP_PATH=$PREFIX/data/gpaw-setups
+EOF

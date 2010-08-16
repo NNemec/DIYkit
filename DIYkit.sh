@@ -52,7 +52,3 @@ _diy () {
     esac
 }
 complete -F _diy diy
-
-####################
-
-#export GPAW_SETUP_PATH=$DIYkit/data/gpaw-setups
