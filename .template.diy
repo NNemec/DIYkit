@@ -5,9 +5,9 @@
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
    AVAILABLE="pkg-config --exists template"
 
-. $NNlab_path/NNlab-include.sh
+. $DIYkit/DIYkit-include.sh
 
-# NNlab depend somepkg
+# diy depend somepkg
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE

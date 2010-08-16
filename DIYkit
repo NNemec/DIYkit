@@ -1,13 +1,10 @@
 #!/bin/bash
 
-. ~/NNlab/NNlab.sh
-
-if [ $# -eq 0 ] ; then
-    exec bash
-fi
+[ -z "$DIYkit" ] && export DIYkit=$HOME/.DIYkit
+. $DIYkit/DIYkit.sh
 
 (
-cd $NNlab_path
+cd $DIYkit
 
 if [ $(uname -m) == "x86_64" -a ! -L lib64 ] ; then
     mkdir -p lib
@@ -22,14 +19,14 @@ CMD=$1 ; shift
 
 case $CMD in
 install)
-    bash ./$1.nnl
+    bash ./$1.diy
     ;;
 depend)
-    DEPENDENCY_ONLY=true bash ./$1.nnl
+    DEPENDENCY_ONLY=true bash ./$1.diy
     ;;
 avail)
-    for pkg in $( ( for x in *.nnl ; do basename $x .nnl ; done ) | sort ) ; do
-        echo "$(printf "%-15s " $pkg)$(head -n 1 $pkg.nnl | grep "^#")"
+    for pkg in $( ( for x in *.diy ; do basename $x .diy ; done ) | sort ) ; do
+        echo "$(printf "%-15s " $pkg)$(head -n 1 $pkg.diy | grep "^#")"
     done
     ;;
 update)
