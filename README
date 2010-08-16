@@ -1,37 +1,43 @@
-NNlab -- simple and clean $HOME installation of source packages
-=====================================================
+DIYkit -- $HOME improvements made easy...
+=========================================
+
+DIYkit is a lightweight package manager to cleanly install libraries
+and tools into your $HOME directory. The repository contains a growing
+list of packages that can easily be downloaded, compiled from source
+and installed with a single command.
 
 If you frequently work on Unix/Linux systems that you do not
-administrate yourself, NNlab is the solution to comfortably install
+administrate yourself, DIYkit is the solution to comfortably install
 software into your $HOME directory:
 
--> Create a single directory (e.g. ~/NNlab/ ) for user-installed
+-> A single directory (default: ~/.DIYkit/ ) contains all user-installed
 libraries and programs.
 
--> Set up the environment to access the installed software
+-> The environment ($PATH etc.) is automatically configured to contain
+all the relevant information to make the software accessible.
 
--> Download, compile and install a large number of pre-configured
-software packages. (Automatically resolving any dependencies.)
+-> Each package in the repository consists of a simple bash script that
+is short and clean for all standard cases (autoconf etc.) and flexible
+enough for non-standard distribution formats.
 
--> Easily add missing software packages. (Feel free to contribute them
-back!)
+-> Missing software packages can easily be added. Contributions welcome!
 
 
 INITIAL SET-UP
 ==============
 
-Currently, NNlab can only be obtained via git. A tar archive will
+Currently, DIYkit can only be obtained via git. A tar archive will
 be made available in the near future. Ask for it if you require this.
 
 Follow these steps:
 
-Check out the NNlab directory directly into your $HOME directory
-    git clone git://github.com/NNemec/NNlab.git
+Check out the DIYkit directory directly into your $HOME directory
+    git clone git://github.com/NNemec/DIYkit.git ~/.DIYkit
 
 Add the following line to your ~/.bashrc file:
-    [ -d ~/NNlab ] && . ~/NNlab/NNlab.sh
+    [ -d ~/.DIYkit ] && . ~/DIYkit/DIYkit.sh
 
-Close the current shell and start a new one to activate the NNlab
+Close the current shell and start a new one to activate the DIYkit
 environment.
 
 
@@ -41,23 +47,27 @@ INSTALLING SOFTWARE
 The following actions can be performed anywhere from the command line:
 
 View the available pre-configured packages:
-   NNlab avail
+   diy avail
 
 Install a pre-configured package (e.g. NumPy) type:
-   NNlab install numpy
-
-Conditionally install a package if it is not available:
-   NNlab depend numpy
+   diy install numpy
 
 
 ADDING NEW SOFTWARE PACKAGES
 ============================
 
-Simply add a new *.nnl file to the ~/NNlab/ directory. See the existing
+Simply add a new *.diy file to the ~/.DIYkit/ directory. See the existing
 packages for examples. Software using autoconf or similar standards
 can be added with just a few lines. The files are plain bash scripts
 flexible enough to accomodate arbitrarily non-standard installation
 procedures.
+
+The conventions for DIYkit packages are still evolving. Documentation is
+on the way. For the moment: try to follow the example where possible and
+feel free to improvise otherwise.
+
+Contributions are welcome! Send me your public SSH key (~/.ssh/id_?sa.pub)
+to obtain write access to the repository.
 
 
 ADVANCED USAGE
@@ -66,15 +76,15 @@ ADVANCED USAGE
 Temporary deactivation
 ----------------------
 
-To deactivate NNlab temporarily within a running shell, issue
-    . ~/NNlab/NNlab-off.sh
-which will clear the environment of all traces of NNlab.
+To deactivate DIYkit temporarily within a running shell, issue
+    diy off
+which will clear the current environment of all traces of DIYkit.
 
 
 CONTACT THE AUTHOR
 ==================
 
-Currently the NNlab system is in early development. If you want to use
+Currently the DIYkit is in early development. If you want to use
 it, I would be delighted to hear about your experience!
 
                                  Norbert Nemec <Norbert@Nemec-online.de>
