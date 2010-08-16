@@ -21,7 +21,7 @@ install -m 644 -D ./man/man1/rdmd.1 $PREFIX/man/man1/rdmd1.1
 
 cat > $TMPDIR/dmd1.wrap << EOF
 #!/bin/sh
-export DFLAGS="-I$PREFIX/import/druntime -I$PREFIX/import/phobos -L-L$PREFIX/lib"
+export DFLAGS="-I$PREFIX/import/phobos -L-L$PREFIX/lib"
 exec $0.bin "$@"
 EOF
 install -m 755 -D $TMPDIR/dmd1.wrap $PREFIX/bin/dmd1
