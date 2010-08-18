@@ -15,4 +15,4 @@ UNPACK_ARCHIVE
 cd $SRCDIR
 python setup.py install --prefix $PREFIX
 python setup2.py
-install -m 755 -D pymol.com $NNlab_path/bin/pymol
+install -m 755 -D pymol.com $DIYkit/bin/pymol

@@ -9,7 +9,7 @@ cd $DIYkit
 if [ $(uname -m) == "x86_64" -a ! -L lib64 ] ; then
     mkdir -p lib
     if [ -e lib64 ] ; then
-        echo "ERROR: $NNlab_path/lib64/ is not a link to lib/."
+        echo "ERROR: $DIYkit/lib64/ is not a link to lib/."
         echo "Please move all of its contents to lib/ and replace it by a symbolic link"
     fi
     ln -s lib lib64

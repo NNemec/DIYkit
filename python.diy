@@ -13,9 +13,7 @@ CHECK_AVAILABLE "python -c 'import sys; exit(0 if (sys.version>=\"2.6\") else 1)
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
-XXXXXXXXXX-unfinished-XXXXXXXXXX
-
 cd $SRCDIR
-#./configure --prefix $PREFIX
-#make
-#make install
+./configure --prefix $PREFIX
+make
+make install
