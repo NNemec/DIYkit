@@ -2,7 +2,7 @@
 # DIYkit package: Midnight Commander
 
         NAME=mc
-     VERSION=4.7.0.7
+     VERSION=4.7.0.8
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://www.midnight-commander.org/downloads
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
