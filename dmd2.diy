@@ -13,8 +13,8 @@ DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
 cd $SRCDIR
-install -m 755 -D ./linux/bin/dmd $PREFIX/bin/dmd2
-install -m 755 -D ./linux/bin/rdmd $PREFIX/bin/rdmd2
+install -m 755 -D ./linux/bin/dmd $PREFIX/bin/dmd2.bin
+install -m 755 -D ./linux/bin/rdmd $PREFIX/bin/rdmd2.bin
 install -m 644 -D ./linux/lib/libdruntime.a $PREFIX/lib/libdruntime.a
 install -m 644 -D ./linux/lib/libphobos2.a $PREFIX/lib/libphobos2.a
 install -m 644 -D ./man/man1/dmd.1 $PREFIX/man/man1/dmd2.1
@@ -23,10 +23,15 @@ install -m 644 -D ./man/man1/rdmd.1 $PREFIX/man/man1/rdmd2.1
 cat > $TMPDIR/dmd2.wrap << EOF
 #!/bin/sh
 export DFLAGS="-I$PREFIX/import2/druntime -I$PREFIX/import2/phobos -L-L$PREFIX/lib"
-exec $0.bin "$@"
+exec $PREFIX/bin/dmd2.bin "\$@"
 EOF
 install -m 755 -D $TMPDIR/dmd2.wrap $PREFIX/bin/dmd2
-install -m 755 -D $TMPDIR/dmd2.wrap $PREFIX/bin/rdmd2
+cat > $TMPDIR/rdmd2.wrap << EOF
+#!/bin/sh
+export DFLAGS="-I$PREFIX/import2/druntime -I$PREFIX/import2/phobos -L-L$PREFIX/lib"
+exec $PREFIX/bin/rdmd2.bin "\$@"
+EOF
+install -m 755 -D $TMPDIR/rdmd2.wrap $PREFIX/bin/rdmd2
 [ -e $PREFIX/bin/dmd ] || ln -s dmd2 $PREFIX/bin/dmd
 [ -e $PREFIX/bin/rdmd ] || ln -s rdmd2 $PREFIX/bin/rdmd
 
@@ -39,7 +44,7 @@ install -m 755 -D $TMPDIR/dmd2.wrap $PREFIX/bin/rdmd2
 mv ./src/phobos/std/openrj.d ./src/phobos/std/openrj.d.rename
 ( cd $TMPDIR
     for d in etc/c std std/c std/c/linux ; do
-        mkdir -p $SRCDIR/import2/phobos/$d
-        dmd -c -I$SRCDIR/src/phobos -Hd$PREFIX/import2/phobos/$d $SRCDIR/src/phobos/$d/*.d
+        mkdir -p $PREFIX/import2/phobos/$d
+        dmd2 -c -I$SRCDIR/src/phobos -Hd$PREFIX/import2/phobos/$d $SRCDIR/src/phobos/$d/*.d
     done
 )

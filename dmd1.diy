@@ -22,16 +22,21 @@ install -m 644 -D ./man/man1/rdmd.1 $PREFIX/man/man1/rdmd1.1
 cat > $TMPDIR/dmd1.wrap << EOF
 #!/bin/sh
 export DFLAGS="-I$PREFIX/import/phobos -L-L$PREFIX/lib"
-exec $0.bin "$@"
+exec $PREFIX/bin/dmd1.bin "\$@"
 EOF
 install -m 755 -D $TMPDIR/dmd1.wrap $PREFIX/bin/dmd1
-install -m 755 -D $TMPDIR/dmd1.wrap $PREFIX/bin/rdmd1
+cat > $TMPDIR/rdmd1.wrap << EOF
+#!/bin/sh
+export DFLAGS="-I$PREFIX/import/phobos -L-L$PREFIX/lib"
+exec $PREFIX/bin/rdmd1.bin "\$@"
+EOF
+install -m 755 -D $TMPDIR/rdmd1.wrap $PREFIX/bin/rdmd1
 [ -e $PREFIX/bin/dmd ] || ln -s dmd1 $PREFIX/bin/dmd
 [ -e $PREFIX/bin/rdmd ] || ln -s rdmd1 $PREFIX/bin/rdmd
 
 ( cd $TMPDIR
     for d in etc/c std std/c std/c/linux ; do
-        mkdir -p $SRCDIR/import1/phobos/$d
+        mkdir -p $PREFIX/import1/phobos/$d
         dmd -c -I$SRCDIR/src/phobos -Hd$PREFIX/import1/phobos/$d $SRCDIR/src/phobos/$d/*.d
     done
 )
