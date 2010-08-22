@@ -1,0 +1,119 @@
+Index: asciidoc/Makefile.in
+===================================================================
+--- asciidoc.orig/Makefile.in	2009-10-03 06:51:26.000000000 +0100
++++ asciidoc/Makefile.in	2010-08-22 09:09:36.000000000 +0100
+@@ -87,38 +87,38 @@
+ 
+ # create directories used during the install
+ $(INSTDIRS):
+-	$(INSTALL) -d $(DESTDIR)/$($@)
++	$(INSTALL) -d $($@)
+ 
+ $(PROGTARGETS): % : %dir
+-	$(INSTALL_PROG) $($@) $(DESTDIR)/$($<)/
++	$(INSTALL_PROG) $($@) $($<)/
+ 
+ $(DATATARGETS): % : %dir
+-	$(INSTALL_DATA) $($@) $(DESTDIR)/$($<)/
++	$(INSTALL_DATA) $($@) $($<)/
+ 
+ docs:
+-	$(INSTALL) -d $(DESTDIR)/$(docdir)
+-	$(INSTALL_DATA) $(doc) $(DESTDIR)/$(docdir)
+-	$(INSTALL) -d $(DESTDIR)/$(docdir)/docbook-xsl
+-	$(INSTALL_DATA) docbook-xsl/asciidoc-docbook-xsl.txt $(DESTDIR)/$(docdir)/docbook-xsl
+-	$(INSTALL) -d $(DESTDIR)/$(docdir)/dblatex
+-	$(INSTALL_DATA) dblatex/dblatex-readme.txt $(DESTDIR)/$(docdir)/dblatex
+-	$(INSTALL) -d $(DESTDIR)/$(docdir)/stylesheets
+-	$(INSTALL_DATA) $(css) $(DESTDIR)/$(docdir)/stylesheets
+-	$(INSTALL) -d $(DESTDIR)/$(docdir)/javascripts
+-	$(INSTALL_DATA) $(js) $(DESTDIR)/$(docdir)/javascripts
+-	$(INSTALL) -d $(DESTDIR)/$(docdir)/images
++	$(INSTALL) -d $(docdir)
++	$(INSTALL_DATA) $(doc) $(docdir)
++	$(INSTALL) -d $(docdir)/docbook-xsl
++	$(INSTALL_DATA) docbook-xsl/asciidoc-docbook-xsl.txt $(docdir)/docbook-xsl
++	$(INSTALL) -d $(docdir)/dblatex
++	$(INSTALL_DATA) dblatex/dblatex-readme.txt $(docdir)/dblatex
++	$(INSTALL) -d $(docdir)/stylesheets
++	$(INSTALL_DATA) $(css) $(docdir)/stylesheets
++	$(INSTALL) -d $(docdir)/javascripts
++	$(INSTALL_DATA) $(js) $(docdir)/javascripts
++	$(INSTALL) -d $(docdir)/images
+ 	( cd images && \
+-		cp -R * $(DESTDIR)/$(docdir)/images )
+-	$(INSTALL) -d $(DESTDIR)/$(docdir)/doc
++		cp -R * $(docdir)/images )
++	$(INSTALL) -d $(docdir)/doc
+ 	( cd doc && \
+-		cp -R * $(DESTDIR)/$(docdir)/doc )
+-	$(INSTALL) -d $(DESTDIR)/$(docdir)/examples/website
++		cp -R * $(docdir)/doc )
++	$(INSTALL) -d $(docdir)/examples/website
+ 	( cd examples/website && \
+-		cp -R * $(DESTDIR)/$(docdir)/examples/website )
++		cp -R * $(docdir)/examples/website )
+ 
+ progsymlink:
+-	(cd $(DESTDIR)/$(progdir); ln -sf asciidoc.py asciidoc)
+-	(cd $(DESTDIR)/$(progdir); ln -sf a2x.py a2x)
++	(cd $(progdir); ln -sf asciidoc.py asciidoc)
++	(cd $(progdir); ln -sf a2x.py a2x)
+ 
+ fixconfpath:
+ 	@for f in $(prog); do \
+@@ -129,22 +129,17 @@
+ 	done
+ 
+ install-vim:
+-	@for d in $(DESTDIR)/$(vimdir) /etc/vim; do \
+-		if ! test -d $$d; then continue; fi ; \
+-		echo "installing Vim files in $$d" ; \
+-		$(INSTALL) -d $$d/syntax ; \
+-		$(INSTALL_DATA) vim/syntax/asciidoc.vim $$d/syntax ; \
+-		$(INSTALL) -d $$d/ftdetect ; \
+-		$(INSTALL_DATA) vim/ftdetect/asciidoc_filetype.vim $$d/ftdetect ; \
+-	done
++	@echo "installing Vim files in $$d"
++	mkdir -p $(vimdir)
++	$(INSTALL) -d $(vimdir)/syntax
++	$(INSTALL_DATA) vim/syntax/asciidoc.vim $(vimdir)/syntax
++	$(INSTALL) -d $(vimdir)/ftdetect
++	$(INSTALL_DATA) vim/ftdetect/asciidoc_filetype.vim $(vimdir)/ftdetect
+ 
+ uninstall-vim:
+-	@for d in $(DESTDIR)/$(vimdir) /etc/vim; do \
+-		if ! test -d $$d; then continue; fi ; \
+-		echo "uninstalling Vim files in $$d" ; \
+-		rm -f $$d/syntax/asciidoc.vim ; \
+-		rm -f $$d/ftdetect/asciidoc_filetype.vim ; \
+-	done
++	@echo "uninstalling Vim files in $(vimdir)"
++	rm -f $(vimdir)/syntax/asciidoc.vim
++	rm -f $(vimdir)/ftdetect/asciidoc_filetype.vim
+ 
+ 
+ build: fixconfpath
+@@ -152,14 +147,14 @@
+ install: all $(PROGTARGETS) $(DATATARGETS) progsymlink install-vim
+ 
+ uninstall: uninstall-vim
+-	rm -f $(DESTDIR)/$(progdir)/asciidoc
+-	rm -f $(DESTDIR)/$(progdir)/asciidoc.py
+-	rm -f $(DESTDIR)/$(progdir)/a2x
+-	rm -f $(DESTDIR)/$(progdir)/a2x.py
+-	rm -f $(DESTDIR)/$(mandir)/asciidoc.1
+-	rm -f $(DESTDIR)/$(mandir)/a2x.1
+-	rm -rf $(DESTDIR)/$(confdir)
+-	rm -rf $(DESTDIR)/$(docdir)
++	rm -f $(progdir)/asciidoc
++	rm -f $(progdir)/asciidoc.py
++	rm -f $(progdir)/a2x
++	rm -f $(progdir)/a2x.py
++	rm -f $(mandir)/asciidoc.1
++	rm -f $(mandir)/a2x.1
++	rm -rf $(confdir)
++	rm -rf $(docdir)
+ 
+ test:
+ 	@echo "Nothing to see here...Move along."

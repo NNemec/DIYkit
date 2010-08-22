@@ -1,0 +1,20 @@
+#!/bin/bash
+# DIYkit package: ???
+
+        NAME=asciidoc
+     VERSION=8.6.1
+    DISTFILE=${NAME}-${VERSION}.tar.gz
+ MASTER_SITE=http://downloads.sourceforge.net/project/${NAME}/${NAME}/${VERSION}
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+
+. $DIYkit/DIYkit-include.sh
+
+CHECK_AVAILABLE "asciidoc -version"
+DEPENDS_ON python
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+
+cd $SRCDIR
+./configure --prefix $PREFIX
+make
+make install
