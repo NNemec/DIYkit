@@ -69,6 +69,10 @@ function DOWNLOAD_ARCHIVE() {(
 )}
 
 function UNPACK_ARCHIVE() {(
+    if [ -d $SRCDIR ] ; then
+        echo "Keeping existing directory $SRCDIR -- remove to unpack freshly."
+        return
+    fi
     echo "DIYkit: unpacking archive $DISTFILE ..."
     mkdir -p $TMPDIR
     cd $TMPDIR
