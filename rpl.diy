@@ -1,0 +1,19 @@
+#!/bin/bash
+# DIYkit package: ???
+
+        NAME=rpl
+     VERSION=1.5.5
+    DISTFILE=${NAME}_${VERSION}.orig.tar.gz
+ MASTER_SITE=ftp://ftp.de.debian.org/debian/pool/main/r/${NAME}
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+
+. $DIYkit/DIYkit-include.sh
+
+CHECK_AVAILABLE "rpl --version"
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+
+cd $SRCDIR
+
+python setup.py build
+python setup.py install --prefix $PREFIX

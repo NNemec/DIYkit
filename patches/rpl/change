@@ -1,0 +1,19 @@
+Index: rpl/rpl
+===================================================================
+--- rpl.orig/rpl	2006-09-18 23:47:21.000000000 +0100
++++ rpl/rpl	2010-06-29 10:54:05.000000000 +0100
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/python
+ 
+ import optparse, sys, os, tempfile, re
+ try: import readline
+@@ -185,7 +185,7 @@
+ 		old_str = unescape(old_str)
+ 		new_str = unescape(new_str)
+ 	if opts.whole_words:
+-		regex = re.compile(r"(?:(?<=\s)|^)" + re.escape(old_str) + r"(?=\s|$)",
++		regex = re.compile(r"(?:(?<=\W)|^)" + re.escape(old_str) + r"(?=\W|$)",
+ 						   opts.ignore_case and re.I or 0)
+ 	else:
+ 		regex = re.compile(re.escape(old_str), opts.ignore_case and re.I or 0)
