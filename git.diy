@@ -2,7 +2,7 @@
 # DIYkit package: Version Control System
 
         NAME=git
-     VERSION=1.7.2
+     VERSION=1.7.2.2
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=http://www.kernel.org/pub/software/scm/${NAME}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
@@ -11,6 +11,7 @@
 
 CHECK_AVAILABLE "git --version"
 DEPENDS_ON curl
+DEPENDS_ON asciidoc
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
@@ -19,3 +20,4 @@ export PYTHON_PATH=python
 ./configure --without-openssl --prefix=$PREFIX --with-curl=$PREFIX
 make
 make install
+make install-man
