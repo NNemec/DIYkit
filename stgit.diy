@@ -2,18 +2,20 @@
 # DIYkit package: Stacked GIT - patch manager on top of GIT
 
         NAME=stgit
-     VERSION=0.14.1
-    DISTFILE=${NAME}-${VERSION}.tar.gz
- MASTER_SITE=http://homepage.ntlworld.com/cmarinas/${NAME}
- ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+     VERSION=git
+#     VERSION=0.15
+#    DISTFILE=${NAME}-${VERSION}.tar.gz
+# MASTER_SITE=http://download.gna.org/${NAME}
+# ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
 . $DIYkit/DIYkit-include.sh
 
 CHECK_AVAILABLE "stg -v"
 DEPENDS_ON python
 DEPENDS_ON git
-DOWNLOAD_ARCHIVE
-UNPACK_ARCHIVE
+#DOWNLOAD_ARCHIVE
+#UNPACK_ARCHIVE
+GIT_CLONE git://repo.or.cz/stgit.git
 
 cd $SRCDIR
 python setup.py build
