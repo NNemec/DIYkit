@@ -1,0 +1,19 @@
+#!/bin/bash
+# DIYkit package: ???
+
+        NAME=xmlto
+     VERSION=0.0.23
+    DISTFILE=${NAME}-${VERSION}.tar.bz2
+ MASTER_SITE=https://fedorahosted.org/releases/x/m/${NAME}
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+
+. $DIYkit/DIYkit-include.sh
+
+CHECK_AVAILABLE "xmlto --version"
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+
+cd $SRCDIR
+./configure --prefix $PREFIX
+make
+make install
