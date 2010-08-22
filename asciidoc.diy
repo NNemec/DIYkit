@@ -9,7 +9,7 @@
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "asciidoc -version"
+CHECK_AVAILABLE "asciidoc --help"
 DEPENDS_ON python
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
