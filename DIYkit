@@ -24,9 +24,9 @@ install)
 avail)
     for pkg in $( ( for x in *.diy ; do basename $x .diy ; done ) | sort ) ; do
         NAME=$pkg
-        VERSION=$(grep "VERSION=" $pkg.diy | sed "s/.*=//")
+        VERSION=$(grep -m 1 "VERSION=" $pkg.diy | sed "s/.*=//")
         COMMENT=$(grep "# DIYkit package:" $pkg.diy | sed "s/.*: //")
-        printf "%-15s %-13s %s\n" "$NAME" "$VERSION" "$COMMENT"
+        printf "%-20s %-15s %s\n" "$NAME" "$VERSION" "$COMMENT"
     done
     ;;
 update)
