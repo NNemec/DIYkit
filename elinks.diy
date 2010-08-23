@@ -1,0 +1,20 @@
+#!/bin/bash
+# DIYkit package: ???
+
+        NAME=elinks
+     VERSION=0.11.7
+    DISTFILE=${NAME}-${VERSION}.tar.bz2
+ MASTER_SITE=http://elinks.or.cz/download
+ ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+
+. $DIYkit/DIYkit-include.sh
+
+CHECK_AVAILABLE "elinks --version"
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+
+cd $SRCDIR
+
+./configure --prefix $PREFIX
+make
+make install
