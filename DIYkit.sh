@@ -7,8 +7,10 @@ PATH_PREPEND() {
 }
 
 export PATH=$(PATH_PREPEND "$PATH" $DIYkit/bin)
+[ -z "$MANPATH" ] && export MANPATH="XXXplaceholderXXX" # if original MANPATH was unset, the new one should end on ':'
 export MANPATH=$(PATH_PREPEND "$MANPATH" $DIYkit/man)
 export MANPATH=$(PATH_PREPEND "$MANPATH" $DIYkit/share/man)
+export MANPATH=$(echo "$MANPATH" | sed s/XXXplaceholderXXX//)
 export CPATH=$(PATH_PREPEND "$CPATH" $DIYkit/include)
 export LIBRARY_PATH=$(PATH_PREPEND "$LIBRARY_PATH" $DIYkit/lib)
 export LD_LIBRARY_PATH=$(PATH_PREPEND "$LD_LIBRARY_PATH" $DIYkit/lib)
