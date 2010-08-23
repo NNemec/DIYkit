@@ -1,5 +1,5 @@
 #!/bin/bash
-# DIY package: ???
+# DIYkit package: ???
 
         NAME=sqlite
      VERSION=3.3.13

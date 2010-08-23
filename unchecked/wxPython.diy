@@ -1,5 +1,5 @@
 #!/bin/bash
-# DIY package: ???
+# DIYkit package: ???
 
         NAME=wxPython
      VERSION=2.6.3.2

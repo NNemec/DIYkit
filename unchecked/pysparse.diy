@@ -1,5 +1,5 @@
 #!/bin/bash
-# DIY package: ???
+# DIYkit package: ???
 
         NAME=pysparse
      VERSION=0.34.032

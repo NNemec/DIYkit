@@ -1,5 +1,5 @@
 #!/bin/bash
-# DIY package: ???
+# DIYkit package: ???
 
         NAME=pixman
      VERSION=1.18.4

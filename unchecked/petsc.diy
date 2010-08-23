@@ -1,5 +1,5 @@
 #!/bin/bash
-# DIY package: ???
+# DIYkit package: ???
 
         NAME=petsc
      VERSION=2.3.1
