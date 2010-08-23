@@ -73,6 +73,9 @@ function UNPACK_ARCHIVE() {(
         echo "Keeping existing directory $SRCDIR -- remove to unpack freshly."
         return
     fi
+    if [ -f $DIYkit/patches/$NAME/series ] ; then
+        DEPENDS_ON quilt
+    fi
     echo "DIYkit: unpacking archive $DISTFILE ..."
     mkdir -p $TMPDIR
     cd $TMPDIR
@@ -108,6 +111,8 @@ function UNPACK_ARCHIVE() {(
 )}
 
 function GIT_CLONE() {(
+    DEPENDS_ON git
+
     GIT_URL=$1
     cd $DIYkit/src
     if [ -d $NAME/.git/ ] ; then
