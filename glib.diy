@@ -9,7 +9,7 @@
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "pkg-config --exists glib-2.0"
+CHECK_AVAILABLE "pkg-config --atleast-version=2.20 glib-2.0"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

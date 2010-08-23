@@ -11,6 +11,7 @@
 
 CHECK_AVAILABLE "mc -V"
 DEPENDS_ON slang
+DEPENDS_ON glib # at least version 2.20
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
