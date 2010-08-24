@@ -20,25 +20,32 @@ DOCDIR=$DIYkit/doc
 TMPDIR=$DIYkit/tmp
 DOWNLOADDIR=$DIYkit/download
 
+[ -n $FIND_INSTALLED ] && INSTALLED_VERSION=`sh -c "$FIND_INSTALLED" 2> /dev/null || true`
+
+if [ -n DIY_GET ] ; then
+    echo ${!DIY_GET}
+    exit 0
+fi
+
 function CHECK_INSTALLED() {
-    INSTALLED_VERSION=`sh -c "$FIND_INSTALLED" 2> /dev/null || true`
     if [ -n "$INSTALLED_VERSION" ] ; then
         echo "DIYkit: found $NAME installed (version: $INSTALLED_VERSION)"
-        [ -n "$DEPENDENCY_ONLY" ] && exit 0
+        [ -n "$DIY_DEPEND" ] && exit 0
     fi
-    unset INSTALLED_VERSION
 }
 
 function CHECK_AVAILABLE() {
     if sh -c "$1" > /dev/null ; then
         echo "DIYkit: found $NAME installed"
-        [ -n "$DEPENDENCY_ONLY" ] && exit 0
+        [ -n "$DIY_DEPEND" ] && exit 0
     fi
 }
 
 function DEPENDS_ON() {(
-    PKG="$1"
-    DEPENDENCY_ONLY=true bash $DIYkit/$PKG.diy
+    PKG="$1" ; VERSION="$2"
+    [ -n $VERSION ] && VERSION=any
+    DIY_DEPEND=$VERSION bash $DIYkit/$PKG.diy
+    unset PKG VERSION
 )}
 
 function DOWNLOAD_ARCHIVE() {(
