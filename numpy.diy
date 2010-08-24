@@ -1,17 +1,17 @@
 #!/bin/bash
 # DIYkit package: Numerical arrays in Python
 
-        NAME=numpy
-     VERSION=1.4.1
-    DISTFILE=${NAME}-${VERSION}.tar.gz
- MASTER_SITE=http://downloads.sourceforge.net/project/${NAME}/NumPy/${VERSION}
- ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+          NAME=numpy
+       VERSION=1.4.1
+      DISTFILE=${NAME}-${VERSION}.tar.gz
+   MASTER_SITE=http://downloads.sourceforge.net/project/${NAME}/NumPy/${VERSION}
+   ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="python -c 'import numpyX ; print numpy.version.version'"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "python -c 'import numpy'"
+CHECK_INSTALLED
 DEPENDS_ON python
-
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

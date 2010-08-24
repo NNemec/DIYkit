@@ -1,16 +1,17 @@
 #!/bin/bash
 # DIYkit package: Stacked GIT - patch manager on top of GIT
 
-        NAME=stgit
-     VERSION=git
-#     VERSION=0.15
-#    DISTFILE=${NAME}-${VERSION}.tar.gz
-# MASTER_SITE=http://download.gna.org/${NAME}
-# ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+          NAME=stgit
+       VERSION=git
+#       VERSION=0.15
+#      DISTFILE=${NAME}-${VERSION}.tar.gz
+#   MASTER_SITE=http://download.gna.org/${NAME}
+#   ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="stg -v | sed -n 's/Stacked GIT \(.*\)/\1/p'"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "stg -v"
+CHECK_INSTALLED
 DEPENDS_ON python
 DEPENDS_ON git
 #DOWNLOAD_ARCHIVE

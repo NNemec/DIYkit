@@ -20,13 +20,20 @@ DOCDIR=$DIYkit/doc
 TMPDIR=$DIYkit/tmp
 DOWNLOADDIR=$DIYkit/download
 
-function CHECK_AVAILABLE() {
-    CHECK_COMMAND="$1"
-    if [ -n "$DEPENDENCY_ONLY" ] && sh -c "$CHECK_COMMAND" ; then
-        echo "DIYkit: found $NAME installed"
-        exit 0
+function CHECK_INSTALLED() {
+    INSTALLED_VERSION=`sh -c "$FIND_INSTALLED" 2> /dev/null || true`
+    if [ -n "$INSTALLED_VERSION" ] ; then
+        echo "DIYkit: found $NAME installed (version: $INSTALLED_VERSION)"
+        [ -n "$DEPENDENCY_ONLY" ] && exit 0
     fi
-    unset CHECK_COMMAND
+    unset INSTALLED_VERSION
+}
+
+function CHECK_AVAILABLE() {
+    if sh -c "$1" > /dev/null ; then
+        echo "DIYkit: found $NAME installed"
+        [ -n "$DEPENDENCY_ONLY" ] && exit 0
+    fi
 }
 
 function DEPENDS_ON() {(
@@ -123,3 +130,11 @@ function GIT_CLONE() {(
         git clone $GIT_URL $NAME
     fi
 )}
+
+function VERCMP() {
+# thanks to http://rubinium.org/blog/archives/2010/04/05/shell-script-version-compare-vercmp/
+    expr '(' "$1" : '\([^.]*\)' ')' '-' '(' "$2" : '\([^.]*\)' ')' '|' \
+         '(' "$1" : '[^.]*[.]\([^.]*\)' ')' '-' '(' "$2" : '[^.]*[.]\([^.]*\)' ')' '|' \
+         '(' "$1" : '[^.]*[.][^.]*[.]\([^.]*\)' ')' '-' '(' "$2" : '[^.]*[.][^.]*[.]\([^.]*\)' ')' '|' \
+         '(' "$1" : '[^.]*[.][^.]*[.][^.]*[.]\([^.]*\)' ')' '-' '(' "$2" : '[^.]*[.][^.]*[.][^.]*[.]\([^.]*\)' ')'
+}

@@ -1,15 +1,16 @@
 #!/bin/bash
 # DIYkit package: Version Control System
 
-        NAME=git
-     VERSION=1.7.2.2
-    DISTFILE=${NAME}-${VERSION}.tar.bz2
- MASTER_SITE=http://www.kernel.org/pub/software/scm/${NAME}
- ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+          NAME=git
+       VERSION=1.7.2.2
+      DISTFILE=${NAME}-${VERSION}.tar.bz2
+   MASTER_SITE=http://www.kernel.org/pub/software/scm/${NAME}
+   ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="git --version | sed -n 's/git version \(.*\)/\1/p'"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "git --version"
+CHECK_INSTALLED
 DEPENDS_ON curl
 DEPENDS_ON asciidoc
 DOWNLOAD_ARCHIVE
