@@ -6,10 +6,10 @@
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=http://delta.affinix.com/download
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="qconf --version"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "qconf --version"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

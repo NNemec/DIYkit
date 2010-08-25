@@ -6,10 +6,10 @@
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=https://fedorahosted.org/releases/x/m/${NAME}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="xmlto --version | sed -n 's/xmlto version \(.*\)/\1/p'"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "xmlto --version"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

@@ -6,10 +6,10 @@
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=ftp://space.mit.edu/pub/davis/slang/v2.2
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="pkg-config --modversion slang"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "pkg-config --exists slang"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

@@ -6,10 +6,10 @@
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://downloads.sourceforge.net/project/${NAME}/${NAME}/${VERSION}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="asciidoc --version | sed -n 's/asciidoc \(.*\)/\1/p'"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "asciidoc --help"
 DEPENDS_ON python
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE

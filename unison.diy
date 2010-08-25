@@ -6,10 +6,10 @@
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://www.seas.upenn.edu/~bcpierce/unison//download/releases/stable
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="unison -version | sed -n 's/unison version \(.*\)/\1/p'"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "unison -version"
 DEPENDS_ON ocaml
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE

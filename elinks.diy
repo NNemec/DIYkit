@@ -6,10 +6,10 @@
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=http://elinks.or.cz/download
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_VERSION="elinks --version"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "elinks --version"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

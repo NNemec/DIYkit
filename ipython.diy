@@ -6,10 +6,9 @@
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://ipython.scipy.org/dist/${VERSION}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="ipython -Version"
 
 . $DIYkit/DIYkit-include.sh
-
-CHECK_AVAILABLE "ipython -Version"
 
 DEPENDS_ON python
 

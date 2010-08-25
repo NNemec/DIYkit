@@ -6,10 +6,10 @@
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://www.midnight-commander.org/downloads
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="mc -V | sed -n 's/GNU Midnight Commander \(.*\)/\1/p'"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "mc -V"
 DEPENDS_ON slang
 DEPENDS_ON glib # at least version 2.20
 

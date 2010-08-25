@@ -6,10 +6,10 @@
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=http://curl.haxx.se/download
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="pkg-config --modversion libcurl"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "pkg-config --exists libcurl"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

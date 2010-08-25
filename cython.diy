@@ -6,10 +6,10 @@
     DISTFILE=Cython-${VERSION}.tar.gz
  MASTER_SITE=http://cython.org/release
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_VERSION="cython --version"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "cython --version"
 DEPENDS_ON python
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
