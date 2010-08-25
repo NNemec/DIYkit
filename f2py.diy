@@ -3,7 +3,7 @@
 
         NAME=f2py
      VERSION=2.45.241_1926
-    DISTFILE=F2PY-$(VERSION).tar.gz
+    DISTFILE=F2PY-${VERSION}.tar.gz
  MASTER_SITE=http://cens.ioc.ee/projects/f2py2e/2.x
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 

@@ -6,7 +6,7 @@
       DISTFILE=${NAME}-${VERSION}.tar.gz
    MASTER_SITE=http://downloads.sourceforge.net/project/${NAME}/NumPy/${VERSION}
    ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-FIND_INSTALLED="python -c 'import numpyX ; print numpy.version.version'"
+FIND_INSTALLED="python -c 'import numpy ; print numpy.version.version'"
 
 . $DIYkit/DIYkit-include.sh
 
