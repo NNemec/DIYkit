@@ -6,7 +6,7 @@
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://www.lysator.liu.se/${NAME}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-FIND_VERSION="fsh -V"
+FIND_INSTALLED="fsh -V"
 
 . $DIYkit/DIYkit-include.sh
 

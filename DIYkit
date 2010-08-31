@@ -22,7 +22,9 @@ install)
     bash ./$1.diy
     ;;
 avail)
-    for pkg in $( ( for x in *.diy ; do basename $x .diy ; done ) | sort ) ; do
+    PAT="$1"
+    [ -z "$PAT" ] && PAT="*"
+    for pkg in $( ( for x in $PAT.diy ; do basename $x .diy ; done ) | sort ) ; do
         NAME=$pkg
         VERSION_INSTALLED=$(DIY_GET=INSTALLED bash $pkg.diy)
         [ -z "$VERSION_INSTALLED" ] && VERSION_INSTALLED=none

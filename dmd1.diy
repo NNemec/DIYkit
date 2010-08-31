@@ -6,6 +6,7 @@
     DISTFILE=dmd.${VERSION}.zip
  MASTER_SITE=http://ftp.digitalmars.com
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="dmd1 --help | sed -n 's/Digital Mars D Compiler v\(.*\)/\1/p'"
 
 . $DIYkit/DIYkit-include.sh
 

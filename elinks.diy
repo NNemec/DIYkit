@@ -6,7 +6,7 @@
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=http://elinks.or.cz/download
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-FIND_VERSION="elinks --version"
+FIND_INSTALLED="elinks -version | sed -n 's/ELinks \(.*\)/\1/p'"
 
 . $DIYkit/DIYkit-include.sh
 

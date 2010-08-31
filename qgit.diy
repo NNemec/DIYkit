@@ -3,6 +3,7 @@
 
         NAME=qgit
      VERSION=git
+FIND_INSTALLED='strings $(which qgit) | sed -n "s@.*<b>QGit version \([^ ]*\)</b>.*@\1@p"'
 
 . $DIYkit/DIYkit-include.sh
 

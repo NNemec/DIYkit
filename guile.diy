@@ -6,6 +6,7 @@
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=ftp://ftp.gnu.org/pub/gnu/${NAME}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED='guile -v | sed -n "s/^Guile \([^ ]*\)$/\1/p"'
 
 . $DIYkit/DIYkit-include.sh
 

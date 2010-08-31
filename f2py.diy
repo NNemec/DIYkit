@@ -6,7 +6,7 @@
     DISTFILE=F2PY-${VERSION}.tar.gz
  MASTER_SITE=http://cens.ioc.ee/projects/f2py2e/2.x
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-FIND_VERSION="f2py -v"
+FIND_INSTALLED="f2py -v"
 
 . $DIYkit/DIYkit-include.sh
 

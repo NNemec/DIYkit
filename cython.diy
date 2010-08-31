@@ -1,12 +1,12 @@
 #!/bin/bash
 # DIYkit package: C-Extensions for Python
 
-        NAME=cython
-     VERSION=0.12.1
-    DISTFILE=Cython-${VERSION}.tar.gz
- MASTER_SITE=http://cython.org/release
- ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-FIND_VERSION="cython --version"
+          NAME=cython
+       VERSION=0.12.1
+      DISTFILE=Cython-${VERSION}.tar.gz
+   MASTER_SITE=http://cython.org/release
+   ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="cython -V 2>&1 | sed -n 's/Cython version \(.*\)/\1/p'"
 
 . $DIYkit/DIYkit-include.sh
 
