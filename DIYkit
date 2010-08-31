@@ -25,6 +25,7 @@ avail)
     for pkg in $( ( for x in *.diy ; do basename $x .diy ; done ) | sort ) ; do
         NAME=$pkg
         VERSION_INSTALLED=$(DIY_GET=INSTALLED bash $pkg.diy)
+        [ -z "$VERSION_INSTALLED" ] && VERSION_INSTALLED=none
         VERSION_AVAILABLE=$(DIY_GET=VERSION bash $pkg.diy)
         COMMENT=$(grep "# DIYkit package:" $pkg.diy | sed "s/.*: //")
         printf "%-20s %-15s %-15s %s\n" "$NAME" "$VERSION_INSTALLED" "$VERSION_AVAILABLE" "$COMMENT"

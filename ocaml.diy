@@ -6,10 +6,10 @@
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=http://caml.inria.fr/pub/distrib/ocaml-3.11
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="ocaml -version"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "ocaml -version"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

@@ -6,10 +6,10 @@
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://${NAME}.googlecode.com/files
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="python -c 'import numexpr;print numexpr.__version__'"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "python -c 'import numexpr'"
 DEPENDS_ON python
 
 DOWNLOAD_ARCHIVE

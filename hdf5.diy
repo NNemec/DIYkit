@@ -6,10 +6,10 @@
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://www.hdfgroup.org/ftp/HDF5/current/src
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="t=\$(tempfile) ; readlink -f \$(gcc -lhdf5 -shared -o \$t && ldd \$t | sed -n 's/.*libhdf5\.so.* => \([^ ]*\) .*/\1/p') | sed 's/.*\.so\.//' && rm \$t"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "gcc -lhdf5 -shared -o /dev/null"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

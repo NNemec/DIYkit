@@ -6,10 +6,10 @@
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://downloads.sourceforge.net/project/${NAME}/${NAME}/${VERSION}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="python -c 'import scipy;print scipy.__version__'"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "python -c 'import scipy'"
 DEPENDS_ON python
 DEPENDS_ON numpy
 DOWNLOAD_ARCHIVE

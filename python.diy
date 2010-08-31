@@ -6,10 +6,10 @@
     DISTFILE=Python-${VERSION}.tar.bz2
  MASTER_SITE=http://www.python.org/ftp/${NAME}/${VERSION}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="python -c 'import sys; print \".\".join(map(str,sys.version_info))'"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "python -c 'import sys; exit(0 if (sys.version>=\"2.6\") else 1)'"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

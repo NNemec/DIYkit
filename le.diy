@@ -6,10 +6,10 @@
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=ftp://ftp.yars.free.net/pub/source/${NAME}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="le --version"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "le --version"
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

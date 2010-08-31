@@ -6,10 +6,9 @@
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/matplotlib-1.0
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="python -c 'import matplotlib;print matplotlib.__version__'"
 
 . $DIYkit/DIYkit-include.sh
-
-CHECK_AVAILABLE "python -c 'import matplotlib'"
 
 DEPENDS_ON python
 DEPENDS_ON numpy

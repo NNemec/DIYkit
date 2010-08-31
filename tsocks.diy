@@ -6,7 +6,7 @@
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/1.8%20beta%205
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-FIND_INSTALLED="tsocks -sh"
+FIND_INSTALLED='[ -n $(tsocks -sh) ] && echo "~some version~"'
 
 . $DIYkit/DIYkit-include.sh
 

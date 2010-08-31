@@ -6,10 +6,10 @@
     DISTFILE=tables-${VERSION}.tar.gz
  MASTER_SITE=http://www.pytables.org/download/stable
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="python -c 'import tables;print tables.__version__'"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_AVAILABLE "python -c 'import tables'"
 DEPENDS_ON hdf5
 DEPENDS_ON python
 DEPENDS_ON numpy
