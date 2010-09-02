@@ -26,16 +26,23 @@ enough for non-standard distribution formats.
 INITIAL SET-UP
 ==============
 
-Currently, DIYkit can only be obtained via git. A tar archive will
-be made available in the near future. Ask for it if you require this.
+If git is available on your system, check out the DIYkit directory directly
+into your $HOME directory:
+    > git clone git://github.com/NNemec/DIYkit.git ~/.DIYkit
 
-Follow these steps:
+otherwise, unpack an initial version by using the conventional commands
+    > cd ~
+    > wget http://github.com/downloads/NNemec/DIYkit/DIYkit-20100823.tar.gz
+    > gunzip DIYkit-20100823.tar.gz
+    > tar xf DIYkit-20100823.tar
+(if wget or gunzip are missing on your system, use ssh or other means to copy
+DIYkit-20100823.tar to the target system)
 
-Check out the DIYkit directory directly into your $HOME directory
-    git clone git://github.com/NNemec/DIYkit.git ~/.DIYkit
-
-Add the following line to your ~/.bashrc file:
-    [ -d ~/.DIYkit ] && . ~/DIYkit/DIYkit.sh
+Now depending on your login shell:
+  If your login shell is bash, add the following line to your ~/.bashrc file:
+    [ -d ~/.DIYkit ] && . ~/.DIYkit/DIYkit.sh
+  If your login shell is tcsh, add the following to your ~/.tcshrc file:
+    if ( -d ~/.DIYkit ) source ~/.DIYkit/DIYkit.csh
 
 Close the current shell and start a new one to activate the DIYkit
 environment.

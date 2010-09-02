@@ -11,8 +11,8 @@ FIND_INSTALLED="git --version | sed -n 's/git version \(.*\)/\1/p'"
 . $DIYkit/DIYkit-include.sh
 
 CHECK_INSTALLED
-DEPENDS_ON curl
-DEPENDS_ON asciidoc
+# DEPENDS_ON curl
+# DEPENDS_ON asciidoc
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
@@ -21,4 +21,4 @@ export PYTHON_PATH=python
 ./configure --without-openssl --prefix=$PREFIX --with-curl=$PREFIX
 make
 make install
-make install-man
+# make install-man

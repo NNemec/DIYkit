@@ -59,23 +59,23 @@ function DOWNLOAD_ARCHIVE() {(
     echo "DIYkit: downloading archive $DISTFILE (from $ARCHIVE_URL) ..."
     mkdir -p $TMPDIR
     rm -f $TMPDIR/$DISTFILE
-    ( cd $TMPDIR ; wget $ARCHIVE_URL )
+    curl $ARCHIVE_URL -o $TMPDIR/$DISTFILE
     if [ ! -s $TMPDIR/$DISTFILE ] ; then
         echo "DIYkit: Download unsuccessful! (file not found or empty)"
         echo URL: $ARCHIVE_URL
         echo Filename: $DISTFILE
         exit 1
     fi
-    case `file -i $TMPDIR/$DISTFILE` in
-    *application/x-gzip*)
+    case `file $TMPDIR/$DISTFILE` in
+    *gzip\ compressed\ data*)
         ;;
-    *application/x-bzip2*)
+    *bzip2\ compressed\ data*)
         ;;
-    *application/zip*)
+    *Zip\ archive\ data*)
         ;;
     *)
         echo "DIYkit: Download unsuccessful! (filetype not recognized)"
-        file -i $TMPDIR/$DISTFILE
+        file $TMPDIR/$DISTFILE
         exit 1
         ;;
     esac
@@ -99,10 +99,10 @@ function UNPACK_ARCHIVE() {(
     cd ./$NAME
     case $DISTFILE in
     *.tar.gz|*.tgz)
-        tar xfz $DOWNLOADDIR/$DISTFILE
+        zcat $DOWNLOADDIR/$DISTFILE | tar xf -
         ;;
     *.tar.bz2)
-        tar xfj $DOWNLOADDIR/$DISTFILE
+        bzcat $DOWNLOADDIR/$DISTFILE | tar xf -
         ;;
     *.zip)
         unzip $DOWNLOADDIR/$DISTFILE
@@ -146,3 +146,5 @@ function VERCMP() {
          '(' "$1" : '[^.]*[.][^.]*[.]\([^.]*\)' ')' '-' '(' "$2" : '[^.]*[.][^.]*[.]\([^.]*\)' ')' '|' \
          '(' "$1" : '[^.]*[.][^.]*[.][^.]*[.]\([^.]*\)' ')' '-' '(' "$2" : '[^.]*[.][^.]*[.][^.]*[.]\([^.]*\)' ')'
 }
+
+# DEPENDS_ON curl
