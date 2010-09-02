@@ -21,3 +21,7 @@ make install
 cat > DIYkit.sh.d/${NAME}.sh << EOF
 export GUILE_LOAD_PATH=$PREFIX/share/guile/1.8
 EOF
+
+cat > DIYkit.csh.d/${NAME}.csh << EOF
+setenv GUILE_LOAD_PATH $PREFIX/share/guile/1.8
+EOF

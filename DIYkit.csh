@@ -1,11 +1,11 @@
 if ( ! $?DIYkit ) setenv DIYkit ~/.DIYkit
 
-if ( ! $?PATH ) set PATH=""
-if ( ! $?MANPATH ) set MANPATH=""
-if ( ! $?CPATH ) set CPATH=""
-if ( ! $?LIBRARY_PATH ) set LIBRARY_PATH=""
-if ( ! $?LD_LIBRARY_PATH ) set LD_LIBRARY_PATH=""
-if ( ! $?PKG_CONFIG_PATH ) set PKG_CONFIG_PATH=""
+if ( ! $?PATH ) setenv PATH ""
+if ( ! $?MANPATH ) setenv MANPATH ""
+if ( ! $?CPATH ) setenv CPATH ""
+if ( ! $?LIBRARY_PATH ) setenv LIBRARY_PATH ""
+if ( ! $?LD_LIBRARY_PATH ) setenv LD_LIBRARY_PATH ""
+if ( ! $?PKG_CONFIG_PATH ) setenv PKG_CONFIG_PATH ""
 
 setenv PATH $DIYkit/bin:$PATH
 setenv MANPATH $DIYkit/man:$MANPATH
@@ -16,8 +16,8 @@ setenv LD_LIBRARY_PATH $DIYkit/lib:$LD_LIBRARY_PATH
 setenv PKG_CONFIG_PATH $DIYkit/lib/pkgconfig:$PKG_CONFIG_PATH
 setenv PYTHONUSERBASE $DIYkit
 
-# for f in $DIYkit/DIYkit.sh.d/*.sh ; do
-#     [ -f $f ] && . $f
-# done
+foreach f ( $DIYkit/DIYkit.csh.d/*.csh )
+    if ( -f $f ) source $f
+end
 
 alias diy $DIYkit/DIYkit

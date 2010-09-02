@@ -17,3 +17,11 @@ cd $SRCDIR
 ./configure --prefix $PREFIX
 make
 make install
+
+cat > DIYkit.sh.d/${NAME}.sh << EOF
+export PKG_CONFIG_PATH=$(PATH_APPEND "$PKG_CONFIG_PATH" /usr/lib/pkgconfig)
+EOF
+
+cat > DIYkit.csh.d/${NAME}.csh << EOF
+setenv PKG_CONFIG_PATH $PKG_CONFIG_PATH:/usr/lib/pkgconfig
+EOF
