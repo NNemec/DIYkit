@@ -33,9 +33,10 @@ into your $HOME directory:
 otherwise, unpack an initial version by using the conventional commands
     > cd ~
     > wget http://github.com/downloads/NNemec/DIYkit/DIYkit-20100823.tar.gz
-    > tar xfz DIYkit-20100823.tar.gz
-    > mv DIYkit/ ~/.DIYkit
-    > rm DIYkit-20100823.tar.gz
+    > gunzip DIYkit-20100823.tar.gz
+    > tar xf DIYkit-20100823.tar
+(if wget or gunzip are missing on your system, use ssh or other means to copy
+DIYkit-20100823.tar to the target system)
 
 Now, add the following line to your ~/.bashrc file:
     [ -d ~/.DIYkit ] && . ~/DIYkit/DIYkit.sh
