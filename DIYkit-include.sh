@@ -28,19 +28,10 @@ if [ -n "$DIY_GET" ] ; then
     exit 0
 fi
 
-function CHECK_INSTALLED() {
-    if [ -n "$INSTALLED" ] ; then
-        echo "DIYkit: found $NAME installed (version: $INSTALLED)"
-        [ -n "$DIY_DEPEND" ] && exit 0
-    fi
-}
-
-function CHECK_AVAILABLE() {
-    if sh -c "$1" > /dev/null ; then
-        echo "DIYkit: found $NAME installed"
-        [ -n "$DIY_DEPEND" ] && exit 0
-    fi
-}
+if [ -n "$INSTALLED" ] ; then
+    echo "DIYkit: found $NAME installed (version: $INSTALLED)"
+    [ -n "$DIY_DEPEND" ] && exit 0
+fi
 
 function DEPENDS_ON() {(
     PKG="$1" ; VERSION="$2"

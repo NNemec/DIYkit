@@ -10,7 +10,6 @@ FIND_INSTALLED="pkg-config --modversion glib-2.0"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_INSTALLED
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

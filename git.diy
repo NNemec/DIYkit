@@ -10,7 +10,6 @@ FIND_INSTALLED="git --version | sed -n 's/git version \(.*\)/\1/p'"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_INSTALLED
 # DEPENDS_ON curl
 # DEPENDS_ON asciidoc
 DOWNLOAD_ARCHIVE

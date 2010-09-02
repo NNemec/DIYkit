@@ -10,7 +10,6 @@ FIND_INSTALLED="python -c 'import numpy ; print numpy.version.version'"
 
 . $DIYkit/DIYkit-include.sh
 
-CHECK_INSTALLED
 DEPENDS_ON python
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
