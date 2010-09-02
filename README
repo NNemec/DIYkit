@@ -38,8 +38,11 @@ otherwise, unpack an initial version by using the conventional commands
 (if wget or gunzip are missing on your system, use ssh or other means to copy
 DIYkit-20100823.tar to the target system)
 
-Now, add the following line to your ~/.bashrc file:
-    [ -d ~/.DIYkit ] && . ~/DIYkit/DIYkit.sh
+Now depending on your login shell:
+  If your login shell is bash, add the following line to your ~/.bashrc file:
+    [ -d ~/.DIYkit ] && . ~/.DIYkit/DIYkit.sh
+  If your login shell is tcsh, add the following to your ~/.tcshrc file:
+    if ( -d ~/.DIYkit ) source ~/.DIYkit/DIYkit.csh
 
 Close the current shell and start a new one to activate the DIYkit
 environment.
