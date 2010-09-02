@@ -6,7 +6,7 @@
     DISTFILE=${NAME}-${VERSION}.tar.bz2
  MASTER_SITE=http://curl.haxx.se/download
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-FIND_INSTALLED="pkg-config --modversion libcurl"
+FIND_INSTALLED="curl -V | sed -n 's/^curl \([^ ][^ ]*\) .*/\1/p'"
 
 . $DIYkit/DIYkit-include.sh
 
