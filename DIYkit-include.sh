@@ -35,7 +35,7 @@ fi
 
 function DEPENDS_ON() {(
     PKG="$1" ; VERSION="$2"
-    [ -n "$VERSION" ] && VERSION=any
+    [ -z "$VERSION" ] && VERSION=any
     DIY_DEPEND=$VERSION bash $DIYkit/$PKG.diy
     unset PKG VERSION
 )}
