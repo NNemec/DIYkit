@@ -11,7 +11,7 @@ FIND_INSTALLED="mc -V | sed -n 's/GNU Midnight Commander \(.*\)/\1/p'"
 . $DIYkit/DIYkit-include.sh
 
 DEPENDS_ON slang
-DEPENDS_ON glib # at least version 2.20
+DEPENDS_ON glib 2.8 # at least version 2.20
 
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
