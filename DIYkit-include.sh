@@ -23,7 +23,7 @@ DOWNLOADDIR=$DIYkit/download
 INSTALLED=unknown
 [ -n "$FIND_INSTALLED" ] && INSTALLED=`sh -c "$FIND_INSTALLED" 2> /dev/null || true`
 
-if [ -n DIY_GET ] ; then
+if [ -n "$DIY_GET" ] ; then
     echo ${!DIY_GET}
     exit 0
 fi
