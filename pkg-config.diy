@@ -2,10 +2,11 @@
 # DIYkit package: ???
 
         NAME=pkg-config
-     VERSION=0.23
+     VERSION=0.25
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://pkgconfig.freedesktop.org/releases
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="pkg-config --version"
 
 . $DIYkit/DIYkit-include.sh
 
