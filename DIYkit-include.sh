@@ -99,7 +99,7 @@ function UNPACK_ARCHIVE() {(
     cd ./$NAME
     case $DISTFILE in
     *.tar.gz|*.tgz)
-        zcat $DOWNLOADDIR/$DISTFILE | tar xf -
+        gzip -c -d $DOWNLOADDIR/$DISTFILE | tar xf -
         ;;
     *.tar.bz2)
         bzcat $DOWNLOADDIR/$DISTFILE | tar xf -
