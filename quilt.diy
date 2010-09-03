@@ -2,16 +2,18 @@
 # DIYkit package: Simple patch queue manager
 
         NAME=quilt
-     VERSION=0.48
-    DISTFILE=${NAME}-${VERSION}.tar.gz
- MASTER_SITE=http://download.savannah.gnu.org/releases/${NAME}
- ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+     VERSION=git
+#     VERSION=0.48  # 0.48 does not work on SunOS
+#    DISTFILE=${NAME}-${VERSION}.tar.gz
+# MASTER_SITE=http://download.savannah.gnu.org/releases/${NAME}
+# ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 FIND_INSTALLED="quilt --version"
 
 . $DIYkit/DIYkit-include.sh
 
-DOWNLOAD_ARCHIVE
-UNPACK_ARCHIVE
+# DOWNLOAD_ARCHIVE
+# UNPACK_ARCHIVE
+GIT_CLONE git://git.savannah.nongnu.org/quilt.git
 
 cd $SRCDIR
 ./configure --prefix=$PREFIX
