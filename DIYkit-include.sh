@@ -50,7 +50,7 @@ function DOWNLOAD_ARCHIVE() {(
     echo "DIYkit: downloading archive $DISTFILE (from $ARCHIVE_URL) ..."
     mkdir -p $TMPDIR
     rm -f $TMPDIR/$DISTFILE
-    curl $ARCHIVE_URL -o $TMPDIR/$DISTFILE
+    curl -L $ARCHIVE_URL -o $TMPDIR/$DISTFILE
     if [ ! -s $TMPDIR/$DISTFILE ] ; then
         echo "DIYkit: Download unsuccessful! (file not found or empty)"
         echo URL: $ARCHIVE_URL

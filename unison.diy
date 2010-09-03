@@ -2,9 +2,10 @@
 # DIYkit package: File synchronizer
 
         NAME=unison
-     VERSION=2.32.52
+#     VERSION=2.32.52
+     VERSION=2.27.57
     DISTFILE=${NAME}-${VERSION}.tar.gz
- MASTER_SITE=http://www.seas.upenn.edu/~bcpierce/unison//download/releases/stable
+ MASTER_SITE=http://www.seas.upenn.edu/~bcpierce/unison/download/releases/${NAME}-${VERSION}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 FIND_INSTALLED="unison -version | sed -n 's/unison version \(.*\)/\1/p'"
 
@@ -15,6 +16,10 @@ DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
 cd $SRCDIR
-./configure --prefix $PREFIX
-make
-make install
+# ./configure --prefix $PREFIX
+make UISTYLE=text
+#install -d $PREFIX/bin
+#install -m 755 -D ./unison $PREFIX/bin
+cp ./unison $PREFIX/bin/unison-$VERSION
+rm -f $PREFIX/bin/unison
+ln -s unison-$VERSION $PREFIX/bin/unison
