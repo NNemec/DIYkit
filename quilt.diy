@@ -16,6 +16,6 @@ FIND_INSTALLED="quilt --version"
 GIT_CLONE git://git.savannah.nongnu.org/quilt.git
 
 cd $SRCDIR
-./configure --prefix=$PREFIX
+./configure --prefix=$PREFIX --without-date
 make
 make install

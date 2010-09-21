@@ -2,8 +2,8 @@
 # DIYkit package: File synchronizer
 
         NAME=unison
-#     VERSION=2.32.52
-     VERSION=2.27.57
+     VERSION=2.32.52
+#     VERSION=2.27.57
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://www.seas.upenn.edu/~bcpierce/unison/download/releases/${NAME}-${VERSION}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
