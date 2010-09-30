@@ -1,0 +1,21 @@
+#!/bin/bash
+# DIYkit package: ???
+
+          NAME=htop
+       VERSION=0.8.3
+      DISTFILE=${NAME}-${VERSION}.tar.gz
+   MASTER_SITE=http://downloads.sourceforge.net/project/${NAME}/${NAME}/${VERSION}
+   ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="false"
+
+. $DIYkit/DIYkit-include.sh
+
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+
+cd $SRCDIR
+
+######### autoconf
+./configure --prefix $PREFIX
+make
+make install
