@@ -6,7 +6,8 @@
     DISTFILE=PyQt-x11-gpl-${VERSION}.tar.gz
  MASTER_SITE=http://www.riverbankcomputing.com/static/Downloads/PyQt4
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-FIND_INSTALLED="python -c 'import PyQt4;print PyQt4.__version__'"
+FIND_INSTALLED="python -c 'import PyQt4;print \"~some version~\"'"
+# FIND_INSTALLED="python -c 'import PyQt4;print PyQt4.__version__'"
 
 . $DIYkit/DIYkit-include.sh
 

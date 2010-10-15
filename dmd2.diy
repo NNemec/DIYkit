@@ -2,7 +2,7 @@
 # DIYkit package: Compiler for D programming language (Digital Mars)
 
         NAME=dmd2
-     VERSION=2.048
+     VERSION=2.049
     DISTFILE=dmd.${VERSION}.zip
  MASTER_SITE=http://ftp.digitalmars.com
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
@@ -46,6 +46,7 @@ mv ./src/phobos/std/openrj.d ./src/phobos/std/openrj.d.rename
 ( cd $TMPDIR
     for d in etc/c std std/c std/c/linux ; do
         mkdir -p $PREFIX/import2/phobos/$d
-        dmd2 -c -I$SRCDIR/src/phobos -Hd$PREFIX/import2/phobos/$d $SRCDIR/src/phobos/$d/*.d
+#        dmd2 -c -I$SRCDIR/src/phobos -Hd$PREFIX/import2/phobos/$d $SRCDIR/src/phobos/$d/*.d
+        cp $SRCDIR/src/phobos/$d/*.d $PREFIX/import2/phobos/$d
     done
 )

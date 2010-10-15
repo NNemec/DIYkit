@@ -130,6 +130,20 @@ function GIT_CLONE() {(
     fi
 )}
 
+function HG_CLONE() {(
+    DEPENDS_ON mercurial
+
+    HG_URL=$1
+    cd $DIYkit/src
+    if [ -d $NAME/.hg/ ] ; then
+        cd $NAME
+        hg update
+    else
+        rm -rf $NAME
+        hg clone $HG_URL $NAME
+    fi
+)}
+
 function VERCMP() {
 # thanks to http://rubinium.org/blog/archives/2010/04/05/shell-script-version-compare-vercmp/
     expr '(' "$1" : '\([^.]*\)' ')' '-' '(' "$2" : '\([^.]*\)' ')' '|' \

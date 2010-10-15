@@ -1,0 +1,24 @@
+#!/bin/bash
+# DIYkit package: ???
+
+          NAME=qtd
+       VERSION=hg
+#       VERSION=0.15
+#      DISTFILE=${NAME}-${VERSION}.tar.gz
+#   MASTER_SITE=http://download.gna.org/${NAME}
+#   ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="false"
+
+. $DIYkit/DIYkit-include.sh
+
+DEPENDS_ON dmd2
+#DOWNLOAD_ARCHIVE
+#UNPACK_ARCHIVE
+HG_CLONE http://hg.dsource.org/projects/qtd
+
+cd $SRCDIR
+mkdir -p build_dir
+cd build_dir
+cmake ../ -DCMAKE_INSTALL_PREFIX=$PREFIX
+make
+make install

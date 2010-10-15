@@ -2,11 +2,11 @@
 # DIYkit package: Python bindings for the CAIRO graphics library
 
         NAME=pycairo
-     VERSION=1.6.4
+     VERSION=1.8.10
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://cairographics.org/releases
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-FIND_INSTALLED="python -c 'import cairo;print cairo.__version__'"
+FIND_INSTALLED="python -c 'import cairo;print cairo.version'"
 
 . $DIYkit/DIYkit-include.sh
 

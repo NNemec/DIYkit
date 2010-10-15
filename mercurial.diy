@@ -1,0 +1,20 @@
+#!/bin/bash
+# DIYkit package: ???
+
+          NAME=mercurial
+       VERSION=1.6.4
+      DISTFILE=${NAME}-${VERSION}.tar.gz
+   MASTER_SITE=http://mercurial.selenic.com/release
+   ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="hg --version | sed -n 's/.*(version \(.*\))/\1/p'"
+
+. $DIYkit/DIYkit-include.sh
+
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+
+cd $SRCDIR
+
+./configure --prefix $PREFIX
+make
+make install
