@@ -57,19 +57,21 @@ function DOWNLOAD_ARCHIVE() {(
         echo Filename: $DISTFILE
         exit 1
     fi
-    case `file $TMPDIR/$DISTFILE` in
-    *gzip\ compressed\ data*)
-        ;;
-    *bzip2\ compressed\ data*)
-        ;;
-    *Zip\ archive\ data*)
-        ;;
-    *)
-        echo "DIYkit: Download unsuccessful! (filetype not recognized)"
-        file $TMPDIR/$DISTFILE
-        exit 1
-        ;;
-    esac
+#    case `file $TMPDIR/$DISTFILE` in
+#    *gzip\ compressed\ data*)
+#        ;;
+#    *bzip2\ compressed\ data*)
+#        ;;
+#    *Zip\ archive\ data*)
+#        ;;
+#    *data\ or\ International\ Language\ text*)
+#	;;
+#    *)
+#        echo "DIYkit: Download unsuccessful! (filetype not recognized)"
+#        file $TMPDIR/$DISTFILE
+#        exit 1
+#        ;;
+#    esac
     mv $TMPDIR/$DISTFILE .
     echo "... done downloading."
 )}
