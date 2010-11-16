@@ -1,0 +1,20 @@
+#!/bin/bash
+# DIYkit package: ???
+
+          NAME=zlib
+       VERSION=1.2.5
+      DISTFILE=${NAME}-${VERSION}.tar.bz2
+   MASTER_SITE=http://zlib.net
+   ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="false"
+
+. $DIYkit/DIYkit-include.sh
+
+DOWNLOAD_ARCHIVE
+UNPACK_ARCHIVE
+
+cd $SRCDIR
+
+./configure --prefix $PREFIX
+make
+make install
