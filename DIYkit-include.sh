@@ -152,5 +152,5 @@ function VERCMP() {
          '(' "$1" : '[^.]*[.][^.]*[.][^.]*[.]\([^.]*\)' ')' '-' '(' "$2" : '[^.]*[.][^.]*[.][^.]*[.]\([^.]*\)' ')'
 }
 
-# DEPENDS_ON curl
-# DEPENDS_ON pkg_config # at least 0.20 ??
+DEPENDS_ON curl
+DEPENDS_ON pkg_config # at least 0.20 ??

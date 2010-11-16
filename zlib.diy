@@ -6,7 +6,7 @@
       DISTFILE=${NAME}-${VERSION}.tar.bz2
    MASTER_SITE=http://zlib.net
    ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
-FIND_INSTALLED="false"
+FIND_INSTALLED="pkg-config --modversion zlib"
 
 . $DIYkit/DIYkit-include.sh
 
