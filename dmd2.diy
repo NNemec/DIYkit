@@ -42,7 +42,7 @@ install -m 755 -D $TMPDIR/rdmd2.wrap $PREFIX/bin/rdmd2
     done
 )
 
-mv ./src/phobos/std/openrj.d ./src/phobos/std/openrj.d.rename
+#mv ./src/phobos/std/openrj.d ./src/phobos/std/openrj.d.rename
 ( cd $TMPDIR
     for d in etc/c std std/c std/c/linux ; do
         mkdir -p $PREFIX/include/d/phobos2/$d
@@ -50,3 +50,4 @@ mv ./src/phobos/std/openrj.d ./src/phobos/std/openrj.d.rename
         cp $SRCDIR/src/phobos/$d/*.d $PREFIX/include/d/phobos2/$d
     done
 )
+#mv ./src/phobos/std/openrj.d.rename ./src/phobos/std/openrj.d
