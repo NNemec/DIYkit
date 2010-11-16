@@ -81,9 +81,6 @@ function UNPACK_ARCHIVE() {(
         echo "Keeping existing directory $SRCDIR -- remove to unpack freshly."
         return
     fi
-    if [ -f $DIYkit/patches/$NAME/series ] ; then
-        DEPENDS_ON quilt
-    fi
     echo "DIYkit: unpacking archive $DISTFILE ..."
     mkdir -p $TMPDIR
     cd $TMPDIR
@@ -111,10 +108,17 @@ function UNPACK_ARCHIVE() {(
     rmdir ./$NAME
     echo "... done unpacking."
     if [ -f $DIYkit/patches/$NAME/series ] ; then
-        echo "DIYkit: applying patches"
         cd $SRCDIR
-        ln -sf $DIYkit/patches/$NAME ./patches
-        quilt push -a
+        if quilt --version > /dev/null 2>&1 ; then
+            echo "DIYkit: applying patches (quilt)"
+            ln -sf $DIYkit/patches/$NAME ./patches
+            quilt push -a
+        else
+            echo "DIYkit: applying patches (patch)"
+            for p in $(cat $DIYkit/patches/$NAME/series) ; do
+                patch < $DIYkit/patches/$NAME/$p
+            done
+        fi
     fi
 )}
 
