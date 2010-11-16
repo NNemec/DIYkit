@@ -1,119 +1,190 @@
 Index: git/Documentation/Makefile
 ===================================================================
---- git.orig/Documentation/Makefile	2010-11-16 16:21:53.975243001 +0100
-+++ git/Documentation/Makefile	2010-11-16 16:22:28.035243001 +0100
-@@ -180,15 +180,15 @@
- install: install-man
- 
- install-man: man
--	$(INSTALL) -d -m 755 $(DESTDIR)$(man1dir)
--	$(INSTALL) -d -m 755 $(DESTDIR)$(man5dir)
--	$(INSTALL) -d -m 755 $(DESTDIR)$(man7dir)
-+	$(INSTALLDIR) -m 755 $(DESTDIR)$(man1dir)
-+	$(INSTALLDIR) -m 755 $(DESTDIR)$(man5dir)
-+	$(INSTALLDIR) -m 755 $(DESTDIR)$(man7dir)
- 	$(INSTALL) -m 644 $(DOC_MAN1) $(DESTDIR)$(man1dir)
- 	$(INSTALL) -m 644 $(DOC_MAN5) $(DESTDIR)$(man5dir)
- 	$(INSTALL) -m 644 $(DOC_MAN7) $(DESTDIR)$(man7dir)
- 
- install-info: info
--	$(INSTALL) -d -m 755 $(DESTDIR)$(infodir)
-+	$(INSTALLDIR) -m 755 $(DESTDIR)$(infodir)
- 	$(INSTALL) -m 644 git.info gitman.info $(DESTDIR)$(infodir)
- 	if test -r $(DESTDIR)$(infodir)/dir; then \
- 	  $(INSTALL_INFO) --info-dir=$(DESTDIR)$(infodir) git.info ;\
-@@ -198,7 +198,7 @@
- 	fi
- 
- install-pdf: pdf
--	$(INSTALL) -d -m 755 $(DESTDIR)$(pdfdir)
-+	$(INSTALLDIR) -m 755 $(DESTDIR)$(pdfdir)
- 	$(INSTALL) -m 644 user-manual.pdf $(DESTDIR)$(pdfdir)
- 
- install-html: html
+*** git.orig/Documentation/Makefile
+--- git/Documentation/Makefile
+*************** pdf: user-manual.pdf
+*** 180,194 ****
+  install: install-man
+  
+  install-man: man
+! 	$(INSTALL) -d -m 755 $(DESTDIR)$(man1dir)
+! 	$(INSTALL) -d -m 755 $(DESTDIR)$(man5dir)
+! 	$(INSTALL) -d -m 755 $(DESTDIR)$(man7dir)
+  	$(INSTALL) -m 644 $(DOC_MAN1) $(DESTDIR)$(man1dir)
+  	$(INSTALL) -m 644 $(DOC_MAN5) $(DESTDIR)$(man5dir)
+  	$(INSTALL) -m 644 $(DOC_MAN7) $(DESTDIR)$(man7dir)
+  
+  install-info: info
+! 	$(INSTALL) -d -m 755 $(DESTDIR)$(infodir)
+  	$(INSTALL) -m 644 git.info gitman.info $(DESTDIR)$(infodir)
+  	if test -r $(DESTDIR)$(infodir)/dir; then \
+  	  $(INSTALL_INFO) --info-dir=$(DESTDIR)$(infodir) git.info ;\
+--- 180,194 ----
+  install: install-man
+  
+  install-man: man
+! 	$(INSTALLDIR) -m 755 $(DESTDIR)$(man1dir)
+! 	$(INSTALLDIR) -m 755 $(DESTDIR)$(man5dir)
+! 	$(INSTALLDIR) -m 755 $(DESTDIR)$(man7dir)
+  	$(INSTALL) -m 644 $(DOC_MAN1) $(DESTDIR)$(man1dir)
+  	$(INSTALL) -m 644 $(DOC_MAN5) $(DESTDIR)$(man5dir)
+  	$(INSTALL) -m 644 $(DOC_MAN7) $(DESTDIR)$(man7dir)
+  
+  install-info: info
+! 	$(INSTALLDIR) -m 755 $(DESTDIR)$(infodir)
+  	$(INSTALL) -m 644 git.info gitman.info $(DESTDIR)$(infodir)
+  	if test -r $(DESTDIR)$(infodir)/dir; then \
+  	  $(INSTALL_INFO) --info-dir=$(DESTDIR)$(infodir) git.info ;\
+*************** install-info: info
+*** 198,204 ****
+  	fi
+  
+  install-pdf: pdf
+! 	$(INSTALL) -d -m 755 $(DESTDIR)$(pdfdir)
+  	$(INSTALL) -m 644 user-manual.pdf $(DESTDIR)$(pdfdir)
+  
+  install-html: html
+--- 198,204 ----
+  	fi
+  
+  install-pdf: pdf
+! 	$(INSTALLDIR) -m 755 $(DESTDIR)$(pdfdir)
+  	$(INSTALL) -m 644 user-manual.pdf $(DESTDIR)$(pdfdir)
+  
+  install-html: html
 Index: git/Makefile
 ===================================================================
---- git.orig/Makefile	2010-11-16 16:15:33.165243000 +0100
-+++ git/Makefile	2010-11-16 16:26:21.895243002 +0100
-@@ -303,6 +303,7 @@
- TAR = tar
- FIND = find
- INSTALL = install
-+INSTALLDIR = mkdir -p
- RPMBUILD = rpmbuild
- TCL_PATH = tclsh
- TCLTK_PATH = wish
-@@ -2052,8 +2053,8 @@
- install_bindir_programs := $(patsubst %,%$X,$(BINDIR_PROGRAMS_NEED_X)) $(BINDIR_PROGRAMS_NO_X)
- 
- install: all
--	$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(bindir_SQ)'
--	$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
-+	$(INSTALLDIR) -m 755 '$(DESTDIR_SQ)$(bindir_SQ)'
-+	$(INSTALLDIR) -m 755 '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
- 	$(INSTALL) $(ALL_PROGRAMS) '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
- 	$(INSTALL) -m 644 $(SCRIPT_LIB) '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
- 	$(INSTALL) $(install_bindir_programs) '$(DESTDIR_SQ)$(bindir_SQ)'
+*** git.orig/Makefile
+--- git/Makefile
+*************** DIFF = diff
+*** 303,308 ****
+--- 303,309 ----
+  TAR = tar
+  FIND = find
+  INSTALL = install
++ INSTALLDIR = mkdir -p
+  RPMBUILD = rpmbuild
+  TCL_PATH = tclsh
+  TCLTK_PATH = wish
+*************** export gitexec_instdir
+*** 2052,2059 ****
+  install_bindir_programs := $(patsubst %,%$X,$(BINDIR_PROGRAMS_NEED_X)) $(BINDIR_PROGRAMS_NO_X)
+  
+  install: all
+! 	$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(bindir_SQ)'
+! 	$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
+  	$(INSTALL) $(ALL_PROGRAMS) '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
+  	$(INSTALL) -m 644 $(SCRIPT_LIB) '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
+  	$(INSTALL) $(install_bindir_programs) '$(DESTDIR_SQ)$(bindir_SQ)'
+--- 2053,2060 ----
+  install_bindir_programs := $(patsubst %,%$X,$(BINDIR_PROGRAMS_NEED_X)) $(BINDIR_PROGRAMS_NO_X)
+  
+  install: all
+! 	$(INSTALLDIR) -m 755 '$(DESTDIR_SQ)$(bindir_SQ)'
+! 	$(INSTALLDIR) -m 755 '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
+  	$(INSTALL) $(ALL_PROGRAMS) '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
+  	$(INSTALL) -m 644 $(SCRIPT_LIB) '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
+  	$(INSTALL) $(install_bindir_programs) '$(DESTDIR_SQ)$(bindir_SQ)'
 Index: git/git-gui/Makefile
 ===================================================================
---- git.orig/git-gui/Makefile	2010-11-16 16:21:53.985243001 +0100
-+++ git/git-gui/Makefile	2010-11-16 16:22:28.035243001 +0100
-@@ -48,7 +48,7 @@
- RM_RF     ?= rm -rf
- RMDIR     ?= rmdir
- 
--INSTALL_D0 = $(INSTALL) -d -m 755 # space is required here
-+INSTALL_D0 = $(INSTALLDIR) -m 755 # space is required here
- INSTALL_D1 =
- INSTALL_R0 = $(INSTALL) -m 644 # space is required here
- INSTALL_R1 =
-@@ -76,7 +76,7 @@
- 	QUIET_2DEVNULL = 2>/dev/null
- 
- 	INSTALL_D0 = dir=
--	INSTALL_D1 = && echo ' ' DEST $$dir && $(INSTALL) -d -m 755 "$$dir"
-+	INSTALL_D1 = && echo ' ' DEST $$dir && $(INSTALLDIR) -m 755 "$$dir"
- 	INSTALL_R0 = src=
- 	INSTALL_R1 = && echo '   ' INSTALL 644 `basename $$src` && $(INSTALL) -m 644 $$src
- 	INSTALL_X0 = src=
+*** git.orig/git-gui/Makefile
+--- git/git-gui/Makefile
+*************** endif
+*** 48,54 ****
+  RM_RF     ?= rm -rf
+  RMDIR     ?= rmdir
+  
+! INSTALL_D0 = $(INSTALL) -d -m 755 # space is required here
+  INSTALL_D1 =
+  INSTALL_R0 = $(INSTALL) -m 644 # space is required here
+  INSTALL_R1 =
+--- 48,54 ----
+  RM_RF     ?= rm -rf
+  RMDIR     ?= rmdir
+  
+! INSTALL_D0 = $(INSTALLDIR) -m 755 # space is required here
+  INSTALL_D1 =
+  INSTALL_R0 = $(INSTALL) -m 644 # space is required here
+  INSTALL_R1 =
+*************** ifndef V
+*** 76,82 ****
+  	QUIET_2DEVNULL = 2>/dev/null
+  
+  	INSTALL_D0 = dir=
+! 	INSTALL_D1 = && echo ' ' DEST $$dir && $(INSTALL) -d -m 755 "$$dir"
+  	INSTALL_R0 = src=
+  	INSTALL_R1 = && echo '   ' INSTALL 644 `basename $$src` && $(INSTALL) -m 644 $$src
+  	INSTALL_X0 = src=
+--- 76,82 ----
+  	QUIET_2DEVNULL = 2>/dev/null
+  
+  	INSTALL_D0 = dir=
+! 	INSTALL_D1 = && echo ' ' DEST $$dir && $(INSTALLDIR) -m 755 "$$dir"
+  	INSTALL_R0 = src=
+  	INSTALL_R1 = && echo '   ' INSTALL 644 `basename $$src` && $(INSTALL) -m 644 $$src
+  	INSTALL_X0 = src=
 Index: git/gitk-git/Makefile
 ===================================================================
---- git.orig/gitk-git/Makefile	2010-11-16 16:21:53.995243001 +0100
-+++ git/gitk-git/Makefile	2010-11-16 16:22:28.035243001 +0100
-@@ -41,7 +41,7 @@
- 
- install:: all
- 	$(INSTALL) -m 755 gitk-wish '$(DESTDIR_SQ)$(bindir_SQ)'/gitk
--	$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(msgsdir_SQ)'
-+	$(INSTALLDIR) -m 755 '$(DESTDIR_SQ)$(msgsdir_SQ)'
- 	$(foreach p,$(ALL_MSGFILES), $(INSTALL) -m 644 $p '$(DESTDIR_SQ)$(msgsdir_SQ)' &&) true
- 
- uninstall::
+*** git.orig/gitk-git/Makefile
+--- git/gitk-git/Makefile
+*************** all:: gitk-wish $(ALL_MSGFILES)
+*** 41,47 ****
+  
+  install:: all
+  	$(INSTALL) -m 755 gitk-wish '$(DESTDIR_SQ)$(bindir_SQ)'/gitk
+! 	$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(msgsdir_SQ)'
+  	$(foreach p,$(ALL_MSGFILES), $(INSTALL) -m 644 $p '$(DESTDIR_SQ)$(msgsdir_SQ)' &&) true
+  
+  uninstall::
+--- 41,47 ----
+  
+  install:: all
+  	$(INSTALL) -m 755 gitk-wish '$(DESTDIR_SQ)$(bindir_SQ)'/gitk
+! 	$(INSTALLDIR) -m 755 '$(DESTDIR_SQ)$(msgsdir_SQ)'
+  	$(foreach p,$(ALL_MSGFILES), $(INSTALL) -m 644 $p '$(DESTDIR_SQ)$(msgsdir_SQ)' &&) true
+  
+  uninstall::
 Index: git/gitweb/Makefile
 ===================================================================
---- git.orig/gitweb/Makefile	2010-11-16 16:21:54.025243001 +0100
-+++ git/gitweb/Makefile	2010-11-16 16:22:28.035243001 +0100
-@@ -146,9 +146,9 @@
- ### Installation rules
- 
- install: all
--	$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(gitwebdir_SQ)'
-+	$(INSTALLDIR) -m 755 '$(DESTDIR_SQ)$(gitwebdir_SQ)'
- 	$(INSTALL) -m 755 $(GITWEB_PROGRAMS) '$(DESTDIR_SQ)$(gitwebdir_SQ)'
--	$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(gitwebstaticdir_SQ)'
-+	$(INSTALLDIR) -m 755 '$(DESTDIR_SQ)$(gitwebstaticdir_SQ)'
- 	$(INSTALL) -m 644 $(GITWEB_FILES) '$(DESTDIR_SQ)$(gitwebstaticdir_SQ)'
- 
- ### Cleaning rules
+*** git.orig/gitweb/Makefile
+--- git/gitweb/Makefile
+*************** gitweb.cgi: gitweb.perl GITWEB-BUILD-OPT
+*** 146,154 ****
+  ### Installation rules
+  
+  install: all
+! 	$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(gitwebdir_SQ)'
+  	$(INSTALL) -m 755 $(GITWEB_PROGRAMS) '$(DESTDIR_SQ)$(gitwebdir_SQ)'
+! 	$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(gitwebstaticdir_SQ)'
+  	$(INSTALL) -m 644 $(GITWEB_FILES) '$(DESTDIR_SQ)$(gitwebstaticdir_SQ)'
+  
+  ### Cleaning rules
+--- 146,154 ----
+  ### Installation rules
+  
+  install: all
+! 	$(INSTALLDIR) -m 755 '$(DESTDIR_SQ)$(gitwebdir_SQ)'
+  	$(INSTALL) -m 755 $(GITWEB_PROGRAMS) '$(DESTDIR_SQ)$(gitwebdir_SQ)'
+! 	$(INSTALLDIR) -m 755 '$(DESTDIR_SQ)$(gitwebstaticdir_SQ)'
+  	$(INSTALL) -m 644 $(GITWEB_FILES) '$(DESTDIR_SQ)$(gitwebstaticdir_SQ)'
+  
+  ### Cleaning rules
 Index: git/templates/Makefile
 ===================================================================
---- git.orig/templates/Makefile	2010-11-16 16:21:54.045243001 +0100
-+++ git/templates/Makefile	2010-11-16 16:22:28.035243001 +0100
-@@ -61,6 +61,6 @@
- 	$(RM) -r blt boilerplates.made
- 
- install: all
--	$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(template_instdir_SQ)'
-+	$(INSTALLDIR) -m 755 '$(DESTDIR_SQ)$(template_instdir_SQ)'
- 	(cd blt && $(TAR) cf - .) | \
- 	(cd '$(DESTDIR_SQ)$(template_instdir_SQ)' && umask 022 && $(TAR) xof -)
+*** git.orig/templates/Makefile
+--- git/templates/Makefile
+*************** clean:
+*** 61,66 ****
+  	$(RM) -r blt boilerplates.made
+  
+  install: all
+! 	$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(template_instdir_SQ)'
+  	(cd blt && $(TAR) cf - .) | \
+  	(cd '$(DESTDIR_SQ)$(template_instdir_SQ)' && umask 022 && $(TAR) xof -)
+--- 61,66 ----
+  	$(RM) -r blt boilerplates.made
+  
+  install: all
+! 	$(INSTALLDIR) -m 755 '$(DESTDIR_SQ)$(template_instdir_SQ)'
+  	(cd blt && $(TAR) cf - .) | \
+  	(cd '$(DESTDIR_SQ)$(template_instdir_SQ)' && umask 022 && $(TAR) xof -)
