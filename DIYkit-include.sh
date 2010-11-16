@@ -35,7 +35,7 @@ fi
 
 function DEPENDS_ON() {(
     PKG="$1" ; VERSION="$2"
-    [ -z "$VERSION" ] && VERSION=any
+    [ "$PKG" != "$NAME" -a -z "$VERSION" ] && VERSION=any
     DIY_DEPEND=$VERSION bash $DIYkit/$PKG.diy
     unset PKG VERSION
 )}
@@ -155,4 +155,4 @@ function VERCMP() {
 }
 
 # DEPENDS_ON curl
-# DEPENDS_ON pkg_config # at least 0.20 ??
+# DEPENDS_ON pkg-config # at least 0.20 ??
