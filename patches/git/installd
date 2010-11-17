@@ -62,7 +62,7 @@ Index: git/Makefile
   TAR = tar
   FIND = find
   INSTALL = install
-+ INSTALLDIR = install -d
++ INSTALLDIR = $(INSTALL) -d
   RPMBUILD = rpmbuild
   TCL_PATH = tclsh
   TCLTK_PATH = wish
@@ -72,8 +72,8 @@ Index: git/Makefile
   	NO_MKSTEMPS = YesPlease
   	NO_STRLCPY = YesPlease
   	NO_NSEC = YesPlease
-+ 	INSTALL = installbsd
-+ 	INSTALLDIR = mkdir -p
++ 	export INSTALL = installbsd -c -o `whoami` -g `groups | sed 's/ .*//'`
++ 	export INSTALLDIR = mkdir -p
   	FREAD_READS_DIRECTORIES = UnfortunatelyYes
   	INTERNAL_QSORT = UnfortunatelyYes
   	NEEDS_LIBICONV=YesPlease
@@ -184,6 +184,16 @@ Index: git/templates/Makefile
 ===================================================================
 *** git.orig/templates/Makefile
 --- git/templates/Makefile
+*************** ifndef V
+*** 5,10 ****
+--- 5,11 ----
+  endif
+  
+  INSTALL ?= install
++ INSTALLDIR ?= $(INSTALL) -d
+  TAR ?= tar
+  RM ?= rm -f
+  prefix ?= $(HOME)
 *************** clean:
 *** 61,66 ****
   	$(RM) -r blt boilerplates.made
@@ -192,7 +202,7 @@ Index: git/templates/Makefile
 ! 	$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(template_instdir_SQ)'
   	(cd blt && $(TAR) cf - .) | \
   	(cd '$(DESTDIR_SQ)$(template_instdir_SQ)' && umask 022 && $(TAR) xof -)
---- 61,66 ----
+--- 62,67 ----
   	$(RM) -r blt boilerplates.made
   
   install: all
