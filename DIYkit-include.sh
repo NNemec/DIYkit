@@ -116,7 +116,7 @@ function UNPACK_ARCHIVE() {(
         else
             echo "DIYkit: applying patches (patch)"
             for p in $(cat $DIYkit/patches/$NAME/series) ; do
-                patch < $DIYkit/patches/$NAME/$p
+                patch -p 1 < $DIYkit/patches/$NAME/$p
             done
         fi
     fi

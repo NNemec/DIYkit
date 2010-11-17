@@ -62,10 +62,21 @@ Index: git/Makefile
   TAR = tar
   FIND = find
   INSTALL = install
-+ INSTALLDIR = mkdir -p
++ INSTALLDIR = install -d
   RPMBUILD = rpmbuild
   TCL_PATH = tclsh
   TCLTK_PATH = wish
+*************** ifeq ($(uname_S),AIX)
+*** 939,944 ****
+--- 940,947 ----
+  	NO_MKSTEMPS = YesPlease
+  	NO_STRLCPY = YesPlease
+  	NO_NSEC = YesPlease
++ 	INSTALL = installbsd
++ 	INSTALLDIR = mkdir -p
+  	FREAD_READS_DIRECTORIES = UnfortunatelyYes
+  	INTERNAL_QSORT = UnfortunatelyYes
+  	NEEDS_LIBICONV=YesPlease
 *************** export gitexec_instdir
 *** 2052,2059 ****
   install_bindir_programs := $(patsubst %,%$X,$(BINDIR_PROGRAMS_NEED_X)) $(BINDIR_PROGRAMS_NO_X)
@@ -76,7 +87,7 @@ Index: git/Makefile
   	$(INSTALL) $(ALL_PROGRAMS) '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
   	$(INSTALL) -m 644 $(SCRIPT_LIB) '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
   	$(INSTALL) $(install_bindir_programs) '$(DESTDIR_SQ)$(bindir_SQ)'
---- 2053,2060 ----
+--- 2055,2062 ----
   install_bindir_programs := $(patsubst %,%$X,$(BINDIR_PROGRAMS_NEED_X)) $(BINDIR_PROGRAMS_NO_X)
   
   install: all
