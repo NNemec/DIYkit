@@ -1,14 +1,16 @@
 #!/bin/bash
 # DIYkit package: ???
 
-        NAME=pyFltk
-     VERSION=1.1b3
+        NAME=pyfltk
+     VERSION=1.1.5
     DISTFILE=${NAME}-${VERSION}.tar.gz
  MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/pyfltk
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
 . $DIYkit/DIYkit-include.sh
 
+DEPENDS_ON fltk
+DEPENDS_ON python
 DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 

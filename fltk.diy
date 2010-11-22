@@ -2,7 +2,7 @@
 # DIYkit package: ???
 
         NAME=fltk
-     VERSION=1.1.6
+     VERSION=1.1.10
     DISTFILE=${NAME}-${VERSION}-source.tar.bz2
  MASTER_SITE=ftp://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/${NAME}/${VERSION}/
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}

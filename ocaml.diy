@@ -2,9 +2,9 @@
 # DIYkit package: The O'Caml programming language
 
         NAME=ocaml
-     VERSION=3.11.2
+     VERSION=3.10.2
     DISTFILE=${NAME}-${VERSION}.tar.bz2
- MASTER_SITE=http://caml.inria.fr/pub/distrib/ocaml-3.11
+ MASTER_SITE=http://caml.inria.fr/pub/distrib/ocaml-3.10
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 FIND_INSTALLED="ocaml -version"
 
