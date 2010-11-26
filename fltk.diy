@@ -1,11 +1,12 @@
 #!/bin/bash
 # DIYkit package: ???
 
-        NAME=fltk
-     VERSION=1.1.10
-    DISTFILE=${NAME}-${VERSION}-source.tar.bz2
- MASTER_SITE=ftp://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/${NAME}/${VERSION}/
- ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+          NAME=fltk
+       VERSION=1.1.10
+      DISTFILE=${NAME}-${VERSION}-source.tar.bz2
+   MASTER_SITE=http://ftp.funet.fi/pub/mirrors/ftp.easysw.com/pub/${NAME}/${VERSION}
+   ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
+FIND_INSTALLED="fltk-config --version"
 
 . $DIYkit/DIYkit-include.sh
 
@@ -13,6 +14,6 @@ DOWNLOAD_ARCHIVE
 UNPACK_ARCHIVE
 
 cd $SRCDIR
-./configure --prefix $PREFIX
+./configure --prefix $PREFIX --enable-shared
 make
 make install

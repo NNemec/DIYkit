@@ -3,8 +3,8 @@
 
         NAME=pyfltk
      VERSION=1.1.5
-    DISTFILE=${NAME}-${VERSION}.tar.gz
- MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/${VERSION}/pyfltk
+    DISTFILE=pyFltk-${VERSION}.tar.gz
+ MASTER_SITE=http://download.sourceforge.net/project/${NAME}/${NAME}/pyFltk-${VERSION}
  ARCHIVE_URL=${MASTER_SITE}/${DISTFILE}
 
 . $DIYkit/DIYkit-include.sh
